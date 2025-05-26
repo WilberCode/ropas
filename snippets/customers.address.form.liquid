@@ -1,0 +1,125 @@
+{%- liquid
+  if address.id != null
+    assign address_id = address.id
+  else
+    assign address_id = 'new'
+  endif
+  if active != blank
+    assign active = active
+  else
+    assign active = false
+  endif
+-%}
+
+<div class="account-address-form{% if customer.addresses.size == 0 %} customer-address-edit-only{% endif %} account-options-slide{% if address_id == 'new' %} visible{% endif %} slider-v" data-address-id="{{ address_id }}"{% if address_id == 'new' %} data-revealer-visible="true"{% endif %}>
+  
+  <h2 class="section-title-24">
+    {%- liquid
+      if address_id == 'new'
+        echo 'customers.addresses.form.add_new_heading' | t
+      else
+        echo 'customers.addresses.form.edit_existing_heading' | t
+      endif
+    -%}
+  </h2>
+
+  {% form 'customer_address', address %}
+
+  <div class="input-wrapper-half-width">
+
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-firstname">{{ 'general.form.first_name' | t }}</label>
+      <input id="customer-addr-{{ address_id }}-firstname" type="text" name="address[first_name]" value="{{ form.first_name | escape }}">
+    </div>
+
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-lastname">{{ 'general.form.last_name' | t }}</label>
+      <input id="customer-addr-{{ address_id }}-lastname" type="text" name="address[last_name]" value="{{ form.last_name | escape }}">
+    </div>
+
+  </div>
+
+  <div class="input-wrapper">
+    <label for="customer-addr-{{ address_id }}-company">{{ 'general.form.company' | t }}</label>
+    <input id="customer-addr-{{ address_id }}-company" type="text" name="address[company]" value="{{ form.company | escape }}">
+  </div>
+
+  <div class="input-wrapper">
+    <label for="customer-addr-{{ address_id }}-address1">{{ 'general.form.address_1' | t }}</label>
+    <input id="customer-addr-{{ address_id }}-address1" type="text" name="address[address1]" value="{{ form.address1 | escape }}">
+  </div>
+
+  <div class="input-wrapper">
+    <label for="customer-addr-{{ address_id }}-address2">{{ 'general.form.address_2' | t }}</label>
+    <input id="customer-addr-{{ address_id }}-address2" type="text" name="address[address2]" value="{{ form.address2 | escape }}">
+  </div>
+
+  <div class="input-wrapper-half-width">
+
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-city">{{ 'general.form.city' | t }}</label>
+      <input id="customer-addr-{{ address_id }}-city" type="text" name="address[city]" value="{{ form.city | escape }}">
+    </div>
+  
+    <div class="input-wrapper" id="address-province-container-{{ address_id }}" >
+      <label for="customer-addr-{{ address_id }}-province">{{ 'general.form.province' | t }}</label>
+      <div class="select-wrapper relative">
+        <select id="customer-addr-{{ address_id }}-province" class="scroll-bar-v" name="address[province]" data-default="{{ form.province | escape }}"></select>
+        <span class="option-select-arrow">{%- render 'icons', id: 'arrow', size: 12 -%}</span>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="input-wrapper-half-width">
+
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-zip">{{ 'general.form.zip' | t }}</label>
+      <input id="customer-addr-{{ address_id }}-zip" type="text" name="address[zip]" value="{{ form.zip | escape }}"/>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-country">{{ 'general.form.country' | t }}</label>
+      <div class="select-wrapper relative">
+        <select id="customer-addr-{{ address_id }}-country" class="scroll-bar-v" name="address[country]" data-default="{{ form.country | escape }}">{{ country_option_tags }}</select>
+        <span class="option-select-arrow">{%- render 'icons', id: 'arrow', size: 12 -%}</span>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="input-wrapper-half-width">
+    <div class="input-wrapper">
+      <label for="customer-addr-{{ address_id }}-phone">{{ 'general.form.phone' | t }}</label>
+      <input id="customer-addr-{{ address_id }}-phone" type="text" name="address[phone]" value="{{ form.phone | escape }}"/>
+    </div>
+  </div>
+
+  <div class="line-items">
+    <div class="input-wrapper bottompad">
+      {{ form.set_as_default_checkbox }} <label for="address_default_address_{{ form.id }}">{{ 'customers.addresses.set_default' | t }}</label>
+    </div>
+  </div>
+
+  <div class="input-wrapper"> 
+    {%- liquid
+      capture address_text
+        if address_id == 'new'
+          echo 'customers.addresses.submit' | t
+        else
+          echo 'customers.addresses.update' | t
+        endif
+      endcapture
+    -%}
+    <button type="submit" 
+            id="submit-{{form.id}}" 
+            class="account-login-btn btn btn-primary">{{ address_text }}</button>
+    {%- unless address_id == 'new' -%}
+    <button type="button"
+            class="account-recovery-toggle cancel-edit underline"
+            data-edit-address="new">{{ 'general.form.cancel' | t }}</button>
+    {%- endunless -%}
+  </div>
+
+  {% endform %}
+</div>

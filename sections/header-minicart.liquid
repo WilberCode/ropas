@@ -1,0 +1,96 @@
+{%- unless request.page_type == 'cart' -%}
+  <section data-section-id="{{ section.id }}"  
+           data-section-type="header_minicart"
+           data-url="{{ 'script.header.minicart.js' | asset_url }}"
+           data-header-minicart>
+
+    <div id="header-minicart-drawer" class="header-minicart-drawer minicart-wrapper{% if cart.item_count == 0 %} minicart-cart-empty{% endif %} slider-v" data-header-minicart-drawer>
+
+      <div class="header-minicart-header container">
+        <h3 class="header-minicart-heading" data-header-minicart-title="{{ 'cart.title_minicart' | t }}">{{ 'cart.title_minicart' | t }} ({{ cart.item_count }})</h3>
+        <button type="button" class="header-minicart-slideout-dismiss" aria-label="{{ 'general.form.close' | t | escape }}" data-site-header-minicart-dismiss>{%- render 'icons', id: 'close', size: 18 -%}</button>
+      </div>
+
+      <div class="header-minicart-content container quantity-{{ section.settings.quantity_enable }}">
+        <div class="scroll-bar-v" data-cart-items>
+          {% if cart.item_count > 0 %}
+            {% for item in cart.items %}
+              {%- render 'cart.item', item: item, ajax: true, lazy: 'eager' -%}
+            {% endfor %}
+          {% else %}
+          <div class="cart-mini-empty">
+            <h3>{{ 'cart.empty' | t }}</h3>
+            <a class="cart-mini-button-continueshopping btn btn-primary" href="{{ routes.all_products_collection_url }}" title="{{ 'product.continue_shopping' | t | escape }}">{{ 'product.continue_shopping' | t }}</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="header-minicart-footer container container-inner">
+        <div class="header-minicart-footer-wrapper">
+          
+          <div>
+            <div class="product-menu-buttons-checkout sticky-menu-button-checkout-price money" data-cart-subtotal>{% if settings.currency_enable %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</div>
+            <div class="product-menu-buttons-discounts header-minicart-discounts">
+              <div class="cart-discount" data-cart-discounts-simplified>
+                {%- for discount_application in cart.cart_level_discount_applications -%}
+                  {%- render 'icons', id: 'sale-tag', class: ' cart-discount-sale-tag', size: 12 -%}{{ discount_application.title }} (-<span class="money">{% if settings.currency_enable %}{{ discount_application.total_allocated_amount | money_with_currency }}{% else %}{{ discount_application.total_allocated_amount | money }}{% endif %}</span>)
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+          
+          <div class="header-minicart-interactions{% if section.settings.smart_enable %} smart{% endif %}">
+            {% unless request.page_type == 'cart' %}
+              <a href="{{ routes.cart_url }}" class="btn btn-{% if section.settings.smart_enable %}secondary{% else %}primary{% endif %}" title="{{ 'product.view_cart' | t | escape }}">{{ 'product.view_cart' | t }}</a>
+            {% else %}
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-{% if section.settings.smart_enable %}secondary{% else %}primary{% endif %}" title="{{ 'product.continue_shopping' | t | escape }}">{{ 'product.continue_shopping' | t }}</a>
+            {% endunless %}
+            {% if section.settings.smart_enable %}
+              <form action="{{ routes.cart_url }}" method="POST">
+                <button type="submit" name="checkout" class="btn btn-primary">
+                  <span class="sticky-menu-button-checkout-text{% if section.settings.enable_checkout_lock_icon %} relative with-lock{% endif %}">
+                    {%- liquid
+                      if section.settings.enable_checkout_lock_icon
+                        render 'icons', id: 'checkout-lock', size: 18
+                      endif
+                    -%}
+                    <span>{{ 'cart.button_checkout_title' | t }}</span>
+                  </span>
+                </button>
+              </form>
+            {%  endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.header_cart.content",
+    "class": "site-main header-minicart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "quantity_enable",
+        "label": "t:sections.general.cart.quantity.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "smart_enable",
+        "label": "Show cart drawer checkout button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_checkout_lock_icon",
+        "label": "t:sections.general.cart.lock.label",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

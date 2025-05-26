@@ -1,0 +1,708 @@
+{%- liquid
+  assign paginate_by = section.settings.products_per_page
+  paginate search.results by paginate_by
+  	assign total_products = paginate.items
+  endpaginate
+  assign text_color = false
+  if section.settings.section_color != 'rgba(0,0,0,0)' and section.settings.section_color != blank
+    assign text_color = true
+    assign text_color_section = section.settings.section_color
+  endif     
+  assign text_color_hover = false
+  if section.settings.section_color_hover != 'rgba(0,0,0,0)' and section.settings.section_color_hover != blank
+    assign text_color_hover = true
+    assign text_color_hover_section = section.settings.section_color_hover
+  endif    
+  assign line_color = false
+  if section.settings.section_line != 'rgba(0,0,0,0)' and section.settings.section_line != blank
+    assign line_color = true
+    assign line_color_section = section.settings.section_line
+  endif
+  assign btn_color_section = settings.color_background
+  assign background_color = false
+  if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+    assign btn_color_section = section.settings.background
+    assign background_color = true
+    assign background_color_section = section.settings.background
+  endif
+  if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+    assign background_color = true
+    assign background_color_section = section.settings.background_gradient
+  endif
+-%}
+
+{% style %}
+  {%- if section.settings.enable_menu_form -%}body {padding-bottom: 100px;}{%- endif -%}
+  .dynamic-section-{{ section.id }} {
+    --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+    --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+    --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+    {%- if text_color -%}
+    --color_title_text:{{ text_color_section }};
+    --color_text:{{ text_color_section }};
+    --color_text_modify_5:{{ text_color_section }};
+    --color_text_modify_8:{{ text_color_section }};
+    --color_text_modify_08:{{ text_color_section | color_modify: 'alpha', 0.08 }};
+    --color_text_modify_25:{{ text_color_section | color_modify: 'alpha', 0.25 }};
+    --color_accent:{{ text_color_section }};
+    --color_accent_modify_25:{{ text_color_section | color_modify: 'alpha', 0.25 }};
+    --color_error:{{ text_color_section }};
+    --color_rating:{{ text_color_section }};
+    --color_sale:{{ text_color_section }};
+    --button_primary_background:{{ text_color_section }};
+    --button_primary_border:{{ text_color_section }};
+    --button_primary_text:{{ btn_color_section }};
+    --button_secondary_background:{{ btn_color_section }};
+    --button_secondary_border:{{ text_color_section }};
+    --button_secondary_text:{{ text_color_section }};
+    {%- endif -%}
+    {%- if text_color_hover -%}
+    --color_text_hover:{{ text_color_hover_section }};
+    {%- endif -%}
+    {%- if line_color -%}
+    --color_border:{{ line_color_section }};
+    {%- endif -%}
+    {%- if background_color -%}
+    --color_background:{{ background_color_section }};
+    {%- endif -%}
+  }
+{% endstyle %}
+
+<div class="dynamic-section dynamic-section-{{ section.id }}">
+  <section data-section-id="{{ section.id }}" 
+           data-section-type="search" 
+           data-sort-by="{{ search.sort_by | default: search.default_sort_by }}"
+           data-pagination-method="traditional_pagination"
+           data-products-per-page="{{ section.settings.products_per_page }}"         
+           data-text-refine="{{ 'collection.refine.button_title' | t | escape }}"
+           data-text-apply="{{ 'general.form.apply' | t | escape }}"
+           data-text-cancel="{{ 'general.form.cancel' | t | escape }}"
+           id="collection">
+    <div class="container-inner section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}">
+
+      {%- liquid
+        if search.performed
+          assign page_title = 'search.results.title' | t
+          assign page_subtitle = 'search.results.results_count' | t: count: search.results_count, query: search.terms
+        else
+          assign page_title = 'search.form.title' | t
+        endif
+      -%}
+
+      {% if section.settings.title_enable and page_title != blank %}
+      <div id="search-title" class="masthead">
+        {% if page_title != blank %}
+          <h1 class="section-title{% if page_subtitle != blank %} section-title-half{% endif %} section-title-{{ section.settings.title_size }} {{ section.settings.title_outline }}">{{ page_title }}</h1>
+        {% endif %}
+        {% if section.settings.title_sub != blank %}
+          <h2 class="section-title section-title-{{ section.settings.title_sub_size }} {{ section.settings.title_sub_outline }}">{{ section.settings.title_sub }}</h2>
+        {% endif %}
+        {% if page_subtitle != blank %}
+          <p>{{ page_subtitle }}</p>  
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% paginate search.results by paginate_by %}
+
+        {%- liquid
+          assign product_first = false
+          assign product_count = 0
+          assign article_first = false
+          assign article_count = 0
+          assign page_first = false
+          assign page_count = 0
+  
+          for item in search.results
+            if item.object_type == 'product'
+              if forloop.first
+                assign product_first = true
+              endif
+              assign product_count = product_count | plus: 1
+            endif
+              if item.object_type == 'article'
+                if forloop.first
+                  assign article_first = true
+                endif
+                assign article_count = article_count | plus: 1
+              endif
+              if item.object_type == 'page'
+                if forloop.first
+                  assign page_first = true
+                endif
+                assign page_count = page_count | plus: 1
+            endif
+          endfor
+  
+          assign type_count = 0
+          if product_count > 0
+            assign type_count = type_count | plus: 1
+          endif
+          if article_count > 0
+            assign type_count = type_count | plus: 1
+          endif
+          if page_count > 0
+            assign type_count = type_count | plus: 1
+          endif
+        -%}
+  
+        <div class="search-section-form-container">
+          <div class="search-section-form">
+            {%- render 'search', icon: true, four: true, size: 18 -%}
+            {% if type_count > 1 %}
+              <div class="search-results-tabs search-results-tabs-{{ type_count }}">
+                {% if product_count > 0 %}
+                  <span class="collection-sortby-option{% if product_first %} collection-sortby-option-selected{% endif %}">
+                    <button type="button" data-id="search-products" class="search-results-tab{% if product_first %} search-results-tab-selected{% endif %} keyed-inside">{{ 'search.results.product_count' | t: count: product_count }}</button>
+                  </span>
+                {% endif %}
+                {% if page_count > 0 %}
+                  <span class="collection-sortby-option{% if page_first %} collection-sortby-option-selected{% endif %}">
+                    <button type="button" data-id="search-pages" class="search-results-tab{% if page_first %} search-results-tab-selected{% endif %} keyed-inside">{{ 'search.results.page_count' | t: count: page_count }}</button>
+                  </span>
+                {% endif %}
+                {% if article_count > 0 %}
+                  <span class="collection-sortby-option{% if article_first %} collection-sortby-option-selected{% endif %}">
+                    <button type="button" data-id="search-articles" class="search-results-tab{% if article_first %} search-results-tab-selected{% endif %} keyed-inside">{{ 'search.results.article_count' | t: count: article_count }}</button>
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+  
+        <div class="search-results page">
+  
+          <div class="search-results-groups">
+  
+            {% if product_count > 0 %}
+  
+              {%- liquid
+                assign image_style = settings.product_item_style
+                if settings.enable_image_crop and image_style != 'natural'
+                  assign image_style = image_style | prepend: 'cropped-'
+                endif
+              -%}
+    
+              <div id="filter-sortby" class="slider-v{% if product_first %} visible{% endif %}"{% if product_first %} data-revealer-visible="true"{% endif %}>
+    
+                {% if section.settings.enable_filters or section.settings.enable_sorting %}
+                  <div class="collection-filter-sortby">
+    
+                    {% if section.settings.enable_filters %}
+                      <div class="collection-filter">
+                        <div class="collection-filter-select-wrapper collection-sortby-option collection-sortby-option-selected">
+                          <button type="button" class="keyed-inside" aria-label="{{ 'collection.refine.title' | t }}" data-filter>{%- render 'icons', id: 'filter' -%}</button>          
+                        </div>
+                      </div>
+                    {% endif %}
+      
+                    {% if section.settings.enable_sorting %}
+                      <div class="collection-sortby">
+                        <div class="collection-sortby-select-wrapper collection-sortby-option collection-sortby-option-selected" data-select-wrapper data-select-wrapper-sortby>            
+                          <label class="collection-sortby-label" for="collection-sortby" data-select-label>
+                            {%- liquid
+                              assign current_sort = search.sort_by | default: search.default_sort_by
+                              for option in search.sort_options
+                                if option.value == current_sort
+                                  echo option.name
+                                endif
+                              endfor
+                            -%}
+                          </label>
+                          <select class="collection-sortby-select scroll-bar-v" id="collection-sortby" data-select>
+                            {% for option in search.sort_options %}
+                              <option value="{{ option.value }}"{% if current_sort contains option.value %} selected{% endif %}>{{ option.name }}</option>
+                            {% endfor %}
+                          </select>
+                          <span class="collection-sortby-select-arrow">{%- render 'icons', id: 'arrow', size: 10 -%}</span>
+                        </div>
+                      </div>
+                    {% endif %}
+      
+                  </div>
+                {% endif %}
+    
+                {%- render 'collection.filters', collection: search, class: 'static', enable_filters_color: section.settings.enable_filters_color, enable_filters_rounded: section.settings.enable_filters_rounded, enable_filters_label: section.settings.enable_filters_label, enable_filters_hide: section.settings.enable_filters_hide, background_color: background_color -%}
+    
+              </div>
+    
+              <div id="search-products" class="search-results-group{% if product_first %} search-results-group-selected visible first-visible{% endif %} search-results-products slider-v"{% if product_first %} data-revealer-visible="true" data-height{% endif %}> 
+                <div class="collection-grid-container relative">
+                  <div id="collection-grid" class="collection-grid product-item-style-{{ image_style }} rows-of-{{ section.settings.products_per_row }}" data-collection-grid>
+    
+                    {%- liquid
+                      assign index = 0
+                      case section.settings.products_per_row
+                        when 2
+                          assign size = 610
+                          assign sizes = '(min-width: 1280px) 610px, calc(50vw - 50px)'
+                          assign lazy_total = 4
+                        when 3
+                          assign size = 441
+                          assign sizes = '(min-width: 1280px) 400px, (min-width: 960px) calc(33.33vw - 40px), calc(50vw - 50px)'
+                          assign lazy_total = 6
+                        when 4
+                          assign size = 441
+                          assign sizes = '(min-width: 1280px) 295px, (min-width: 960px) calc(25vw - 40px), calc(50vw - 50px)'
+                          assign lazy_total = 8
+                        when 5
+                          assign size = 441
+                          assign sizes = '(min-width: 1280px) 232px, (min-width: 960px) calc(20vw - 40px), calc(50vw - 50px)'
+                          assign lazy_total = 10
+                      endcase
+                      if section.settings.enable_lazy
+                        assign lazy = 'lazy'
+                      else
+                        assign lazy = 'eager'
+                      endif
+                    -%}
+    
+                    {% for item in search.results %}
+                      {%- liquid
+                        if item.object_type != 'product'
+                          continue
+                        endif
+                      -%}
+                      <div class="collection-grid-item grid-item-{% increment index %}" data-collection-grid-item>
+                        {%- render 'product.loop-backup', product: item, product_style: image_style, size: size, sizes: sizes, lazy: lazy, lazy_total: lazy_total, forloop_index: forloop.index -%}
+                      </div>  
+                    {% endfor %}
+    
+                  </div>
+                </div>
+              </div>
+  
+            {% endif %}
+  
+            {% if page_count > 0 %}
+              <div id="search-pages" class="search-results-group{% if page_first %} search-results-group-selected visible first-visible{% endif %} search-results-pages slider-v"{% if page_first %} data-revealer-visible="true" data-height{% endif %}>
+                {% for item in search.results %}
+                {% if item.object_type != 'page' %}{% continue %}{% endif %}
+                <article class="search-result-page">
+                  <a class="search-result-page-link" href="{{ item.url }}" title="{{ item.title | escape }}">
+                    <h3 class="search-result-page-title underline">{{ item.title }}</h3>
+                    <div class="search-result-page-summary"><p>{{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}</p></div>
+                  </a>
+                </article>
+                {% endfor %}
+              </div>
+            {% endif %}
+  
+            {% if article_count > 0 %}
+              <div id="search-articles" class="search-results-group{% if article_first %} search-results-group-selected visible{% endif %} search-results-articles section-blog slider-v"{% if article_first %} data-revealer-visible="true" data-height{% endif %}>
+                <div class="article-excerpts" data-article-excerpts>
+                  {%- liquid
+                    if section.settings.include_border
+                      assign size = 548
+                      assign sizes = '(min-width: 1280px) 548px, (min-width: 960px) calc(50vw - 112px), (min-width: 640px) calc(50vw - 102px), calc(100vw - 92px)'
+                    else
+                      assign size = 600
+                      assign sizes = '(min-width: 1280px) 600px, (min-width: 960px) calc(50vw - 60px), (min-width: 640px) calc(50vw - 50px), calc(100vw - 40px)'
+                    endif
+                    if section.settings.enable_lazy
+                      assign lazy = 'lazy'
+                    else
+                      assign lazy = 'eager'
+                    endif 
+                    for item in search.results
+                      if item.object_type != 'article'
+                        continue
+                      endif
+                      render 'blog.details', article: item, borders: section.settings.include_border, size: size, sizes: sizes, lazy: lazy, lazy_total: 4, forloop_index: forloop.index, padding: section.settings.image_height, image_position: section.settings.image_position, insta_filter: section.settings.insta_filter, excerpt: section.settings.excerpt_limit, forloop: forloop
+                    endfor
+                  -%}
+                </div>
+              </div>
+            {% endif %}
+  
+          </div>
+        </div>
+  
+        <div id="pagination" data-total-products="{{ total_products }}">        
+          {%- render 'pagination', paginate: paginate, title: page_title  -%}
+        </div>
+
+      {% endpaginate %}
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.search_page.content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.text.title.label"
+      },
+      {
+        "id": "title_enable",
+        "type": "checkbox",
+        "label": "t:sections.text.enable.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "title_outline",
+        "label": "t:sections.text.outline.heading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_size",
+        "type": "range",
+        "label": "t:sections.text.heading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 48
+      },
+      {
+        "id": "title_sub",
+        "type": "text",
+        "label": "t:sections.text.subheading.label"
+      },
+      {
+        "type": "select",
+        "id": "title_sub_outline",
+        "label": "t:sections.text.outline.subheading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_sub_size",
+        "type": "range",
+        "label": "t:sections.text.subheading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "id": "section_color",
+        "type": "color",
+        "label": "t:sections.text.color.label"
+      },
+      {
+        "id": "section_color_hover",
+        "type": "color",
+        "label": "t:sections.text.hover.label"
+      },
+      {
+        "id": "section_line",
+        "type": "color",
+        "label": "t:settings_schema.colors.settings.elements_line.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.options.label"
+      },
+      {
+        "id": "enable_lazy",
+        "type": "checkbox",
+        "label": "t:sections.general.lazy.multiple.label",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.products.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filters",
+        "label": "t:sections.collection.filter.enable.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "enable_filters_color",
+        "label": "t:sections.collection.filter.color.label",
+        "default": "block",
+        "options": [
+          {
+            "value": "text",
+            "label": "t:sections.general.text.label"
+          },
+          {
+            "value": "block",
+            "label": "t:sections.product.blocks.variants.options.buttons.colors.label"
+          },
+          {
+            "value": "img-block",
+            "label": "t:sections.image.custom.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filters_rounded",
+        "label": "t:sections.collection.filter.rounded.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filters_label",
+        "label": "t:sections.collection.filter.hide.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filters_hide",
+        "label": "t:sections.collection.filter.disabled.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sorting",
+        "label": "t:sections.collection.sorting.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "products_per_page",
+        "label": "t:sections.general.rows.products_page.label",
+        "min": 12,
+        "max": 50,
+        "step": 1,
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "label": "t:sections.general.rows.products_page_desktop.label",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.blog.articles.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "include_border",
+        "label": "t:sections.general.border.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "image_height",
+        "label": "t:sections.image.height.label",
+        "options": [
+          {
+            "value": "25",
+            "label": "t:sections.general.height.small.label"
+          },
+          {
+            "value": "50",
+            "label": "t:sections.general.height.medium.label"
+          },
+          {
+            "value": "75",
+            "label": "t:sections.general.height.large.label"
+          },
+          {
+            "value": "original",
+            "label": "t:sections.general.height.original.label"
+          }
+        ],
+        "default": "original"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "t:sections.image.position.label",
+        "options": [
+          {
+            "label": "t:sections.image.position.option_1.label",
+            "value": "0-0"
+          },
+          {
+            "label": "t:sections.image.position.option_2.label",
+            "value": "50-0"
+          },
+          {
+            "label": "t:sections.image.position.option_3.label",
+            "value": "100-0"
+          },
+          {
+            "label": "t:sections.image.position.option_4.label",
+            "value": "0-50"
+          },
+          {
+            "label": "t:sections.image.position.option_5.label",
+            "value": "50-50"
+          },
+          {
+            "label": "t:sections.image.position.option_6.label",
+            "value": "100-50"
+          },
+          {
+            "label": "t:sections.image.position.option_7.label",
+            "value": "0-100"
+          },
+          {
+            "label": "t:sections.image.position.option_8.label",
+            "value": "50-100"
+          },
+          {
+            "label": "t:sections.image.position.option_9.label",
+            "value": "100-100"
+          }
+        ],
+        "default": "50-50"
+      },
+      {
+        "type": "checkbox",
+        "id": "include_author",
+        "label": "t:sections.general.blog.author.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "include_date",
+        "label": "t:sections.general.blog.date.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "excerpt_limit",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "t:sections.general.blog.excerpt.label",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "margin_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": false
+      }
+	]
+  }
+{% endschema %}

@@ -1,0 +1,27 @@
+{%- assign liquid_size = liquid | strip_html -%}
+{% if liquid != blank and liquid_size.size > 0 %}
+  <div id="liquid-{{ block.id }}" class="product-rte rte product-block{% if block.settings.enable_metafields %} variant_metafields{% endif %}{% if enable_slide %} product-slide{% endif %}" {{ block.shopify_attributes }}>
+    <div class="product-slide-content" data-height>
+      <div class="product-slide-space">
+        {{ liquid }}
+      </div>
+    </div>
+    {%- liquid      
+      if enable_slide
+        capture title
+          if heading != blank
+            echo heading
+          else
+            echo 'product.show_more' | t
+          endif
+        endcapture
+        echo '<button type="button" title="'
+        echo title | escape
+        echo '" class="product-slide-btn">'
+        echo title
+        echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+        echo '</button>'
+      endif
+    -%}
+  </div>
+{% endif %}

@@ -1,0 +1,47 @@
+{%- liquid  
+  assign class = blank
+  capture content
+    echo '<span class="product-block">'
+      if sku and product.selected_or_first_available_variant.sku != blank
+        assign class = ' visible'
+        echo '<span>'
+        if style
+          echo '<span>'
+            echo 'product.sku' | t
+          echo '</span>'
+          echo product.selected_or_first_available_variant.sku
+        else
+          echo product.selected_or_first_available_variant.sku
+        endif   
+        echo '</span>'
+      endif       
+      if barcode and product.selected_or_first_available_variant.barcode != blank
+        assign class = ' visible'   
+        echo '<span>'
+        if style
+          echo '<span>'
+            echo 'product.barcode' | t
+          echo '</span>'
+          echo product.selected_or_first_available_variant.barcode
+        else
+          echo product.selected_or_first_available_variant.barcode
+        endif   
+        echo '</span>'   
+      endif
+    echo '</span>'
+  endcapture   
+-%}
+
+<div class="product-vendor product-sku{{ class }} slider-v" 
+     data-variant-sku 
+     data-sku-include="{{ sku }}"
+     data-sku-text="{% if style %}{{ 'product.sku' | t | escape }}{% endif %}" 
+     data-barcode-include="{{ barcode }}"
+     data-barcode-text="{% if style %}{{ 'product.barcode' | t | escape }}{% endif %}" 
+     {{ block.shopify_attributes }}>
+  {%- liquid
+     if class != blank
+       echo content
+     endif
+  -%}
+</div>

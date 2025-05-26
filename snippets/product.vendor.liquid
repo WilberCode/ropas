@@ -1,0 +1,11 @@
+<div class="product-vendor product-block" {{ block.shopify_attributes }}>  
+  {%- liquid
+    assign product_vendor_handle = product.vendor | handle
+    if collections[product_vendor_handle].handle == product_vendor_handle
+      assign vendor_url = collections[product_vendor_handle].url
+    else
+      assign vendor_url = product.vendor | url_for_vendor
+    endif
+  -%}
+  <a href="{{ vendor_url }}" title="{{ product.vendor | escape }}" class="section-title section-title-{{ vendor_size }} no-pad underline">{{ product.vendor }}</a>
+</div>

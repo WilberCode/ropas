@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "enable_image": true,
+        "enable_lazy": false,
+        "image_height": "50",
+        "image_position": "50-0",
+        "insta_filter": "none",
+        "include_author": false,
+        "include_date": true,
+        "include_tags": false,
+        "enable_social_sharing": true,
+        "title_enable": true,
+        "title_outline": "title-outline title-outline-2",
+        "title_size": 30,
+        "title_sub": "Brilla en el ALAS Pro Tour",
+        "title_sub_outline": "none",
+        "title_sub_size": 24,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    }, 
+  },
+  "order": [
+    "main", 
+  ]
+}

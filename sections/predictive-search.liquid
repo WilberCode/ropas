@@ -1,0 +1,163 @@
+<div id="predictive-search-results" class="scroll-bar-v" data-predictive-search-list>
+  <div id="predictive-search-results-list" class="search-list" role="listbox" aria-labelledby="predictive-search-products">
+    
+    {%- liquid
+      assign search_results = 0
+      assign image_style = settings.product_item_style
+      if settings.enable_image_crop and image_style != 'natural'
+        assign image_style = image_style | prepend: 'cropped-'
+      endif
+    -%}
+
+    {% if predictive_search.performed %}
+
+   	  {%- assign search_terms = predictive_search.terms -%}
+
+      {% if predictive_search.resources.queries.size > 0 %}
+        <h2>{{ 'search.results.suggestions' | t }}</h2>
+        {%- assign search_results = search_results | plus: 1 -%}
+        <div class="search-result-query" role="option" aria-selected="false">
+          <ul role="listbox">
+            {% for query in predictive_search.resources.queries %}
+              <li id="search-query-{{ forloop.index }}" role="option">
+                <a href="{{ query.url }}" title="{{ query.text }}">
+                  <span aria-label="{{ query.text }}">{{ query.styled_text }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if predictive_search.resources.products.size > 0 %}
+        {% if search_results > 0 %}<h2>{{ 'search.results.product_count' | t: count: predictive_search.resources.products.size }}</h2>{% endif %}
+        {%- assign search_results = search_results | plus: 1 -%}
+        <div class="products predictive-search-results-two">
+          {%- for product in predictive_search.resources.products -%}
+            <div id="search-product-{{ forloop.index }}" role="option" aria-selected="false">           
+              {%- render 'product.loop-backup', product: product, product_style: image_style, size: 331, sizes: '331px', lazy: 'eager', forloop_index: forloop.index -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {% endif %}
+
+      {% if predictive_search.resources.collections.size > 0 %}
+        {% if search_results > 0 %}<h2>{{ 'search.results.collection_count' | t: count: predictive_search.resources.collections.size }}</h2>{% endif %}
+        {%- assign search_results = search_results | plus: 1 -%}
+    	<div class="predictive-search-results-two">
+          {%- for collection in predictive_search.resources.collections -%}
+            <div id="search-collection-{{ forloop.index }}" class="article-excerpts" role="option" aria-selected="false">
+              <article class="article-excerpt article-excerpt-borders text-center">              
+                {%- liquid
+                  assign img_src = blank
+                  if collection.image == blank
+                    assign img_src = collection.products.first.featured_media.preview_image
+                  else
+                    assign img_src = collection.image
+                  endif
+                -%}
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}" class="{{ settings.insta_filter }}" tabindex="-1">
+                  {%- liquid
+                    capture alt
+                      if img_src.alt != blank
+                        echo img_src.alt | escape
+                      else
+                        echo collection.title | escape
+                      endif
+                    endcapture
+                    render 'image.load', img_src: img_src, size: 574, sizes: '(min-width: 1280px) 574px, calc(50vw - 82px)', alt: alt, lazy: 'eager'
+                  -%}
+                </a>              
+                <div class="article-excerpt-content">
+                  <h3 class="article-excerpt-title collections"><a href="{{ collection.url }}" title="{{ collection.title | escape }}" class="underline keyed inside">{{ collection.title }}</a></h3>
+                </div>
+              </article>
+            </div>
+          {%- endfor -%}
+    	</div>
+      {% endif %}
+
+      {% if predictive_search.resources.articles.size > 0 %}
+        {% if search_results > 0 %}<h2>{{ 'search.results.article_count' | t: count: predictive_search.resources.articles.size }}</h2>{% endif %}
+        {%- assign search_results = search_results | plus: 1 -%}
+        <div class="predictive-search-results-two">
+          {%- for article in predictive_search.resources.articles -%}
+            <div id="search-article-{{ forloop.index }}" class="article-excerpts" role="option" aria-selected="false">
+              {%- render 'blog.details', article: article, borders: true, size: 574, sizes: '(min-width: 1280px) 574px, calc(50vw - 82px)', lazy: 'eager', padding: 'original', image_position: '50-50', insta_filter: settings.insta_filter, excerpt: 0, forloop: forloop -%} 
+            </div>
+          {%- endfor -%}
+    	</div>
+      {% endif %}
+
+      {% if predictive_search.resources.pages.size > 0 %}
+        {% if search_results > 0 %}<h2>{{ 'search.results.page_count' | t: count: predictive_search.resources.pages.size }}</h2>{% endif %}
+        {%- assign search_results = search_results | plus: 1 -%}
+        {% for page in predictive_search.resources.pages %}
+          <div id="search-page-{{ forloop.index }}" class="search-result-page" role="option" aria-selected="false">
+            <a class="search-result-page-link" href="{{ page.url }}" title="{{ page.title | escape }}">
+              <h3 class="search-result-page-title underline">{{ page.title }}</h3>
+              <div class="search-result-page-summary">{{ page.content | strip_html | truncatewords: 40 | highlight: predictive_search.terms }}</div>
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %} 
+    
+    {% else %}
+    
+      {%- assign search_terms = search.terms -%}
+
+      {%- liquid
+        assign search_results = ''
+        for line_item in search.results
+          capture search_results
+            unless search_results == blank
+              echo search_results
+              echo '|'
+            endunless
+            echo line_item.object_type
+          endcapture
+        endfor
+        assign search_results = search_results | split: '|' | uniq
+      -%}
+
+      {% for categories in search_results %}
+        {% unless forloop.index0 < 1 %}
+          <h2>{{ categories | capitalize | append: 's' }}</h2>
+        {% endunless %}
+
+        <div class="{% if categories == 'page' %}predictive-search-results{% else %}predictive-search-results-two{% endif %}">
+        {% for line_item in search.results %}
+          {% if line_item.object_type == categories %}
+          {%- assign search_results = search_results | plus: 1 -%}
+            {% if line_item.object_type == 'product' %}
+              {%- assign product = line_item -%}
+              <div id="search-product-{{ forloop.index }}" role="option" aria-selected="false">
+                {%- render 'product.loop-backup', product: product, product_style: image_style, size: 331, sizes: '331px', lazy: 'eager', forloop_index: forloop.index -%}
+              </div>
+              {% elsif line_item.object_type == 'article' %}
+              {%- assign article = line_item -%}
+              <div id="search-article-{{ forloop.index }}" class="article-excerpts" role="option" aria-selected="false">
+                {%- render 'blog.details', article: article, borders: true, size: 574, sizes: '(min-width: 1280px) 574px, calc(50vw - 82px)', lazy: 'eager', padding: 'original', image_position: '50-50', insta_filter: settings.insta_filter, excerpt: 0, forloop: forloop -%}
+          	  </div>
+              {% elsif line_item.object_type == 'page' %}
+              {%- assign page = line_item -%}
+              <div id="search-page-{{ forloop.index }}" class="search-result-page" role="option" aria-selected="false">
+                <a class="search-result-page-link" href="{{ page.url }}" title="{{ page.title | escape }}">
+                  <h3 class="search-result-page-title underline">{{ page.title }}</h3>
+                  <div class="search-result-page-summary">{{ page.content | strip_html | truncatewords: 40 | highlight: predictive_search.terms }}</div>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        </div>
+      {% endfor %}
+    
+    {% endif %}
+
+    <div class="search-list-button" role="option">
+      <button class="btn btn-secondary alt arrow btn-full-width">{{ 'search.results.results_count' | t: count: search_results, query: search_terms }}</button>
+    </div>
+
+  </div>
+</div>

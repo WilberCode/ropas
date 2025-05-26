@@ -1,0 +1,62 @@
+<div class="newsletter text-{{ section.settings.title_alignment }}">
+  {%- capture id -%}contact-form-{{ section.id }}{%- endcapture -%}  
+  {% form 'customer', id: id %}
+    {% if form.posted_successfully? %}
+    <p class="newsletter-success newsletter-message" data-title="{{ 'newsletter.success_title' | t }}">{{ 'newsletter.success' | t }}</p>
+    {% else %}
+    {% if form.errors %}{{ form.errors | default_errors }}{% endif %}
+    <div class="newsletter-form">
+      <label class="visually-hidden"
+             for="input-{{ id }}">{{ 'newsletter.placeholder' | t }}</label>
+      <input id="input-{{ id }}"
+             class="newsletter-input no-pad" 
+             name="contact[email]" 
+             type="email" 
+             value="{% if customer %}{{ customer.email }}{% else %}{{ form.email }}{% endif %}" 
+             placeholder="{{ 'newsletter.placeholder' | t | escape }}" 
+             required>
+      <input type="hidden" 
+             id="contact_tags" 
+             name="contact[tags]" 
+             value="prospect,newsletter"> 
+
+      
+      <button class="newsletter-submit btn btn-primary {% if background_color %}alt {% endif %}check" name="subscribe" type="submit">{{ 'newsletter.subscribe' | t }}</button>
+    </div>
+    {%- if section.settings.show_terms -%}
+      <div class="terms-checkbox"  >
+        <input 
+          type="checkbox" 
+          id="accept_terms" 
+          name="accept_terms" 
+          required 
+        />
+        <label for="accept_terms">
+          {{ section.settings.terms_intro_text | escape }}
+          <a href="{{ section.settings.terms_link }}" target="_blank">
+            {{ section.settings.terms_link_text | escape }}
+          </a>
+        </label>
+      </div>
+    {%- endif -%}
+    {% endif %}
+  {% endform %} 
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('{{ id }}');
+    
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        const checkbox = document.getElementById('accept_terms');
+        
+        if (checkbox && !checkbox.checked) {
+          event.preventDefault();
+          alert('Debes aceptar los Términos y Condiciones para continuar.');
+        }
+      });
+    }
+  });
+  </script>
+  

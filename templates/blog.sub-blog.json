@@ -1,0 +1,388 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "title-outline title-outline-1",
+        "title_sub_size": 42,
+        "include_rss": false,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "number_of_articles": 4,
+        "include_border": true,
+        "enable_lazy": false,
+        "image_height": "original",
+        "image_position": "50-50",
+        "insta_filter": "none",
+        "include_author": false,
+        "include_date": true,
+        "excerpt_limit": 100,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 20,
+        "padding_border": true
+      }
+    },
+    "section_image_with_text_overlay_Y9Lx36": {
+      "type": "section-image-with-text-overlay",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "CATALINA ZARIQUIEY, DOBLE CAMPEONA DE LA COPA EQUANS GENERACIÓN SURF OLÍMPICO",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 36,
+        "title_sub": "BRILLA EN EL ALAS PRO TOUR",
+        "title_sub_outline": "none",
+        "title_sub_size": 18,
+        "text_border": true,
+        "content": "<h6>La Copa Equans Generación Surf Olímpico concluyó con emocionantes victorias en el Centro de Alto Rendimiento de Surfing en Punta Rocas en Lima - Perú, donde más de 120 atletas de todo el mundo compitieron por una bolsa de diez mil dólares en siete categorías diferentes.<\/h6><h6>La destacada surfista peruana <em><strong>Catalina Zariquiey<\/strong><\/em>, rider de Sisstrevolution, se coronó campeona en la categoría Open, logrando un impresionante total de 11.33 puntos en la final exclusivamente peruana. Zariquiey, también ganadora en Sub 18, demostró su destacado nivel como doble campeona de la temporada 2023 del ALAS Pro Tour en Sub 18 y Sub 14.<\/h6>",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": false,
+        "layout": "overlay-center-center",
+        "content_width": 82,
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "#ffffff",
+        "text_background_gradient": "",
+        "text_background_opacity": 90,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 10,
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/Sin_titulo-2_Mesa_de_trabajo_1.jpg",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "e1c6cab2-51bf-4c32-9ef8-37f5f0c5534f": {
+      "type": "section-rich-text",
+      "blocks": {
+        "template--17550831878456__e1c6cab2-51bf-4c32-9ef8-37f5f0c5534f-1673895098c0e2fbe4-0": {
+          "type": "text",
+          "settings": {
+            "title": "“Las competidoras son muy fuertes y nada,  súper feliz de haber competido en este increíble campeonato acá en una ola que conozco”, indicó Zariquiey.",
+            "title_h1": false,
+            "title_outline": "none",
+            "title_size": 36,
+            "title_sub": "",
+            "title_sub_outline": "none",
+            "title_sub_size": 42,
+            "text_border": true,
+            "text": "",
+            "link": "",
+            "button_text": "Read More",
+            "link_style": "text",
+            "title_alignment": "center",
+            "block_columns": 3
+          }
+        }
+      },
+      "block_order": [
+        "template--17550831878456__e1c6cab2-51bf-4c32-9ef8-37f5f0c5534f-1673895098c0e2fbe4-0"
+      ],
+      "settings": {
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_rich_text_rFETTN": {
+      "type": "section-rich-text",
+      "settings": {
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_gallery_wAnbWR": {
+      "type": "section-image-gallery",
+      "blocks": {
+        "image_kPPdJC": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/c7693bd388334093d84c79899018f7e1_Mesa_de_trabajo_1.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_WeNxfN": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/c7693bd388334093d84c79899018f7e1-03.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        }
+      },
+      "block_order": [
+        "image_kPPdJC",
+        "image_WeNxfN"
+      ],
+      "settings": {
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 40,
+        "image_height": "original",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_rich_text_dWCeU7": {
+      "type": "section-rich-text",
+      "settings": {
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_with_text_overlay_tNVa98": {
+      "type": "section-image-with-text-overlay",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "¡vamos PERÚ!",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 36,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 48,
+        "text_border": true,
+        "content": "<h6>Lucca Mesinas, representante peruano y clasificado para los Juegos Olímpicos de París 2024, se alzó con la victoria en la categoría Open masculina con una puntuación total de 16.16, consolidando su posición como uno de los mejores surfistas de la región.<\/h6><h6>En otras categorías, Julián Schweizer de Uruguay se llevó la victoria en Longboard, mientras que Alejandro Bernales se destacó en la categoría Sub 18 masculina. Lorenzo de Osma y Sofía Artieda también dejaron su huella, siendo los ganadores en Sub 14 masculino y femenino, respectivamente.<\/h6><h6>El evento, patrocinado por la Municipalidad de Punta Negra, Proyecto Especial Legado, G-shock, Yamaha, Perú Surf, Agua Loa, Generade y Lima Expresa by Vinci, marcó el inicio de la lucha por los títulos de campeones de 2024 y formó parte del prestigioso ALAS Pro Tour.<\/h6><h6>Los surfistas peruanos que triunfaron en sus respectivas categorías, incluyendo a <strong>Catalina Zariquiey<\/strong>, recibieron felicitaciones por representar con éxito a Perú en el campeonato Latinoamericano de surf.<\/h6>",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": false,
+        "layout": "overlay-center-center",
+        "content_width": 90,
+        "section_color": "#292929",
+        "section_color_hover": "#000000",
+        "section_line": "#292929",
+        "text_background": "#ffffff",
+        "text_background_gradient": "",
+        "text_background_opacity": 90,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 10,
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/Sin_titulo-3_Mesa_de_trabajo_1.jpg",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_gallery_JANQCQ": {
+      "type": "section-image-gallery",
+      "blocks": {
+        "image_aVtWWY": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/c7693bd388334093d84c79899018f7e1-05.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_4hmMyU": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "insta_filter": "none",
+            "block_img_mobile": "shopify:\/\/shop_images\/c7693bd388334093d84c79899018f7e1-06.jpg",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        }
+      },
+      "block_order": [
+        "image_aVtWWY",
+        "image_4hmMyU"
+      ],
+      "settings": {
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 40,
+        "image_height": "original",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_slideshow_fRekxQ": {
+      "type": "section-slideshow",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "full_width": false,
+        "enable_lazy": true,
+        "should_autoplay": false,
+        "slide_autoplay": 3,
+        "button_alignment": "right",
+        "button_color": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_rich_text_9zMtW9": {
+      "type": "section-rich-text",
+      "blocks": {
+        "text_H73XR4": {
+          "type": "text",
+          "settings": {
+            "title": "Los campeones",
+            "title_h1": false,
+            "title_outline": "none",
+            "title_size": 36,
+            "title_sub": "",
+            "title_sub_outline": "none",
+            "title_sub_size": 30,
+            "text_border": true,
+            "text": "<ul><li><strong>Catalina Zariquiey<\/strong> SUB 18 y OPEN DAMAS. 🥇🥇🏆🏆<\/li><li>Lorenzo de Osma SUB 14 VARONES. 🥇🏆<\/li><li>Sofía Artieda SUB 14 DAMAS. 🥇🏆<\/li><li>Alejandro Bernales SUB 18 VARONES. 🥇🏆<\/li><li>Lucca Mesinas OPEN VARONES. 🥇🏆<\/li><\/ul><p><\/p><p><\/p><p><\/p><p><\/p><p><\/p><p><\/p><p><\/p><p><\/p><p><\/p><p>Fotos: Diego Barreiro Dab<\/p>",
+            "link": "",
+            "button_text": "Read More",
+            "link_style": "text",
+            "title_alignment": "center",
+            "block_columns": 3
+          }
+        }
+      },
+      "block_order": [
+        "text_H73XR4"
+      ],
+      "settings": {
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 30,
+        "padding_border": true
+      }
+    }, 
+  },
+  "order": [
+    "main",
+    "section_image_with_text_overlay_Y9Lx36",
+    "e1c6cab2-51bf-4c32-9ef8-37f5f0c5534f",
+    "section_rich_text_rFETTN",
+    "section_image_gallery_wAnbWR",
+    "section_rich_text_dWCeU7",
+    "section_image_with_text_overlay_tNVa98",
+    "section_image_gallery_JANQCQ",
+    "section_slideshow_fRekxQ",
+    "section_rich_text_9zMtW9", 
+  ]
+}

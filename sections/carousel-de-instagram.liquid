@@ -1,0 +1,252 @@
+<!-- Swiper Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+{% stylesheet %}
+.carousel-instagram {
+  width: 100%;
+  margin:auto;
+  padding-top: 30px;
+}
+
+.carousel-instagram swiper-container {
+  width: 100%;
+  --swiper-navigation-color: #000;
+  --swiper-pagination-color: #000;
+}
+
+.carousel-instagram swiper-slide img {
+  width: 100%;
+  height: auto; 
+  display: block;
+} 
+
+ 
+.carousel-instagram-wrapper .carousel-instagram-header {
+  text-align: center;  
+}
+.carousel-instagram-wrapper .carousel-instagram-header h2{ 
+    font-weight: 700; 
+    line-height: 36px; 
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+    color: #292929;  
+}
+@media (min-width: 768px) {
+    .carousel-instagram-wrapper .carousel-instagram-header h2{  
+        font-size: 48px; 
+    }
+}
+
+ 
+{% endstylesheet %}
+{% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px; 
+    }
+  {% endstyle %}
+
+<div class="dynamic-section dynamic-section-{{ section.id }}"> 
+    <section class="carousel-instagram-wrapper section-padding-top section-padding-bottom">
+        <div class="carousel-instagram-header">
+            <h2>{{ section.settings.title }}</h2>
+        </div>
+        <div class="carousel-instagram" id="carousel-instagram-{{ section.id }}">
+            <swiper-container id="swiper-{{ section.id }}" space-between="20" init="false" navigation="true" loop="true" autoplay="{{ section.settings.autoplay }}"></swiper-container>
+        </div>
+    </section>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiperEl = document.getElementById("swiper-{{ section.id }}");
+
+    const swiperParams = {
+      slidesPerView: {{ section.settings.desktop_slides }},
+      breakpoints: {
+        0: 1,
+        480: { slidesPerView: {{ section.settings.mobile_slides }} },
+        768: { slidesPerView: {{ section.settings.tablet_slides }} },
+        1024: { slidesPerView: {{ section.settings.desktop_slides }} }
+      },
+      autoplay: {{ section.settings.autoplay | json }},
+      navigation: true,
+      loop: true, 
+    };
+
+    // Agregar slides dinámicamente desde los bloques
+    const slides = [
+      {% for block in section.blocks %}
+        `
+        <swiper-slide>
+          {% if block.settings.link %}
+            <a href="{{ block.settings.link }}">
+          {% endif %}
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Slide {{ forloop.index }}">
+          {% endif %}
+          {% if block.settings.link %}
+            </a>
+          {% endif %}
+        </swiper-slide>
+        `,
+      {% endfor %}
+    ];
+
+    swiperEl.innerHTML = slides.join("");
+    Object.assign(swiperEl, swiperParams);
+    swiperEl.initialize();
+  });
+
+  const el = document.querySelector('swiper-container');
+    const shadow = el.shadowRoot;
+
+    const style = document.createElement('style');
+    style.textContent = `
+    [class*="swiper-button-"] {
+        color: #000;  
+        background: rgba(255, 255, 255, 0.5);  
+        padding: 3.4px 6.5px;
+    }
+    [class*="swiper-button-"] svg{
+        width: 14px !important;
+        height: 22px !important;
+
+    }
+    .swiper-button-prev{
+        left: 0 !important; 
+    }
+    .swiper-button-next{
+        right:  0 !important;
+    }
+     `;
+
+    shadow.appendChild(style);
+
+</script>
+
+{% schema %}
+{
+  "name": "Carousel de Instagram",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Título",
+        "default": "Carousel de Instagram"
+    },
+    {
+      "type": "range",
+      "id": "desktop_slides",
+      "label": "Slides en escritorio",
+      "min": 1,
+      "max": 10,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "tablet_slides",
+      "label": "Slides en tablet",
+      "min": 1,
+      "max": 10,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "mobile_slides",
+      "label": "Slides en móvil",
+      "min": 1,
+      "max": 10,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Activar autoplay",
+      "default": true
+    },
+    {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      }, 
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen del slide"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace del slide"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 15,
+  "presets": [
+    {
+      "name": "Carousel de Instagram",
+      "category": "Custom",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

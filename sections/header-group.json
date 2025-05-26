@@ -1,0 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:sections.section.titles.header.content",
+  "sections": {
+    "header-announcement": {
+      "type": "header-announcement",
+      "disabled": true,
+      "settings": {
+        "announcement_home_only": false,
+        "announcement_text": "<p><strong>ENVÍOS GRATIS</strong> por compras mayores a S/200.00</p>",
+        "announcement_text_mobile": "<p><strong>ENVÍOS GRATIS</strong> por compras mayores a S/200.00</p>",
+        "announcement_text_size": 17,
+        "announcement_color": "#ffffff",
+        "announcement_background": "#fd891e",
+        "announcement_line": "#efefef",
+        "announcement_padding": 10,
+        "padding_border": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "05ca2b08-09ee-48cb-a08f-7c7c2b4ea5f0": {
+          "type": "mega_menu",
+          "settings": {
+            "heading": "Shop",
+            "column_link": 5,
+            "color_link": "",
+            "menu_collection_images": "product",
+            "menu_collection_images_insta_filter": "none",
+            "product_item_style": "medium",
+            "enable_image_crop": false,
+            "image_position": "50-50",
+            "menu_alignment": true,
+            "enable_promo": true,
+            "promo_position": "last",
+            "text": "Boardshorts '24",
+            "link": "shopify://collections/ropas-de-bano-hombre",
+            "link_text": "Ir a comprar",
+            "text_position": "split",
+            "color": "#ffffff",
+            "overlay_background": "#000000",
+            "overlay_opacity": 25,
+            "insta_filter": "none",
+            "insta_filter_mobile": "none"
+          }
+        },
+        "1b815b78-97ca-45e0-8fae-92e00385b522": {
+          "type": "contact_menu",
+          "settings": {
+            "heading": "Encuéntranos",
+            "color_link": "",
+            "phone_value": "(+51) 913 810 139",
+            "email_value": "info@phbrands.pe",
+            "hours_value": "<p>Lun-Do, 10am-7pm</p>",
+            "directions_value": "<p>Calle Islas Ballestas 710</p><p>Punta Hermosa</p>",
+            "directions_map": false,
+            "api_key": "",
+            "directions-map-zoom": 2,
+            "directions_map_color_fg": "#292929",
+            "directions_map_color_bg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "05ca2b08-09ee-48cb-a08f-7c7c2b4ea5f0",
+        "1b815b78-97ca-45e0-8fae-92e00385b522"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Carver-30LostRocketRedux-CXTop_740x_58248586-3279-47c1-af56-905e42f9531f.webp",
+        "logo_width": 100,
+        "mobile_logo_width": 85,
+        "menu": "main-menu",
+        "nav_text_size": 12,
+        "enable_sticky": false,
+        "menu_location": "right",
+        "enable_search": true,
+        "cart_icon": "cart-cart",
+        "account": "icon",
+        "header_navtop_text1": "",
+        "header_navtop_url1": "",
+        "header_navtop_text2": "",
+        "header_navtop_url2": ""
+      }
+    },
+    "header-minicart": {
+      "type": "header-minicart",
+      "settings": {
+        "quantity_enable": true,
+        "smart_enable": true,
+        "enable_checkout_lock_icon": true
+      }
+    }
+  },
+  "order": [
+    "header-announcement",
+    "header",
+    "header-minicart"
+  ]
+}

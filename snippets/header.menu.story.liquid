@@ -1,0 +1,45 @@
+<div class="contactbar-layout">
+
+  {% if block.settings.image %}
+  {%- assign has_image = true -%}
+  <div class="contactbar-map">
+    <div class="map">
+      <div class="{{ block.settings.insta_filter }} map-container">
+        {%- liquid
+          capture alt
+            if block.settings.image.alt != blank
+              echo block.settings.image.alt | escape
+            elsif block.settings.title != blank
+              echo block.settings.title | escape
+            elsif block.settings.text != blank
+              echo block.settings.text | escape
+            else
+              echo section.settings.image | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize
+            endif
+          endcapture
+          if is_mobile or menu_location == 'mobile'
+            assign size = 439
+            assign sizes = '(min-width: 526px) 439px, calc(100vw - 86px)'
+          else
+            assign size = 620
+            assign sizes = '(min-width: 1280px) 620px, (min-width: 960px) calc(50vw - 40px), (min-width: 768px) calc(31vw - 40px), (min-width: 526px) 439px, calc(100vw - 86px)'
+          endif
+          render 'image.load', img_src: block.settings.image, size: size, new_size: size, padding: 35.48387096774194, sizes: sizes, alt: alt, background: true, lazy: 'eager'
+        -%}
+      </div>
+    </div>
+  </div>  
+  {% endif %}
+  
+  <div class="contactbar-items story{% if has_image %} contactbar-hasmap{% endif %} text-{{ block.settings.text_alignment }}">
+    {% if block.settings.title != blank %}<h3>{{ block.settings.title }}</h3>{% endif %}
+    {% if block.settings.text != blank %}{{ block.settings.text }}{% endif %}
+    {% if block.settings.link != blank and block.settings.button_text != blank %}
+    <a href="{{ block.settings.link }}" title="{{ block.settings.button_text | escape }}" class="link-group">
+      <span><span class="link-text">{{ block.settings.button_text }}</span></span>
+      <span class="link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>      
+    </a>
+    {% endif %}
+  </div>
+
+</div>

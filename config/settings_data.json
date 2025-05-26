@@ -1,0 +1,1007 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_menu_text": "#292929",
+    "color_title_text": "#292929",
+    "color_text": "#000000",
+    "color_text_hover": "#000000",
+    "color_label": "#000000",
+    "color_background": "#ffffff",
+    "color_accent": "#90a18f",
+    "color_sale": "#ff0000",
+    "rating_color": "#ffcb67",
+    "rating_background_color": "#efefef",
+    "line_color": "#d3d3d3",
+    "success_color": "#15a115",
+    "error_color": "#990000",
+    "swatch_color": "Color",
+    "custom_color": "",
+    "button_border": 3,
+    "button_corner": 10,
+    "button_primary_border": "#db9049",
+    "button_primary_background": "#db9049",
+    "button_primary_text": "#ffffff",
+    "button_secondary_border": "#095dc2",
+    "button_secondary_background": "#ffffff",
+    "button_secondary_text": "#095dc2",
+    "header_type": "karla_n7",
+    "headline_uppercase": true,
+    "base_type": "karla_n4",
+    "body_type_size": 0,
+    "label_type": "karla_n7",
+    "label_type_size": 0,
+    "search_predictive_enable": true,
+    "search_predictive_limit": 4,
+    "search_predictive_author": true,
+    "badge_enable": true,
+    "insta_filter": "none",
+    "product_item_style": "medium",
+    "enable_image_crop": false,
+    "image_hover": true,
+    "vendor_enable": true,
+    "meta_enable": false,
+    "products_sale": true,
+    "reviews_enable": true,
+    "quick_enable": true,
+    "quick_icon": "quick-eye",
+    "quick_insta_filter": "none",
+    "quick_gallery_video_autoplay": true,
+    "quick_gallery_video_looping": true,
+    "quick_vendor": true,
+    "quick_vendor_size": 12,
+    "quick_title_outline": "title-outline title-outline-1",
+    "quick_title_size": 72,
+    "quick_sku": true,
+    "quick_barcode": false,
+    "quick_style": false,
+    "quick_rating": true,
+    "quick_rating_style": "stars",
+    "quick_price": true,
+    "quick_price_size": 24,
+    "quick_tax": true,
+    "quick_variants": true,
+    "quick_variants_enable_single": true,
+    "quick_variants_variant_enable": "select",
+    "quick_variants_rounded": false,
+    "quick_variants_color_enable": "text",
+    "quick_quantity": true,
+    "quick_form": true,
+    "quick_enable_custom": "",
+    "quick_enable_cart_redirection": false,
+    "quick_show_payment_button": true,
+    "quick_section_color": "rgba(0,0,0,0)",
+    "quick_section_color_hover": "rgba(0,0,0,0)",
+    "quick_section_line": "rgba(0,0,0,0)",
+    "quick_background": "rgba(0,0,0,0)",
+    "quick_background_gradient": "",
+    "liquid": "",
+    "currency_enable": false,
+    "month_day_year": "abbreviated_date",
+    "share_widget_facebook": true,
+    "share_widget_pinterest": true,
+    "share_widget_email": false,
+    "social_facebook": "https://www.facebook.com/phsurfsupplies",
+    "social_threads": "",
+    "social_x": "",
+    "social_pinterest": "",
+    "social_instagram": "https://www.instagram.com/phbrands_peru/",
+    "social_tiktok": "",
+    "social_snapchat": "",
+    "social_tumblr": "",
+    "social_whatsapp": "https://api.whatsapp.com/send?phone=913810139&text=%C2%BFMe%20pueden%20brindar%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos?%20",
+    "social_linkedin": "",
+    "social_youtube": "",
+    "social_vimeo": "",
+    "social_medium": "",
+    "social_rss": "",
+    "social_email": "info@phbrands.pe",
+    "favicon": "shopify://shop_images/Logo_PH_Surf_-_Favicon.png",
+    "checkout_header_image": "shopify://shop_images/BANNER_CATEGORIA_PHBRANDS-03_1.jpg",
+    "checkout_logo_image": "shopify://shop_images/LOGO_2.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "large",
+    "checkout_accent_color": "#db9049",
+    "checkout_button_color": "#111d45",
+    "checkout_error_color": "#d64b4b",
+    "checkout_layout": "threepage",
+    "quick_variants_custom_color": "",
+    "share_widget_twitter": true,
+    "social_twitter": "https://twitter.com/shopify",
+    "use_highlighted_menu": false,
+    "color_button_text": "#ffffff",
+    "size_type": 14,
+    "text_alignment": "text-center",
+    "sections": {
+      "header-announcement": {
+        "type": "header-announcement",
+        "settings": {
+          "announcement_home_only": false,
+          "announcement_text": "<p>Call attention to a special discount, feature, or promotion here.</p>",
+          "announcement_text_mobile": "<p>Use less text on mobile!</p>",
+          "announcement_text_size": 12,
+          "announcement_color": "#292929",
+          "announcement_background": "#ffffff",
+          "announcement_line": "#efefef",
+          "announcement_padding": 10,
+          "padding_border": true
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "04d30d42-752b-4a87-a318-25836d5c445d": {
+            "type": "mega_menu",
+            "settings": {
+              "heading": "",
+              "color_link": "rgba(0,0,0,0)",
+              "menu_collection_images": "product",
+              "menu_collection_images_insta_filter": "none",
+              "product_item_style": "natural",
+              "enable_image_crop": false,
+              "menu_alignment": true,
+              "enable_promo": true,
+              "promo_position": "first",
+              "text": "Promotion text",
+              "link": "",
+              "link_text": "More info here",
+              "text_position": "split",
+              "color": "#ffffff",
+              "overlay_background": "#000000",
+              "overlay_opacity": 25,
+              "insta_filter": "none",
+              "insta_filter_mobile": "none"
+            }
+          },
+          "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2": {
+            "type": "story_menu",
+            "settings": {
+              "heading": "",
+              "color_link": "rgba(0,0,0,0)",
+              "title": "Tell a story",
+              "text": "<p>Share details about your business or products</p>",
+              "link": "",
+              "button_text": "Button",
+              "insta_filter": "none"
+            }
+          },
+          "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2": {
+            "type": "contact_menu",
+            "settings": {
+              "heading": "",
+              "color_link": "rgba(0,0,0,0)",
+              "phone_value": "757 555 1212",
+              "email_value": "shop@example.com",
+              "hours_value": "<p>Mon-Fri, 9am-5pm</p>",
+              "directions_value": "<p>Boardwalk</p><p>Virginia Beach, VA 23451</p>",
+              "directions_map": false,
+              "api_key": "",
+              "directions-map-zoom": 2,
+              "directions_map_color_fg": "#ffffff",
+              "directions_map_color_bg": "#90a18f"
+            }
+          }
+        },
+        "block_order": [
+          "04d30d42-752b-4a87-a318-25836d5c445d",
+          "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2",
+          "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2"
+        ],
+        "settings": {
+          "logo_width": 250,
+          "mobile_logo_width": 200,
+          "menu": "main-menu",
+          "nav_text_size": 14,
+          "menu_location": "center",
+          "enable_search": true,
+          "cart_icon": "cart-cart",
+          "account": "icon"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "da49eebe-c9be-4ee8-8f5a-9cec8d28c966": {
+            "type": "menu",
+            "settings": {
+              "title": "About",
+              "menu": "footer"
+            }
+          },
+          "81327541-cc2a-4e81-a2fd-3e09bdfb892b": {
+            "type": "menu",
+            "settings": {
+              "title": "About",
+              "menu": "footer"
+            }
+          },
+          "1162bb90-c1c5-47df-9793-54c21a1b7158": {
+            "type": "customer",
+            "settings": {
+              "title": "Account"
+            }
+          },
+          "fcb2c506-78eb-4d25-a80c-b1e220d30377": {
+            "type": "richtext",
+            "settings": {
+              "title": "About",
+              "content": "<p>Use this space to give credit where it's due, reinforce your brand identity, shop policy, or company motto.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "da49eebe-c9be-4ee8-8f5a-9cec8d28c966",
+          "81327541-cc2a-4e81-a2fd-3e09bdfb892b",
+          "1162bb90-c1c5-47df-9793-54c21a1b7158",
+          "fcb2c506-78eb-4d25-a80c-b1e220d30377"
+        ],
+        "settings": {
+          "enable_social": true,
+          "enable_payment_icons": true,
+          "show_locale_selector": true,
+          "show_currency_selector": true,
+          "subfooter": "",
+          "enable_newsletter": true
+        }
+      },
+      "header-minicart": {
+        "type": "header-minicart",
+        "settings": {
+          "quantity_enable": true,
+          "smart_enable": true,
+          "enable_checkout_lock_icon": true
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "18228966181090706294": {
+        "type": "shopify://apps/selleasy/blocks/app-embed/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+        "disabled": false,
+        "settings": {
+          "storefrontAccessToken": ""
+        }
+      },
+      "14041968213898805026": {
+        "type": "shopify://apps/aov-free-gift-bxgy/blocks/app-embed-free-gift/de98edfe-90fa-4145-8a57-1055e0058723",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Solo": {
+      "color_menu_text": "#292929",
+      "color_title_text": "#292929",
+      "color_text": "#000000",
+      "color_text_hover": "#000000",
+      "color_label": "#000000",
+      "color_background": "#ffffff",
+      "color_accent": "#90a18f",
+      "color_sale": "#ff0000",
+      "rating_color": "#ffcb67",
+      "rating_background_color": "#efefef",
+      "line_color": "#d3d3d3",
+      "success_color": "#15a115",
+      "error_color": "#990000",
+      "swatch_color": "Color",
+      "custom_color": "",
+      "button_border": 2,
+      "button_corner": 0,
+      "button_primary_border": "#90a18f",
+      "button_primary_background": "#90a18f",
+      "button_primary_text": "#ffffff",
+      "button_secondary_border": "#90a18f",
+      "button_secondary_background": "#ffffff",
+      "button_secondary_text": "#90a18f",
+      "header_type": "karla_n7",
+      "headline_uppercase": true,
+      "base_type": "karla_n4",
+      "body_type_size": 0,
+      "label_type": "karla_n7",
+      "label_type_size": 0,
+      "search_predictive_enable": true,
+      "search_predictive_limit": 4,
+      "search_predictive_author": true,
+      "badge_enable": true,
+      "insta_filter": "none",
+      "product_item_style": "natural",
+      "enable_image_crop": true,
+      "image_hover": true,
+      "vendor_enable": true,
+      "meta_enable": true,
+      "products_sale": true,
+      "reviews_enable": true,
+      "quick_enable": true,
+      "quick_icon": "quick-cart",
+      "quick_insta_filter": "none",
+      "quick_gallery_video_autoplay": true,
+      "quick_gallery_video_looping": true,
+      "quick_vendor": true,
+      "quick_vendor_size": 12,
+      "quick_title_outline": "title-outline title-outline-1",
+      "quick_title_size": 72,
+      "quick_sku": true,
+      "quick_barcode": true,
+      "quick_style": false,
+      "quick_rating": true,
+      "quick_rating_style": "both",
+      "quick_price": true,
+      "quick_price_size": 24,
+      "quick_variants": true,
+      "quick_variants_enable_single": true,
+      "quick_variants_variant_enable": "radio",
+      "quick_variants_rounded": false,
+      "quick_variants_color_enable": "var-img-block",
+      "quick_quantity": true,
+      "quick_form": true,
+      "quick_enable_custom": "",
+      "quick_enable_cart_redirection": false,
+      "quick_show_payment_button": true,
+      "quick_section_color": "rgba(0,0,0,0)",
+      "quick_section_color_hover": "rgba(0,0,0,0)",
+      "quick_section_line": "rgba(0,0,0,0)",
+      "quick_background": "rgba(0,0,0,0)",
+      "quick_background_gradient": "",
+      "liquid": "",
+      "currency_enable": false,
+      "month_day_year": "abbreviated_date",
+      "share_widget_facebook": true,
+      "share_widget_pinterest": true,
+      "share_widget_email": true,
+      "social_facebook": "",
+      "social_threads": "",
+      "social_x": "",
+      "social_pinterest": "",
+      "social_instagram": "",
+      "social_tiktok": "",
+      "social_snapchat": "",
+      "social_tumblr": "",
+      "social_whatsapp": "",
+      "social_linkedin": "",
+      "social_youtube": "",
+      "social_vimeo": "",
+      "social_medium": "",
+      "social_rss": "",
+      "social_email": "",
+      "favicon": "",
+      "checkout_logo_position": "center",
+      "checkout_accent_color": "#90a18f",
+      "checkout_button_color": "#90a18f",
+      "checkout_error_color": "#990000",
+      "quick_variants_custom_color": "",
+      "share_widget_twitter": true,
+      "social_twitter": "https://twitter.com/shopify",
+      "use_highlighted_menu": false,
+      "color_button_text": "#ffffff",
+      "size_type": 14,
+      "text_alignment": "text-center",
+      "sections": {
+        "header-announcement": {
+          "type": "header-announcement",
+          "settings": {
+            "announcement_home_only": false,
+            "announcement_text": "<p>Call attention to a special discount, feature, or promotion here.</p>",
+            "announcement_text_mobile": "<p>Use less text on mobile!</p>",
+            "announcement_text_size": 12,
+            "announcement_color": "#292929",
+            "announcement_background": "#ffffff",
+            "announcement_line": "#efefef",
+            "announcement_padding": 10,
+            "padding_border": true
+          }
+        },
+        "header": {
+          "type": "header",
+          "blocks": {
+            "04d30d42-752b-4a87-a318-25836d5c445d": {
+              "type": "mega_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "menu_collection_images": "product",
+                "menu_collection_images_insta_filter": "none",
+                "product_item_style": "natural",
+                "enable_image_crop": false,
+                "menu_alignment": true,
+                "enable_promo": true,
+                "promo_position": "first",
+                "text": "Promotion text",
+                "link": "",
+                "link_text": "More info here",
+                "text_position": "split",
+                "color": "#ffffff",
+                "overlay_background": "#000000",
+                "overlay_opacity": 25,
+                "insta_filter": "none",
+                "insta_filter_mobile": "none"
+              }
+            },
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2": {
+              "type": "story_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "title": "Tell a story",
+                "text": "<p>Share details about your business or products</p>",
+                "link": "",
+                "button_text": "Button",
+                "insta_filter": "none"
+              }
+            },
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2": {
+              "type": "contact_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "phone_value": "757 555 1212",
+                "email_value": "shop@example.com",
+                "hours_value": "<p>Mon-Fri, 9am-5pm</p>",
+                "directions_value": "<p>Boardwalk</p><p>Virginia Beach, VA 23451</p>",
+                "directions_map": false,
+                "api_key": "",
+                "directions-map-zoom": 2,
+                "directions_map_color_fg": "#ffffff",
+                "directions_map_color_bg": "#90a18f"
+              }
+            }
+          },
+          "block_order": [
+            "04d30d42-752b-4a87-a318-25836d5c445d",
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2",
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2"
+          ],
+          "settings": {
+            "logo_width": 250,
+            "mobile_logo_width": 200,
+            "menu": "main-menu",
+            "nav_text_size": 14,
+            "menu_location": "center",
+            "enable_search": true,
+            "cart_icon": "cart-cart",
+            "account": "icon"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "da49eebe-c9be-4ee8-8f5a-9cec8d28c966": {
+              "type": "menu",
+              "settings": {
+                "title": "About",
+                "menu": "footer"
+              }
+            },
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b": {
+              "type": "menu",
+              "settings": {
+                "title": "About",
+                "menu": "footer"
+              }
+            },
+            "1162bb90-c1c5-47df-9793-54c21a1b7158": {
+              "type": "customer",
+              "settings": {
+                "title": "Account"
+              }
+            },
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377": {
+              "type": "richtext",
+              "settings": {
+                "title": "About",
+                "content": "<p>Use this space to give credit where it's due, reinforce your brand identity, shop policy, or company motto.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "da49eebe-c9be-4ee8-8f5a-9cec8d28c966",
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b",
+            "1162bb90-c1c5-47df-9793-54c21a1b7158",
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377"
+          ],
+          "settings": {
+            "enable_social": true,
+            "enable_payment_icons": true,
+            "section_color": "#ffffff",
+            "background": "#000000",
+            "show_locale_selector": true,
+            "show_currency_selector": true,
+            "subfooter": "",
+            "enable_newsletter": true
+          }
+        },
+        "header-minicart": {
+          "type": "header-minicart",
+          "settings": {
+            "quantity_enable": true,
+            "smart_enable": true,
+            "enable_checkout_lock_icon": true
+          }
+        }
+      }
+    },
+    "Share": {
+      "color_menu_text": "#292929",
+      "color_title_text": "#292929",
+      "color_text": "#747474",
+      "color_text_hover": "#000000",
+      "color_label": "#000000",
+      "color_background": "#ffffff",
+      "color_accent": "#c26000",
+      "color_sale": "#ff0000",
+      "rating_color": "#ffcb67",
+      "rating_background_color": "#efefef",
+      "line_color": "#d3d3d3",
+      "success_color": "#15a115",
+      "error_color": "#990000",
+      "custom_color": "",
+      "button_border": 1,
+      "button_corner": 0,
+      "button_primary_border": "#292929",
+      "button_primary_background": "#292929",
+      "button_primary_text": "#ffffff",
+      "button_secondary_border": "#292929",
+      "button_secondary_background": "#ffffff",
+      "button_secondary_text": "#292929",
+      "header_type": "ovo_n4",
+      "headline_uppercase": false,
+      "base_type": "sans-serif",
+      "body_type_size": 0,
+      "label_type": "sans-serif",
+      "label_type_size": 0,
+      "search_predictive_enable": true,
+      "search_predictive_limit": 4,
+      "search_predictive_author": true,
+      "badge_enable": true,
+      "insta_filter": "none",
+      "product_item_style": "natural",
+      "enable_image_crop": false,
+      "image_hover": true,
+      "vendor_enable": true,
+      "products_sale": false,
+      "reviews_enable": true,
+      "quick_icon": "quick-eye",
+      "quick_variants_color_enable": "var-img-block",
+      "currency_enable": false,
+      "month_day_year": "date",
+      "share_widget_facebook": true,
+      "share_widget_pinterest": true,
+      "share_widget_email": true,
+      "social_facebook": "",
+      "social_pinterest": "",
+      "social_instagram": "",
+      "social_tiktok": "",
+      "social_snapchat": "",
+      "social_tumblr": "",
+      "social_whatsapp": "",
+      "social_linkedin": "",
+      "social_youtube": "",
+      "social_vimeo": "",
+      "social_medium": "",
+      "social_rss": "",
+      "social_email": "",
+      "checkout_logo_position": "center",
+      "checkout_accent_color": "#c26000",
+      "checkout_button_color": "#c26000",
+      "checkout_error_color": "#990000",
+      "header_type_size": 2,
+      "share_widget_twitter": true,
+      "social_twitter": "https://twitter.com/shopjohan",
+      "search_predictive_product": true,
+      "search_predictive_collection": true,
+      "search_predictive_article": true,
+      "search_predictive_page": true,
+      "xxx": 0,
+      "use_highlighted_menu": false,
+      "color_button_text": "#ffffff",
+      "size_type": 14,
+      "text_alignment": "text-center",
+      "sections": {
+        "section-4": {
+          "type": "section-blog-posts",
+          "settings": {
+            "title": "Blog posts",
+            "blog": ""
+          }
+        },
+        "header-announcement": {
+          "type": "header-announcement",
+          "settings": {
+            "announcement_home_only": false,
+            "announcement_text": "<p><a href=\"tel:503 222 0119\" title=\"tel:503 222 0119\"><strong>503-222-0119</strong></a><strong> </strong> •  <strong>New weekend hours </strong> •  Saturdays & Sunday we will be open until 8p</p>",
+            "announcement_text_mobile": "<p><a href=\"tel:503 222 0119\" title=\"tel:503 222 0119\">503-222-0119</a>  •  M-F 10a-7p  •  S-S 11a-8p</p>",
+            "announcement_text_size": 14,
+            "announcement_color": "#ffffff",
+            "announcement_background": "#000000",
+            "announcement_padding": 10,
+            "padding_border": false
+          }
+        },
+        "header": {
+          "type": "header",
+          "blocks": {
+            "04d30d42-752b-4a87-a318-25836d5c445d": {
+              "type": "mega_menu",
+              "settings": {
+                "heading": "Shop",
+                "color_link": "",
+                "menu_collection_images": "product",
+                "menu_collection_images_insta_filter": "none",
+                "product_item_style": "natural",
+                "enable_image_crop": true,
+                "menu_alignment": false,
+                "enable_promo": true,
+                "promo_position": "first",
+                "text": "Shop Johan",
+                "link": "shopify://pages/about",
+                "link_text": "Learn More",
+                "text_position": "split",
+                "color": "#292929",
+                "overlay_background": "#e6e6e6",
+                "overlay_opacity": 0,
+                "image_desktop": "shopify://shop_images/roam-mega-menu.jpg",
+                "insta_filter": "none",
+                "image_mobile": "shopify://shop_images/roam-mega-menu-mobile.jpg",
+                "insta_filter_mobile": "none"
+              }
+            },
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2": {
+              "type": "story_menu",
+              "settings": {
+                "heading": "Sale",
+                "color_link": "#990000",
+                "title": "Shop the Sale!",
+                "text": "<p>Items have been reduced by up to 60%</p>",
+                "link": "shopify://collections/sale",
+                "button_text": "Shop",
+                "image": "shopify://shop_images/roam-story-bar.jpg",
+                "insta_filter": "insta insta-gingham"
+              }
+            },
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2": {
+              "type": "contact_menu",
+              "settings": {
+                "heading": "Contact",
+                "color_link": "",
+                "phone_value": "503 222 0119",
+                "email_value": "info@shopjohan.com",
+                "hours_value": "<p>M-F 10a-7p<br/>S-S 11a-8p</p>",
+                "directions_value": "<p>632 SW Pine St<br/>Portland Oregon 97205</p>",
+                "directions_map": true,
+                "api_key": "AIzaSyBg9E-yQsMU3naCpKaV-sIWcsCjyje-DG4",
+                "directions-map-zoom": 2,
+                "directions_map_color_fg": "#292929",
+                "directions_map_color_bg": "#ffffff"
+              }
+            }
+          },
+          "block_order": [
+            "04d30d42-752b-4a87-a318-25836d5c445d",
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2",
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2"
+          ],
+          "settings": {
+            "logo": "shopify://shop_images/roam-logo.png",
+            "logo_width": 110,
+            "mobile_logo": "shopify://shop_images/roam-logo-mobile.png",
+            "mobile_logo_width": 100,
+            "menu": "main-menu",
+            "nav_text_size": 12,
+            "menu_location": "right",
+            "enable_search": true,
+            "cart_icon": "cart-bag",
+            "account": "icon"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377": {
+              "type": "richtext",
+              "settings": {
+                "title": "About",
+                "content": "<p>From our early days as a secret shop in southeast Portland to our current retail project downtown, Johan has become an arbiter of taste and a destination for the design-minded.</p><p>Offering an edited selection of apparel, accessories, home goods, jewelry, and apothecary, Johan has been dubbed \"a minimalist's dream come true\".</p><p><a href=\"/pages/about\" title=\"About\">Read More about Johan</a></p>"
+              }
+            },
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b": {
+              "type": "menu",
+              "settings": {
+                "title": "",
+                "menu": "footer"
+              }
+            },
+            "24ce1882-67d4-4e47-b69e-46c0cca945f1": {
+              "type": "menu",
+              "settings": {
+                "title": "",
+                "menu": "policies"
+              }
+            },
+            "1162bb90-c1c5-47df-9793-54c21a1b7158": {
+              "type": "customer",
+              "settings": {
+                "title": "Account"
+              }
+            }
+          },
+          "block_order": [
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377",
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b",
+            "24ce1882-67d4-4e47-b69e-46c0cca945f1",
+            "1162bb90-c1c5-47df-9793-54c21a1b7158"
+          ],
+          "settings": {
+            "enable_social": true,
+            "enable_payment_icons": true,
+            "section_color": "#ffffff",
+            "background": "#000000",
+            "show_locale_selector": true,
+            "show_currency_selector": true,
+            "subfooter": "<p><strong>Thanks to the wonderful folks at Johan for the imagery that appears in this demo</strong></p>",
+            "enable_newsletter": true
+          }
+        },
+        "header-minicart": {
+          "type": "header-minicart",
+          "settings": {
+            "quantity_enable": true,
+            "smart_enable": true,
+            "enable_checkout_lock_icon": true
+          }
+        }
+      }
+    },
+    "Social": {
+      "color_menu_text": "#666655",
+      "color_title_text": "#6e1052",
+      "color_text": "#666655",
+      "color_text_hover": "#000000",
+      "color_label": "#841964",
+      "color_background": "#ffffff",
+      "color_accent": "#be2790",
+      "color_sale": "#ff0000",
+      "rating_color": "#ffcb67",
+      "rating_background_color": "#efefef",
+      "line_color": "#d3d3d3",
+      "success_color": "#15a115",
+      "error_color": "#990000",
+      "custom_color": "",
+      "button_border": 2,
+      "button_corner": 6,
+      "button_primary_border": "#be2790",
+      "button_primary_background": "#be2790",
+      "button_primary_text": "#ffffff",
+      "button_secondary_border": "#be2790",
+      "button_secondary_background": "#ffffff",
+      "button_secondary_text": "#be2790",
+      "header_type": "raleway_n7",
+      "headline_uppercase": false,
+      "base_type": "sans-serif",
+      "body_type_size": 1,
+      "label_type": "sans-serif",
+      "label_type_size": 0,
+      "search_predictive_enable": true,
+      "search_predictive_limit": 4,
+      "search_predictive_author": true,
+      "badge_enable": true,
+      "insta_filter": "none",
+      "product_item_style": "medium",
+      "enable_image_crop": false,
+      "image_hover": true,
+      "vendor_enable": false,
+      "products_sale": true,
+      "reviews_enable": true,
+      "quick_enable": true,
+      "quick_icon": "quick-cart",
+      "quick_insta_filter": "none",
+      "quick_gallery_video_autoplay": true,
+      "quick_gallery_video_looping": true,
+      "quick_vendor": false,
+      "quick_title_outline": "none",
+      "quick_title_size": 36,
+      "quick_sku": true,
+      "quick_rating": true,
+      "quick_rating_style": "both",
+      "quick_price": true,
+      "quick_price_size": 24,
+      "quick_variants": true,
+      "quick_variants_enable_single": true,
+      "quick_variants_variant_enable": "radio",
+      "quick_variants_rounded": true,
+      "quick_variants_color_enable": "var-img-zoom-block",
+      "quick_quantity": true,
+      "quick_form": true,
+      "quick_enable_custom": "",
+      "quick_enable_cart_redirection": false,
+      "quick_show_payment_button": true,
+      "quick_section_color": "rgba(0,0,0,0)",
+      "quick_section_color_hover": "rgba(0,0,0,0)",
+      "quick_section_line": "rgba(0,0,0,0)",
+      "quick_background": "rgba(0,0,0,0)",
+      "quick_background_gradient": "",
+      "currency_enable": false,
+      "month_day_year": "date",
+      "share_widget_facebook": true,
+      "share_widget_pinterest": true,
+      "share_widget_email": true,
+      "social_facebook": "",
+      "social_pinterest": "",
+      "social_instagram": "",
+      "social_tiktok": "",
+      "social_snapchat": "",
+      "social_tumblr": "",
+      "social_whatsapp": "",
+      "social_linkedin": "",
+      "social_youtube": "",
+      "social_vimeo": "",
+      "social_medium": "",
+      "social_rss": "",
+      "social_email": "",
+      "checkout_logo_position": "center",
+      "checkout_logo_size": "large",
+      "checkout_heading_font": "Raleway",
+      "checkout_body_font": "Open Sans",
+      "checkout_accent_color": "#be2790",
+      "checkout_button_color": "#be2790",
+      "checkout_error_color": "#990000",
+      "header_type_size": 0,
+      "quick_variants_custom_color": "",
+      "share_widget_twitter": true,
+      "social_twitter": "",
+      "use_highlighted_menu": false,
+      "color_button_text": "#ffffff",
+      "size_type": 14,
+      "text_alignment": "text-center",
+      "sections": {
+        "header-announcement": {
+          "type": "header-announcement",
+          "settings": {
+            "announcement_home_only": false,
+            "announcement_text": "<p>Call attention to a special discount, feature, or promotion here.</p>",
+            "announcement_text_mobile": "<p>Use less text on mobile!</p>",
+            "announcement_text_size": 12,
+            "announcement_color": "#ffffff",
+            "announcement_background": "#000000",
+            "announcement_padding": 10,
+            "padding_border": false
+          }
+        },
+        "header": {
+          "type": "header",
+          "blocks": {
+            "04d30d42-752b-4a87-a318-25836d5c445d": {
+              "type": "mega_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "menu_collection_images": "product",
+                "menu_collection_images_insta_filter": "none",
+                "product_item_style": "natural",
+                "enable_image_crop": false,
+                "menu_alignment": true,
+                "enable_promo": true,
+                "promo_position": "first",
+                "text": "Promotion text",
+                "link": "",
+                "link_text": "More info here",
+                "text_position": "split",
+                "color": "#ffffff",
+                "overlay_background": "#000000",
+                "overlay_opacity": 25,
+                "insta_filter": "none",
+                "insta_filter_mobile": "none"
+              }
+            },
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2": {
+              "type": "story_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "title": "Tell a story",
+                "text": "<p>Share details about your business or products</p>",
+                "link": "",
+                "button_text": "Button",
+                "insta_filter": "none"
+              }
+            },
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2": {
+              "type": "contact_menu",
+              "settings": {
+                "heading": "",
+                "color_link": "rgba(0,0,0,0)",
+                "phone_value": "757 555 1212",
+                "email_value": "shop@example.com",
+                "hours_value": "<p>Mon-Fri, 9am-5pm</p>",
+                "directions_value": "<p>Boardwalk</p><p>Virginia Beach, VA 23451</p>",
+                "directions_map": false,
+                "api_key": "",
+                "directions-map-zoom": 2,
+                "directions_map_color_fg": "#ffffff",
+                "directions_map_color_bg": "#90a18f"
+              }
+            }
+          },
+          "block_order": [
+            "04d30d42-752b-4a87-a318-25836d5c445d",
+            "b525aa46-b7ef-47a6-b1fa-a40e39ef03a2",
+            "ca058a04-1dc5-48d5-a3ab-a22faed6fbf2"
+          ],
+          "settings": {
+            "logo": "shopify://shop_images/cart.svg",
+            "logo_width": 250,
+            "mobile_logo_width": 200,
+            "menu": "main-menu",
+            "nav_text_size": 14,
+            "menu_location": "center",
+            "enable_search": true,
+            "cart_icon": "cart-cart",
+            "account": "icon"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "da49eebe-c9be-4ee8-8f5a-9cec8d28c966": {
+              "type": "menu",
+              "settings": {
+                "title": "About",
+                "menu": "footer"
+              }
+            },
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b": {
+              "type": "menu",
+              "settings": {
+                "title": "About",
+                "menu": "footer"
+              }
+            },
+            "1162bb90-c1c5-47df-9793-54c21a1b7158": {
+              "type": "customer",
+              "settings": {
+                "title": "Account"
+              }
+            },
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377": {
+              "type": "richtext",
+              "settings": {
+                "title": "About",
+                "content": "<p>Use this space to give credit where it's due, reinforce your brand identity, shop policy, or company motto.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "da49eebe-c9be-4ee8-8f5a-9cec8d28c966",
+            "81327541-cc2a-4e81-a2fd-3e09bdfb892b",
+            "1162bb90-c1c5-47df-9793-54c21a1b7158",
+            "fcb2c506-78eb-4d25-a80c-b1e220d30377"
+          ],
+          "settings": {
+            "enable_social": true,
+            "enable_payment_icons": true,
+            "section_color": "#ffffff",
+            "background": "#000000",
+            "show_locale_selector": true,
+            "show_currency_selector": true,
+            "subfooter": "",
+            "enable_newsletter": true
+          }
+        },
+        "header-minicart": {
+          "type": "header-minicart",
+          "settings": {
+            "quantity_enable": true,
+            "smart_enable": true,
+            "enable_checkout_lock_icon": true
+          }
+        }
+      }
+    }
+  }
+}

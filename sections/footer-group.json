@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:sections.section.titles.footer.content",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "7381032c-fc68-4ee0-af32-28f2c2f77dea": {
+          "type": "richtext",
+          "settings": {
+            "title": "Nosotros",
+            "content": "<p>Somos una tienda especializada donde trabajamos en lo que nos apasiona y representamos a las mejores marcas del mundo del surf que tengan valores y respeto por nuestra cultura y el medioambiente.</p>"
+          }
+        },
+        "menu_PLCXxM": {
+          "type": "menu",
+          "settings": {
+            "title": "Términos & Condiciones",
+            "menu": "main-menu"
+          }
+        },
+        "about_EknNEM": {
+          "type": "about",
+          "settings": {
+            "title": "Acerca de",
+            "about": "footer"
+          }
+        },
+        "customer_aepdh9": {
+          "type": "customer",
+          "settings": {
+            "title": "Account"
+          }
+        },
+        "conectate_zyKmJF": {
+          "type": "conectate",
+          "settings": {
+            "title": "CONÉCTATE CON NOSOTROS",
+            "content": "<p>Regístrate y recibe nuestras promociones, productos o descuentos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "7381032c-fc68-4ee0-af32-28f2c2f77dea",
+        "menu_PLCXxM",
+        "about_EknNEM",
+        "customer_aepdh9",
+        "conectate_zyKmJF"
+      ],
+      "settings": {
+        "enable_social": true,
+        "include_shop": false,
+        "enable_payment_icons": true,
+        "section_color": "#ffffff",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "background": "#000000",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false,
+        "show_locale_selector": false,
+        "show_currency_selector": false,
+        "subfooter": "",
+        "social_title": "Síguenos",
+        "complaints_book_link": "",
+        "enable_newsletter": true,
+        "show_terms": true,
+        "terms_intro_text": "He leído y acepto los",
+        "terms_link_text": "Términos y Condiciones.",
+        "terms_link": ""
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

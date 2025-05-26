@@ -1,0 +1,196 @@
+{%- liquid
+  assign product_style = product_style | default: 'natural'
+  assign use_badges = settings.badge_enable
+  assign show_vendors = settings.vendor_enable
+  assign on_sale = false
+  assign image_hover = settings.image_hover
+  assign variant_for_unit_price = product.variants | sort: 'price' | first
+  for variant in product.variants
+    if variant.price < variant.compare_at_price
+      assign on_sale = true
+    endif
+  endfor
+  capture price
+    echo '<span class="money" data-variant-price>'
+    if settings.currency_enable
+      echo product.price_min | money_with_currency
+    else
+      echo product.price_min | money
+    endif
+    if settings.products_sale
+      unless product.price_varies == false and product.compare_at_price_varies
+        echo '&nbsp;&nbsp;<span class="compare">'
+        if settings.currency_enable
+          echo product.compare_at_price | money_with_currency
+        else
+          echo product.compare_at_price | money
+        endif
+        echo '</span>'
+      endunless
+    endif
+    echo '</span>'    
+  endcapture
+-%}
+
+<article class="text-left slide product-item {% if emphasize %}product-item-{{ forloop_index }} {% endif %}product-item-style-{{ product_style }} {% unless product.featured_media %} product-item-no-image{% endunless %}" data-product-item="{{ product.id }}">
+  <h1>Sobrandtes</h1>
+  <figure class="product-item-image {{ settings.insta_filter }}" data-product-item-image>
+    <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}" tabindex="-1">  
+      {%- liquid
+        if product.featured_media
+          assign crop = settings.enable_image_crop
+          case settings.product_item_style
+            when 'natural'
+              assign padding = product.media[1].preview_image.aspect_ratio | times: 100
+              assign crop = false
+            when 'small'
+              assign padding = 75
+            when 'medium'
+              assign padding = 100
+            when 'large'
+              assign padding = 150
+          endcase
+          if lazy_total != blank
+            if forloop_index <= lazy_total
+              assign lazy = lazy
+            else
+              assign lazy = 'lazy'
+            endif
+          endif
+          if settings.enable_image_crop
+            assign image_position = '50-50'
+          endif
+          if image_hover and product.media.size > 1
+            capture alt
+              if product.media[1].preview_image.alt != blank
+                echo product.media[1].preview_image.alt | escape
+              else
+                echo product.title | escape
+              endif
+            endcapture
+            render 'image.load', img_src: product.media[1].preview_image, size: size, new_size: size, padding: padding, image_position: image_position, sizes: sizes, alt: alt, class: ' product-image-alternate', loop: true, crop: crop, lazy: lazy  
+          endif
+          if settings.product_item_style == 'natural'
+            assign padding = product.featured_media.preview_image.aspect_ratio | times: 100
+          endif
+          capture alt
+            if product.featured_media.preview_image.alt != blank
+              echo product.featured_media.preview_image.alt | escape
+            else
+              echo product.title | escape
+            endif
+          endcapture
+          render 'image.load', img_src: product.featured_media.preview_image, size: size, new_size: size, padding: padding, image_position: image_position, sizes: sizes, alt: alt, loop: true, crop: crop, lazy: lazy
+        else
+          capture index
+            cycle 1, 2, 3, 4, 5, 6
+          endcapture
+          echo 'product-' | append: index | placeholder_svg_tag: 'placeholder-svg'
+        endif
+      -%}
+    </a>
+    {%- liquid
+      if use_badges
+        if product.available != true
+          echo '<span class="product-item-badge">'
+          echo 'product.item.availability.out_of_stock' | t
+          echo '</span>'
+        elsif on_sale
+          echo '<span class="product-item-badge">'
+          echo 'product.item.badges.on_sale' | t
+          echo '</span>'
+        endif
+      endif
+      if settings.quick_enable
+        echo '<button type="button" class="quick-btn" aria-label="'
+        echo 'product.quickshop' | t
+        echo '" data-quick data-quick-id="'
+        echo product.id
+        echo '" data-quick-url="'
+        echo product.url | split: '?' | first
+        echo '">'
+        render 'icons', id: settings.quick_icon, size: 26
+        echo '</button>'
+      endif
+    -%}
+  </figure>
+  
+  <div class="product-item-details">
+  
+    <h4 class="product-item-title"><a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}" class="underline keyed">{{ product.title }}</a></h4>
+
+    {% if show_vendors %}
+      {%- liquid
+        assign product_vendor_handle = product.vendor | handle
+        if collections[product_vendor_handle].handle == product_vendor_handle
+          assign vendor_url = collections[product_vendor_handle].url
+        else
+          assign vendor_url = product.vendor | url_for_vendor
+        endif
+      -%}
+      <span class="product-item-vendor"><a href="{{ vendor_url }}" title="{{ product.vendor | escape }}" class="underline" tabindex="-1">{{ product.vendor }}</a></span>
+    {% endif %}
+    
+  </div>
+  
+  <div class="product-item-details">
+    
+    <div class="product-price product-item-price">
+      {%- liquid
+        unless use_badges
+          if product.available != true
+            echo 'product.item.availability.out_of_stock' | t
+          elsif on_sale and product.price_varies
+            echo 'product.item.price.on_sale_range_html' | t: price: price
+          elsif on_sale
+            echo 'product.item.price.on_sale_html' | t: price: price
+          elsif product.price_varies
+            echo 'product.item.price.range_html' | t: price: price
+          else
+            echo price
+          endif
+        else
+          if on_sale and product.price_varies
+            echo 'product.item.price.on_sale_range_html' | t: price: price
+          elsif on_sale
+            echo 'product.item.price.on_sale_html' | t: price: price
+          elsif product.price_varies
+            echo 'product.item.price.range_html' | t: price: price
+          else
+            echo price
+          endif
+        endunless
+      -%}
+
+      {% if variant_for_unit_price.unit_price %}      
+      {%- capture unit_price -%}
+      <span class="product-price__unit-price-amount money" data-unit-price-amount>{% if settings.currency_enable %}{{ variant_for_unit_price.unit_price | money_with_currency }}{% else %}{{ variant_for_unit_price.unit_price | money }}{% endif %}</span>
+      {%- endcapture -%}
+      {%- capture unit_measure -%}
+      <span class="product-price__unit-price-measure" data-unit-price-measure>
+        {%- liquid
+          if variant_for_unit_price.unit_price_measurement.reference_value != 1
+            echo variant_for_unit_price.unit_price_measurement.reference_value
+          endif
+          echo variant_for_unit_price.unit_price_measurement.reference_unit
+        -%}
+      </span>
+      {%- endcapture -%}
+      <div class="product-price__unit-price{% unless variant_for_unit_price.unit_price_measurement %} hidden{% endunless %}" data-unit-price>{{ 'product.price_per_unit_html' | t: unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}</div>
+      {% assign variant_for_unit_price = blank %}
+      {% endif %}
+    </div>
+
+    {%- liquid
+      if settings.reviews_enable
+        render 'product.rating', product: product, grid: true
+      endif
+    -%}
+    
+  </div>  
+
+  {% if settings.meta_enable and product.metafields.custom.display_data != blank %}
+    <div class="product-item-details product-meta">{{ product.metafields.custom.display_data | metafield_tag }}</div>
+  {% endif %}
+  
+</article>

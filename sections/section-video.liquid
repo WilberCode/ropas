@@ -1,0 +1,735 @@
+{% if section.blocks.size > 0 %}
+
+  {%- liquid
+    assign btn_color_section = settings.color_background
+    assign background_color = false
+    if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+      assign btn_color_section = section.settings.background
+      assign background_color = true
+      assign background_color_section = section.settings.background
+    endif  
+    if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background_gradient
+    endif
+  -%}
+  
+  {% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+      --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+      --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+      {%- if background_color -%}
+      --color_background:{{ background_color_section }};
+      {%- endif -%}
+    }
+  {% endstyle %}
+  
+  <div class="dynamic-section dynamic-section-{{ section.id }} ph-video-wrapper">
+    <section data-section-id="{{ section.id }}" 
+             data-section-type="video-{{ section.id }}"
+             {% if block.settings.heading == blank and block.settings.description == blank %}
+             data-url="{{ 'script.video.js' | asset_url }}"
+             {% endif %}>
+  
+      <div class="{% if section.blocks.size > 0 %}dynamic-video-wrapper {% endif %}section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}">
+
+        {%- liquid
+          assign NN = 0
+          capture rows
+            for block in section.blocks
+              assign NN = NN | plus: forloop.index
+              if NN > 2
+                assign NN = 0 | plus: 1
+              endif
+              assign mod = forloop.index | modulo: 2
+              if mod == 1
+                echo '1,'
+              else
+                echo '2,'
+              endif  
+            endfor
+          endcapture
+          assign rows = rows | replace: '1,2', '768,768' | replace: '1,', '1240' | split: ','
+        -%}
+ 
+        {% for block in section.blocks %}
+          
+          {% case block.type %}
+
+            {% when 'video' %}
+
+              {% assign url = block.settings.url | default: 'https://www.youtube.com/watch?v=_9VUPq3SxOc' %}
+              <div class="dynamic-video" {{ block.shopify_attributes }}>
+
+                {%- liquid
+                  assign video_img = false
+                  assign platform = ''
+                  if block.settings.url.type == 'youtube'
+                    assign platform = 'youtube'
+                  elsif block.settings.url.type == 'vimeo'
+                    assign platform = 'vimeo'
+                  endif
+                -%}
+
+                <div class="video" data-video="{{ platform }}">
+
+                  {% if block.settings.placeholder %}  
+                    
+                    <div class="{{ block.settings.insta_filter }} video-placeholder video-placeholder-{{ block.settings.style }}" data-video-placeholder>
+                      {%- liquid
+                        assign video_img = true
+                        assign img_src = block.settings.placeholder
+                        capture alt
+                          if img_src.alt != blank
+                            echo img_src.alt | escape
+                          else
+                            echo img_src | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize | escape
+                          endif
+                        endcapture
+                        case rows[forloop.index0]
+                          when '768'
+                            assign size = 768
+                            assign sizes = '(min-width: 1280px) 620px, (min-width: 960px) calc(50vw - 40px), (min-width: 768px) 50vw, 100vw'
+                          when '1240'
+                            assign size = 1240
+                            assign sizes = '(min-width: 1280px) 1240px, (min-width: 960px) calc(100vw - 40px), 100vw'
+                        endcase
+                        if block.settings.enable_lazy
+                          assign lazy = 'lazy'
+                        else
+                          assign lazy = 'eager'
+                        endif
+                        render 'image.load', img_src: img_src, size: size, new_size: size, padding: '56.25', sizes: sizes, alt: alt, background: true, lazy: lazy
+                      -%}
+                      <button class="video-play-button" 
+                              aria-label="{{ 'general.video' | t | escape }}"
+                              data-video-play-button>
+                        {%- render 'icons', id: 'play-thumb', class: ' video-play-icon' -%}
+                        <span class="spinner video-loading-icon"></span>
+                      </button>
+                    </div>
+                  {% endif %}
+
+                  {% capture video %}
+                    {% if platform == 'youtube' %}
+                     <h1>  Hola</h1>
+                    <iframe src="https://www.youtube.com/embed/{{ block.settings.url.id }}?{% if video_img %}autoplay=1&{% endif %}controls=0{% if block.settings.enable_loop %}&loop=1{% endif %}&modestbranding=1&playlist={{ block.settings.url.id }}&rel=0&showinfo=0" 
+                            allowfullscreen 
+                            class="no-container"
+                            title="{% if block.settings.title != blank %}{{ block.settings.title | escape }}{% else %}{{ block.settings.url.type }}{% endif %}"></iframe>
+                    {% else %}
+                    <iframe src="https://player.vimeo.com/video/{{ block.settings.url.id }}?{%- if video_img -%}&autoplay=1{%- endif -%}{%- if block.settings.enable_loop -%}&loop=1{%- endif -%}&title=0&byline=0&portrait=0" 
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen 
+                            class="no-container"
+                            title="{% if block.settings.title != blank %}{{ block.settings.title | escape }}{% else %}{{ block.settings.url.type }}{% endif %}"></iframe>
+                    {% endif %}
+                  {% endcapture %}                
+
+                  <div class="js-reframe {{ platform }}{% if video_img %} video-hidden{% endif %}" data-{{ platform }}>                  
+                    {% if video_img %}
+                      <template>
+                        <div class="youtube-container no-container">{{ video }}</div>
+                      </template>
+                    {% else %}
+                      <div class="youtube-container no-container">{{ video }}</div>
+                    {% endif %}
+                  </div> 
+
+                </div> 
+
+              </div>
+
+            {% when 'text' %}
+
+              {%- liquid
+                assign text_color = false
+                if block.settings.block_color != 'rgba(0,0,0,0)' and block.settings.block_color != blank
+                  assign text_color = true
+                  assign text_color_block = block.settings.block_color
+                endif     
+                assign text_color_hover = false
+                if block.settings.block_color_hover != 'rgba(0,0,0,0)' and block.settings.block_color_hover != blank
+                  assign text_color_hover = true
+                  assign text_color_hover_block = block.settings.block_color_hover
+                endif   
+                assign line_color = false
+                if block.settings.block_line != 'rgba(0,0,0,0)' and block.settings.block_line != blank
+                  assign line_color = true
+                  assign line_color_block = block.settings.block_line
+                endif
+              -%}    
+    
+              {%- if text_color or text_color_hover or line_color -%}
+                {% style %}
+                  .dynamic-block-{{ block.id }} {
+                    {%- if text_color -%}
+                    --color_title_text:{{ text_color_block }};
+                    --color_text:{{ text_color_block }};
+                    --color_accent:{{ text_color_block }};
+                    --color_accent_modify_25:{{ text_color_block | color_modify: 'alpha', 0.25 }};                    
+                    --button_primary_background:{{ text_color_block }};
+                    --button_primary_border:{{ text_color_block }};
+                    --button_primary_text:{{ btn_color_section }};
+                    --button_secondary_background:{{ btn_color_section }};
+                    --button_secondary_border:{{ text_color_block }};
+                    --button_secondary_text:{{ text_color_block }};
+                    {%- endif -%}
+                    {%- if text_color_hover -%}
+                    --color_text_hover:{{ text_color_hover_block }};
+                    {%- endif -%}
+                    {%- if line_color -%}
+                    --color_border:{{ line_color_block }};
+                    {%- endif -%}
+                  }
+                {% endstyle %}
+              {%- endif -%}
+
+              <div class="dynamic-video-info text-{{ block.settings.title_alignment }} dynamic-block-{{ block.id }}" {{ block.shopify_attributes }}>
+
+                {% if block.settings.title != blank or block.settings.title_sub != blank or block.settings.text != blank or block.settings.link != blank and block.settings.button_text != blank %}
+
+                  {% if block.settings.title != blank %}
+                    {%- liquid
+                      if block.settings.title_h1
+                        assign title = 1
+                      else
+                        assign title = 2
+                      endif
+                    -%}
+                    <h{{ title }} class="section-title{% if block.settings.title_sub != blank %} section-title-half{% endif %} section-title-{{ block.settings.title_size }} {{ block.settings.title_outline }} no-pad block-color">{{ block.settings.title }}</h{{ title }}>
+                  {% endif %}
+
+                  {% if block.settings.title_sub != blank %}
+                    <h3 class="section-title section-title-{{ block.settings.title_sub_size }} {{ block.settings.title_sub_outline }} no-pad block-color">{{ block.settings.title_sub }}</h3>  
+                  {% endif %}
+
+                  {% if block.settings.text != blank %}
+                    <div class="block-color{% if block.settings.text_border %} text-border{% endif %}">{{ block.settings.text }}</div>
+                  {% endif %}
+
+                  {% if block.settings.link != blank and block.settings.button_text != blank %}
+                    {% if block.settings.link_style == 'text' %}
+                      <a href="{{ block.settings.link }}" title="{{ block.settings.button_text | escape }}" class="link-group inline-link-group block-color">
+                        <span><span class="link-text">{{ block.settings.button_text }}</span></span>
+                        <span class="link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>
+                      </a>
+                    {% else %}
+                      <a href="{{ block.settings.link }}" title="{{ block.settings.button_text | escape }}" class="btn {% if block.settings.link_style == 'primary' %}btn-primary{% else %}btn-secondary{% endif %} {% if background_color %}alt {% endif %}arrow bottompad auto-width">{{ block.settings.button_text }}</a>
+                    {% endif %}
+                {% endif %}
+
+                {% else %}
+                  <h3 class="dynamic-video-info-heading block-color">{{ 'general.onboarding.no_title' | t }}</h3>
+                  <p class="dynamic-video-info-description block-color">{{ 'general.onboarding.no_body' | t }}</p>
+                {% endif %}
+
+              </div>
+
+          {% endcase %}
+        {% endfor %}
+  
+      </div>
+    </section>
+  </div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.video.content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "margin_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "video",
+        "name": "t:sections.section.titles.video.content",
+        "settings": [
+          {
+            "type": "video_url",
+            "id": "url",
+            "label": "t:sections.general.video.link.label",
+            "accept": ["youtube", "vimeo"],
+            "default": "https://youtu.be/_9VUPq3SxOc"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_loop",
+            "label": "t:sections.general.video.enable.label",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.general.video.title.label"
+          },
+          {
+            "id": "enable_lazy",
+            "type": "checkbox",
+            "label": "t:sections.general.lazy.single.label",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "placeholder",
+            "label": "t:sections.image.placeholder.label",
+            "info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "type": "select",
+            "id": "style",
+            "label": "t:sections.general.video.placeholder.label",
+            "options": [
+              {
+                "label": "t:sections.general.video.placeholder.option_1.label",
+                "value": "dark"
+              },
+              {
+                "label": "t:sections.general.video.placeholder.option_2.label",
+                "value": "light"
+              }
+            ],
+            "default": "dark",
+            "info": "t:sections.general.video.placeholder.info"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "t:sections.text.title.label",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "t:sections.text.heading.label",
+            "default": "Video"
+          },
+          {
+            "id": "title_h1",
+            "type": "checkbox",
+            "label": "t:sections.text.heading_one.label",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "title_outline",
+            "label": "t:sections.text.outline.heading_outline.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.text.outline.option_1.label"
+              },
+              {
+                "value": "title-outline title-outline-1",
+                "label": "t:sections.text.outline.option_2.label"
+              },
+              {
+                "value": "title-outline title-outline-2",
+                "label": "t:sections.text.outline.option_3.label"
+              },
+              {
+                "value": "title-outline title-outline-3",
+                "label": "t:sections.text.outline.option_4.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "id": "title_size",
+            "type": "range",
+            "label": "t:sections.text.heading_size.label",
+            "min": 18,
+            "max": 96,
+            "step": 6,
+            "unit": "px",
+            "default": 42
+          },
+          {
+            "id": "title_sub",
+            "type": "text",
+            "label": "t:sections.text.subheading.label",
+            "default": "Highlight a video that relates to your business, products, or story"
+          },
+          {
+            "type": "select",
+            "id": "title_sub_outline",
+            "label": "t:sections.text.outline.subheading_outline.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.text.outline.option_1.label"
+              },
+              {
+                "value": "title-outline title-outline-1",
+                "label": "t:sections.text.outline.option_2.label"
+              },
+              {
+                "value": "title-outline title-outline-2",
+                "label": "t:sections.text.outline.option_3.label"
+              },
+              {
+                "value": "title-outline title-outline-3",
+                "label": "t:sections.text.outline.option_4.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "id": "title_sub_size",
+            "type": "range",
+            "label": "t:sections.text.subheading_size.label",
+            "min": 18,
+            "max": 96,
+            "step": 6,
+            "unit": "px",
+            "default": 30
+          },
+          {
+            "id": "text_border",
+            "type": "checkbox",
+            "label": "t:sections.text.border.label",
+            "default": true
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.general.text.label"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.general.link.title.label"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "t:sections.general.link.title_text.label",
+            "default": "Read More"
+          },
+          {
+            "type": "select",
+            "id": "link_style",
+            "label": "t:sections.product.blocks.button.style.label",
+            "options": [
+              {
+                "value": "text",
+                "label": "t:sections.general.text.label"
+              },
+              {
+                "value": "primary",
+                "label": "t:settings_schema.buttons.settings.primary.content"
+              },
+              {
+                "value": "secondary",
+                "label": "t:settings_schema.buttons.settings.secondary.content"
+              }
+            ],
+            "default": "text"
+          },
+          {
+            "id": "title_alignment",
+            "type": "text_alignment",
+            "label": "t:sections.text.alignment.title.label",
+            "default": "center"
+          },
+          {
+            "id": "block_color",
+            "type": "color",
+            "label": "t:sections.general.text_color.label"
+          },
+          {
+            "id": "block_color_hover",
+            "type": "color",
+            "label": "t:sections.text.hover.label"
+          },
+          {
+            "id": "block_line",
+            "type": "color",
+            "label": "t:settings_schema.colors.settings.elements_line.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.section.titles.video.content",
+        "blocks" : [
+          {
+            "type": "video"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+	  "templates": ["password"]
+    }
+  }
+{% endschema %}

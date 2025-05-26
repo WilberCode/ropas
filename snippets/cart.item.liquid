@@ -1,0 +1,135 @@
+<article class="cart-item slider-v visible" data-cart-item="{{ item.key }}" data-cart-count="{% if count %}2{% else %}{{ cart.item_count }}{% endif %}" data-revealer-visible="true">
+  
+  <div class="cart-item-content">
+
+    {% if item.image %}
+    <figure class="cart-item-column cart-item-column-image cart-item-image">
+      <a href="{{ item.url }}" title="{{ item.product.title | escape }}" class="{{ settings.insta_filter }}" tabindex="-1">
+        {%- liquid
+          capture alt
+            if item.image.alt != blank
+              echo item.image.alt | escape
+            else
+              echo item.product.title | escape
+            endif
+          endcapture
+          render 'image.load', img_src: item.image, size: 90, sizes: '90px', alt: alt, lazy: lazy
+        -%}
+      </a>
+    </figure>
+    {% endif %}
+
+    <div class="cart-item-column cart-item-column-information">
+      <div class="cart-item-information-row">
+
+        <span class="cart-item-title">
+          <a href="{{ item.url }}" title="{{ item.product.title | escape }}">{{ item.product.title }}</a>
+        </span>
+
+        {% unless item.variant.title == 'Default Title' %}
+          <span class="cart-item-options">{{ item.variant.title | replace: ' /', ' | ' }}</span>
+        {% endunless %}
+
+        {%- liquid
+          if item.selling_plan_allocation
+            echo '<p>'
+            echo item.selling_plan_allocation.selling_plan.name
+            echo '</p>'
+          endif
+          assign property_size = item.properties | size
+          if property_size > 0
+            echo '<p>'
+            for p in item.properties
+              assign property_first_char = p.first | slice: 0
+              if p.last != blank and property_first_char != '_'
+                echo '<strong>'
+                echo p.first
+                echo ':</strong> '
+                if p.last contains '/uploads/'
+                  echo '<a href="'
+                  echo p.last
+                  echo '" title="'
+                  echo p.last | split: '/' | last | escape
+                  echo '">'
+                  echo p.last | split: '/' | last
+                  echo '</a>'
+                else
+                  echo p.last
+                endif
+                unless forloop.last
+                  echo '<br/>'
+                endunless
+              endif
+            endfor
+            echo '</p>'
+          endif
+        -%}
+
+        <div class="cart-item-prices">
+          
+          {% if item.original_price > item.final_price %}
+            <span class="money cart-item-price cart-item-original-price">{% if settings.currency_enable %}{{ item.original_price | money_with_currency }}{% else %}{{ item.original_price | money }}{% endif %}</span>
+          {% elsif item.variant.compare_at_price > item.variant.price %}
+            <span class="money cart-item-price cart-item-original-price">{% if settings.currency_enable %}{{ item.variant.compare_at_price | money_with_currency }}{% else %}{{ item.variant.compare_at_price | money }}{% endif %}</span>
+          {% endif %}
+
+          <span class="money cart-item-price cart-item-final-price">{% if settings.currency_enable %}{{ item.final_price | money_with_currency }}{% else %}{{ item.final_price | money }}{% endif %}</span>
+
+          {% if item.unit_price %}
+            {%- assign variant_for_unit_price = item -%}
+            {%- capture unit_price -%}
+              <span class="product-price__unit-price-amount money" data-unit-price-amount>{% if settings.currency_enable %}{{ variant_for_unit_price.unit_price | money_with_currency }}{% else %}{{ variant_for_unit_price.unit_price | money }}{% endif %}</span>
+            {%- endcapture -%}
+            {%- capture unit_measure -%}
+              <span class="product-price__unit-price-measure" data-unit-price-measure>
+                {% if variant_for_unit_price.unit_price_measurement.reference_value != 1 %}{{ variant_for_unit_price.unit_price_measurement.reference_value }}{% endif %}{{ variant_for_unit_price.unit_price_measurement.reference_unit }}
+              </span>
+            {% endcapture %}          
+            <div class="product-price__unit-price{% unless variant_for_unit_price.unit_price_measurement %} hidden{% endunless %}" data-unit-price>
+              {{ 'product.price_per_unit_html' | t: unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}
+            </div>          
+            {%- assign variant_for_unit_price = blank -%}
+          {% endif %}
+
+        </div>
+
+        {% if item.discount_allocations.size > 0 %}
+          <div class="cart-item-discounts">
+            {% for discount_allocation in item.line_level_discount_allocations %}
+            <span class="cart-item-discount">
+              {%- render 'icons', id: 'sale-tag', class: ' cart-item-discount-sale-tag', size: 11 -%}
+              {{ discount_allocation.discount_application.title }} (-<span class="money">{% if settings.currency_enable %}{{ discount_allocation.amount | money_with_currency }}{% else %}{{ discount_allocation.amount | money }}{% endif %}</span>)
+            </span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+
+      <button class="cart-item-remove" 
+              type="button" 
+              aria-label="{{ 'cart.remove_item' | t | escape }}" 
+              data-cart-item-remove>{%- render 'icons', id: 'close', size: 18 -%}{% unless quantity_enable or ajax == false %}<span>{{ 'cart.remove_item' | t }}</span>{% endunless %}</button>
+      
+      <noscript><a href="{{ item.url_to_remove }}" title="{{ 'cart.remove_item' | t | escape }}" class="cart-item-remove no-js">{%- render 'icons', id: 'close', size: 18 -%}{% unless quantity_enable or ajax == false %}<span>{{ 'cart.remove_item' | t }}</span>{% endunless %}</a></noscript>
+      
+      {% if quantity_enable or ajax %}
+        <div class="cart-item-quantity">
+          {%- liquid
+            render 'product.quantity', variant: item.variant, value: item.quantity, input_name: 'updates[]', sticky: true
+          -%}
+        </div>
+      {% endif %}
+
+      <div class="cart-item-line-prices">        
+        {% if item.original_line_price != item.final_line_price %}
+        <span class="money cart-item-line-price cart-item-original-line-price">{% if settings.currency_enable %}{{ item.original_line_price | money_with_currency }}{% else %}{{ item.original_line_price | money }}{% endif %}</span>
+        {% elsif item.variant.compare_at_price > item.original_price %}
+        <span class="money cart-item-line-price cart-item-original-line-price">{% if settings.currency_enable %}{{ item.variant.compare_at_price | times: item.quantity | money_with_currency }}{% else %}{{ item.variant.compare_at_price | times: item.quantity | money }}{% endif %}</span>
+        {% endif %}
+        <span class="money cart-item-line-price cart-item-final-line-price">{% if settings.currency_enable %}{{ item.final_line_price | money_with_currency }}{% else %}{{ item.final_line_price | money }}{% endif %}</span>
+      </div>
+    </div>
+
+  </div>
+</article>

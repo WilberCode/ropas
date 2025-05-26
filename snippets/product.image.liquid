@@ -1,0 +1,39 @@
+<div class="text-{{ block_img_align }} product-block product-image" {{ block.shopify_attributes }}>
+  {%- liquid
+    capture alt
+      if block_img.alt != blank
+        echo block_img.alt | escape
+      else
+        echo product.title | escape
+      endif
+    endcapture
+    if block.settings.link != blank
+      echo '<a href="'
+      echo block.settings.link
+      echo '" title="'
+      echo alt | escape
+      echo '" class="keyed-inside">'
+    endif  
+    if block_img != blank
+      capture alt
+        if block_img.alt != blank
+          echo block_img.alt | escape
+        else
+          echo product.title | escape
+        endif
+      endcapture
+      echo '<span class="'
+      echo insta_filter
+      echo '">'
+      assign size = 710
+      assign sizes = '(min-width: 1280px) 446px, (min-width: 960px) calc(40vw - 90px), (min-width: 768px) calc(45vw - 90px), calc(100vw - 40px)'
+      render 'image.load', img_src: block_img, size: size, sizes: sizes, alt: alt, lazy: lazy
+      echo '</span>'
+    else
+      echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+    endif
+    if block.settings.link != blank
+      echo '</a>'
+    endif
+  -%}
+</div>

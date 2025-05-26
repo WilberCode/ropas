@@ -1,0 +1,12 @@
+{%- if request.page_type == 'product' -%}
+  <h1 class="product-title product-block section-title section-title-{{ title_size }} {{ title_outline }} no-pad" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+{% else %}
+  {%- liquid
+    if title_h1
+      assign title = 1
+    else
+      assign title = 2
+    endif
+  -%}
+  <h{{ title }} class="product-title product-block section-title section-title-{{ title_size }} {{ title_outline }} no-pad" {{ block.shopify_attributes }}>{{ product.title }}</h{{ title }}>
+{% endif %}

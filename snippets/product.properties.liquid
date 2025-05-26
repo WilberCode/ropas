@@ -1,0 +1,117 @@
+{% if checkbox != blank or radio_body != blank or text != blank or select_title != blank and select_body != blank %}
+  <div class="product-block {% if enable_slide %} product-slide{% endif %}" {{ block.shopify_attributes }}>
+    <div class="product-slide-content" data-height>
+      <div class="product-slide-space">
+
+        {% if checkbox != blank %}
+        <div class="line-items">
+          <div class="input-wrapper">
+            <input type="hidden" name="properties[{{ checkbox | escape }}]" value="{{ 'general.general.no' | t | escape }}">
+            <span>
+              <input id="propCheckbox-{{ block.id }}" 
+                     type="checkbox" 
+                     name="properties[{{ checkbox | escape }}]" 
+                     title="{{ checkbox | escape }}" 
+                     value="{{ 'general.general.yes' | t | escape }}">
+              <label for="propCheckbox-{{ block.id }}">{{ checkbox }}</label>
+            </span>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if radio_body != blank %}
+          <div class="line-items">
+            <div class="input-wrapper">
+              <fieldset>
+                {%- liquid
+                  if radio_label != blank
+                    assign label = radio_label
+                  else
+                    assign label = 'contact.form.label' | t | append: '-' | append: block.id
+                  endif
+                -%}
+                <legend{% if radio_label == blank %} class="visually-hidden"{% endif %}>{{ label | split: '-' | first }}</legend>
+                {%- assign list = radio_body | split: ',' -%}
+                {%- for l in list -%}
+                <div{% unless forloop.last %} class="bottompad-quarter"{% endunless %}>
+                  <input type="radio" 
+                         id="Radio-{{ block.id }}" 
+                         name="properties[{% if radio_label != blank %}{{ radio_label | escape }}{% else %}{{ radio_body | escape }}{% endif %}]" 
+                         title="{{ l | escape | lstrip | rstrip }}" 
+                         value="{{ l | escape | lstrip | rstrip }}"> 
+                  <label for="Radio-{{ block.id }}">{{ l | lstrip | rstrip }}</label>
+                </div>
+                {%- endfor -%}
+              </fieldset>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if text != blank %}
+        {%- liquid
+          if text_label != blank
+            assign label = text_label
+          else
+            assign label = 'contact.form.label' | t | append: '-' | append: block.id
+          endif
+        -%}
+        <div class="input-wrapper">
+          <label for="propText-{{ block.id }}"{% if text_label == blank %} class="visually-hidden"{% endif %}>{{ label | split: '-' | first }}</label>
+          <input type="text" 
+                 id="propText-{{ block.id }}" 
+                 class="input-field"
+                 name="properties[{% if text_label != blank %}{{ text_label | escape }}{% else %}{{ text | escape }}{% endif %}]" 
+                 placeholder="{{ text | escape }}" />
+        </div>
+        {% endif %}
+
+        {% if select_title != blank and select_body != blank %}    
+        {%- liquid
+          if select_label != blank
+            assign label = select_label
+          else
+            assign label = 'contact.form.label' | t | append: '-' | append: block.id
+          endif
+        -%}
+        <div class="option input-wrapper"> 
+          <label for="propSelect-{{ block.id }}"{% if select_label == blank %} class="visually-hidden"{% endif %}>{{ label | split: '-' | first }}</label>
+          <div class="option-values">     
+            <div class="option-select"> 
+              <select id="propSelect-{{ block.id }}" 
+                      class="option-select-input scroll-bar-v" 
+                      name="properties[{% if select_label != blank %}{{ select_label | escape }}{% else %}{{ select_title | escape }}{% endif %}]">
+                <option value="">{{ select_title }}</option>
+                {%- assign list = select_body | split: ',' -%}
+                {%- for l in list -%}
+                <option value="{{ l | escape | lstrip | rstrip  }}">{{ l | lstrip | rstrip }}</option>
+                {%- endfor -%}
+              </select>
+              <span class="option-select-arrow">{%- render 'icons', id: 'arrow', size: 12 -%}</span>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    {%- liquid
+      if enable_slide
+        capture title
+          if heading != blank
+            echo heading
+          else
+            echo 'product.show_more' | t
+          endif
+        endcapture
+        echo '<button type="button" title="'
+        echo title | escape
+        echo '" class="product-slide-btn">'
+        echo title
+        echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+        echo '</button>'
+      endif
+    -%}  
+
+  </div>
+{% endif %}

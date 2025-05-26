@@ -1,0 +1,44 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+<div class="product-details-price product-block section-title-{{ price_size }}" {{ block.shopify_attributes }}>
+
+  <span class="money money-compare-at{% if variant.compare_at_price == blank or variant.price == variant.compare_at_price %} money-compare-at-hidden{% endif %}" data-variant-compare-at-price>{% if settings.currency_enable %}{{ variant.compare_at_price | money_with_currency }}{% else %}{{ variant.compare_at_price | money }}{% endif %}</span>
+
+  <span class="money" data-variant-price>
+    {%- liquid
+      if settings.currency_enable
+        echo variant.price | money_with_currency
+      else
+        echo variant.price | money
+      endif
+    -%}
+  </span>
+  
+  {% assign variant_for_unit_price = variant %}
+  
+  {%- capture unit_price -%}
+    <span class="product-price__unit-price-amount money" data-unit-price-amount>{% if settings.currency_enable %}{{ variant_for_unit_price.unit_price | money_with_currency }}{% else %}{{ variant_for_unit_price.unit_price | money }}{% endif %}</span>
+  {%- endcapture -%}
+  
+  {%- capture unit_measure -%}
+    <span class="product-price__unit-price-measure" data-unit-price-measure>
+      {%- liquid
+        if variant_for_unit_price.unit_price_measurement.reference_value != 1
+          echo variant_for_unit_price.unit_price_measurement.reference_value
+        endif
+        echo variant_for_unit_price.unit_price_measurement.reference_unit
+      -%}
+    </span>
+  {%- endcapture -%}
+  
+  <div class="product-price__unit-price{% unless variant_for_unit_price.unit_price_measurement %} hidden{% endunless %}" data-unit-price>{{ 'product.price_per_unit_html' | t: unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}</div>
+  
+  {%- liquid
+    assign variant_for_unit_price = blank
+  -%}
+
+  {% if cart.taxes_included and tax == false %} 
+    <div class="product-price__tax{% if variant.taxable %} visible{% else %} hidden{% endif %}" data-tax-line>{{ 'product.tax_line_html' | t }}</div>
+  {% endif %}  
+  
+</div>

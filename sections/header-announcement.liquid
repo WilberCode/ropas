@@ -1,0 +1,116 @@
+{%- liquid
+  assign show_announcement = false
+  assign enable_announcement = false
+  if section.settings.announcement_text != blank
+    assign enable_announcement = true
+  endif
+  assign homepage_only = section.settings.announcement_home_only
+  if enable_announcement and homepage_only
+    if request.page_type == 'index'
+      assign show_announcement = true
+    endif
+  elsif enable_announcement
+    assign show_announcement = true
+  endif
+-%}
+
+{% if show_announcement and enable_announcement %}
+  {% style %}
+    .announcement-bar {
+      --announcement_size: {{ section.settings.announcement_text_size }}px;
+      {% if section.settings.announcement_color != 'rgba(0,0,0,0)' and section.settings.announcement_color != blank %}
+      --color_text: {{ section.settings.announcement_color }};
+      {% endif %}
+      {% if section.settings.announcement_background != 'rgba(0,0,0,0)' and section.settings.announcement_background != blank %}
+      --color_background: {{ section.settings.announcement_background }};
+      {% endif %}
+      {% if section.settings.announcement_line != 'rgba(0,0,0,0)' and section.settings.announcement_line != blank %}
+      --color_border_section: {{ section.settings.announcement_line }};
+      {% endif %}
+      --announcement_padding: {{ section.settings.announcement_padding }}px;
+    }
+  {% endstyle %}
+  <div class="dynamic-section announcement-bar{% if section.settings.padding_border %} section-border{% endif %}">
+    <section data-section-id="{{ section.id }}"
+             data-section-type="header_announcement"
+             class="container-inner">
+      {% if section.settings.announcement_text_mobile != blank %}
+        <span class="announcement-bar-text-mobile">{{ section.settings.announcement_text_mobile }}</span>
+      {% endif %}
+      {% if section.settings.announcement_text != blank %}
+        <span class="announcement-bar-text-desktop">{{ section.settings.announcement_text }}</span>
+      {% endif %}
+    </section>
+  </div>
+{% endif %}
+
+{% schema %}
+ {
+   "name": "t:sections.section.titles.header_announcement.content",
+   "class": "site-main",
+   "settings": [
+     {
+       "type": "checkbox",
+       "id": "announcement_home_only",
+       "label": "t:sections.header.announcement.show_home.label",
+       "default": false
+     },
+     {
+       "id": "announcement_text",
+       "type": "richtext",
+       "label": "t:sections.general.text.label",
+       "default": "<p>Call attention to a special discount, feature, or promotion here.</p>"
+     },
+     {
+       "id": "announcement_text_mobile",
+       "type": "richtext",
+       "label": "t:sections.header.announcement.text_mobile.label",
+       "default": "<p>Use less text on mobile!</p>",
+       "info": "t:sections.header.announcement.text_mobile.info"
+     },
+     {
+       "id": "announcement_text_size",
+       "type": "range",
+       "label": "t:sections.header.announcement.text_size.label",
+       "min": 10,
+       "max": 24,
+       "step": 1,
+       "unit": "px",
+       "default": 12
+     },
+     {
+       "id": "announcement_color",
+       "type": "color",
+       "label": "t:sections.general.text_color.label",
+       "default": "#ffffff"
+     },
+     {
+       "id": "announcement_background",
+       "type": "color",
+       "label": "t:sections.section.settings.background_color.label",
+       "default": "#000000"
+     },
+     {
+       "id": "announcement_line",
+       "type": "color",
+       "label": "t:settings_schema.colors.settings.elements_line.label"
+     },
+     {
+       "id": "announcement_padding",
+       "type": "range",
+       "label": "t:sections.header.announcement.padding.label",
+       "min": 5,
+       "max": 30,
+       "step": 5,
+       "unit": "px",
+       "default": 10
+     },
+     {
+       "id": "padding_border",
+       "type": "checkbox",
+       "label": "t:sections.section.settings.border.label",
+       "default": false
+     }
+   ]
+ }
+{% endschema %}

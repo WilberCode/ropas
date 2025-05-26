@@ -1,0 +1,651 @@
+{% if section.blocks.size > 0 %}
+
+  {%- liquid
+    assign text_color = false
+    if section.settings.section_color != 'rgba(0,0,0,0)' and section.settings.section_color != blank
+      assign text_color = true
+      assign text_color_section = section.settings.section_color
+    endif     
+    assign text_color_hover = false
+    if section.settings.section_color_hover != 'rgba(0,0,0,0)' and section.settings.section_color_hover != blank
+      assign text_color_hover = true
+      assign text_color_hover_section = section.settings.section_color_hover
+    endif
+    assign background_color = false
+    if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background
+    endif  
+    if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background_gradient
+    endif
+    if section.settings.enable_lazy
+      assign lazy = 'lazy'
+    else
+      assign lazy = 'eager'
+    endif
+  -%}
+  
+  {% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+      --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+      --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+      {%- if text_color -%}
+      --color_title_text:{{ text_color_section }};
+      --color_text:{{ text_color_section }};
+      --color_text_modify_8:{{ text_color_section }};
+      --color_accent:{{ text_color_section }};
+      --color_accent_modify_25:{{ text_color_section | color_modify: 'alpha', 0.25 }};
+      {%- endif -%}
+      {%- if text_color_hover -%}
+      --color_text_hover:{{ text_color_hover_section }};
+      {%- endif -%}
+      {%- if background_color -%}
+      --color_background:{{ background_color_section }};
+      {%- endif -%}
+    }
+  {% endstyle %}
+  
+  <div class="dynamic-section dynamic-section-{{ section.id }}">
+    <section data-section-id="{{ section.id }}" 
+             data-section-type="mobile-collection-{{ section.id }}"
+             data-url="{{ 'script.collection.mobile.js' | asset_url }}"
+             class="section-mobile-collections text-{{ section.settings.title_alignment }}">
+      <div class="section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}">
+  
+        {%- liquid
+          assign max_item_count = section.settings.truncate_count | times: 1
+          unless section.settings.truncate
+            assign max_item_count = 50
+          endunless
+          if section.settings.type == 'titles'
+            assign max_item_count = 0
+          endif
+        -%}
+  
+        <div class="meganav-index">
+  
+          {% if section.settings.title != blank %}
+            {%- liquid
+              if section.settings.title_h1
+                assign title = 1
+              else
+                assign title = 2
+              endif
+            -%}
+            <h{{ title }} class="section-title{% if section.settings.title_sub != blank %} section-title-half{% endif %} section-title-{{ section.settings.title_size }} {{ section.settings.title_outline }}">{{ section.settings.title }}</h{{ title }}>
+          {% endif %}
+  
+          {% if section.settings.title_sub != blank %}
+            <h3 class="section-title section-title-{{ section.settings.title_sub_size }} {{ section.settings.title_sub_outline }}">{{ section.settings.title_sub }}</h3>  
+          {% endif %}
+  
+          <nav class="meganav-menu meganav-menu-{{ section.blocks.size }}{% if section.settings.show_images %} meganav-show-images{% else %} meganav-no-images{% endif %} text-left">
+            <div class="meganav-menu-panel">
+              <div class="meganav-menu-panel-contents">
+                {% for block in section.blocks %}
+  
+                  {%- liquid
+                    assign collection = collections[block.settings.collection]
+                    assign item_count = 0
+                    if collection != blank and section.settings.type == 'tags'
+                      assign item_count = collection.tags.size
+                    endif
+                    if collection != blank and section.settings.type == 'products'
+                      assign item_count = collection.all_products_count
+                    endif
+                    capture collection_info
+                      if section.settings.show_images                      
+                        if block.settings.image != blank
+                          assign img_src = block.settings.image
+                        elsif collection.image
+                          assign img_src = collection.image
+                        elsif collection.products.first.featured_media.preview_image
+                          assign img_src = collection.products.first.featured_media.preview_image
+                        else
+                          assign img_src = blank
+                        endif
+                        echo '<div class="'
+                        echo block.settings.insta_filter
+                        echo ' meganav-menu-image">'
+                        if img_src != blank
+                          capture alt
+                            if img_src.alt != blank
+                              echo img_src.alt | escape
+                            else
+                              echo collection.title | escape
+                            endif
+                          endcapture
+                          render 'image.load', img_src: img_src, size: 40, sizes: '40px', alt: alt, lazy: lazy
+                        else
+                          capture index
+                            cycle 1, 2, 3, 4, 5, 6
+                          endcapture
+                          echo 'collection-' | append: index | placeholder_svg_tag: 'placeholder-svg'
+                        endif
+                        echo '</div>'
+                      endif
+                      echo '<h4 class="meganav-menu-title">'                    
+                      if block.settings.block_title != blank
+                        echo block.settings.block_title
+                      elsif collection != blank
+                        echo collection.title
+                      else
+                        echo 'collection.onboarding.collection' | t
+                      endif
+                      echo '</h4>'
+                      unless section.settings.type == 'titles'
+                        echo '<div class="navmenu-arrow-toggle mobile-collection"><div class="navmenu-arrow"></div></div>'
+                      endunless
+                    endcapture
+                  -%}
+  
+                  <div class="meganav-menu-group" {{ block.shopify_attributes }}>            
+  
+                    <a href="{% if collection == blank %}{{ routes.root_url }}{% else %}{{ collection.url }}{% endif %}" class="meganav-menu-header{% unless section.settings.show_images %} meganav-menu-header-no-images{% endunless %}{% if max_item_count == 0 %} meganav-menu-empty{% endif %}" title="{% if collection == blank %}{{ 'collection.onboarding.collection' | t | escape }}{% else %}{{ collection.title | escape }}{% endif %}">{{ collection_info }}</a>
+  
+                    {% if section.settings.type == 'tags' %}
+                    <div class="meganav-menu-items">
+                      {% for tag in collection.tags limit: max_item_count %}
+                      <div class="meganav-menu-item">
+                        {%- assign tag_url = tag | handleize | prepend:'/' | within: collection -%}
+                        <a href="{{ tag_url }}" class="meganav-menu-link" title="{{ tag | escape }}">{{ tag }}</a>
+                      </div>
+                      {% endfor %}
+                      {% if collection == blank %}
+                      {% for i in (1..max_item_count) limit: 15 %}
+                      <div class="meganav-menu-item{% if forloop.last %} last{% endif %}">
+                        <a href="{{ routes.all_products_collection_url }}" class="meganav-menu-link" title="{{ 'collection.onboarding.tag' | t: i: i | escape }}">{{ 'collection.onboarding.tag' | t: i: i }}</a>
+                      </div>
+                      {% endfor %}
+                      {% endif %}
+                      {% if collection != blank and max_item_count != 0 %}
+                      <div class="meganav-menu-item last">
+                        <strong><a href="{{ collection.url }}" class="meganav-menu-link" title="{{ 'collection.all_products' | t | escape }}">{{ 'collection.all_products' | t }}</a></strong>
+                      </div>
+                      {% endif %}
+                    </div>
+                    {% endif %}
+  
+                    {% if section.settings.type == 'products' %}
+                    <div class="meganav-menu-items">
+                      {% for product in collection.products limit: max_item_count %}
+                      <div class="meganav-menu-item">
+                        <a href="{{ product.url | within: collection }}" class="meganav-menu-link" title="{{ product.title | escape }}">{{ product.title }}</a>
+                      </div>
+                      {% endfor %}
+                      {% if collection == blank %}
+                      {% for i in (1..max_item_count) limit: 15 %}
+                      <div class="meganav-menu-item{% if forloop.last %} last{% endif %}">
+                        <a href="{{ routes.all_products_collection_url }}" class="meganav-menu-link" title="{{ 'collection.onboarding.product' | t: i: i | escape }}">{{ 'collection.onboarding.product' | t: i: i }}</a>
+                      </div>
+                      {% endfor %}
+                      {% endif %}
+                      {% if collection != blank and max_item_count != 0 %}
+                      <div class="meganav-menu-item last">
+                        <strong><a href="{{ collection.url }}" class="meganav-menu-link" title="{{ 'collection.all_products' | t | escape }}">{{ 'collection.all_products' | t }}</a></strong>
+                      </div>
+                      {% endif %}
+                    </div>
+                    {% endif %}
+  
+                  </div>
+  
+                {% endfor %}
+                
+              </div>
+            </div>
+          </nav>
+  
+        </div>
+  
+      </div>
+    </section>
+  </div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.mobile_collections.content",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.general.mobile_collections_note.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.text.title.label"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "t:sections.text.heading.label",
+        "default": "Mobile collections"
+      },
+      {
+        "id": "title_h1",
+        "type": "checkbox",
+        "label": "t:sections.text.heading_one.label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "title_outline",
+        "label": "t:sections.text.outline.heading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_size",
+        "type": "range",
+        "label": "t:sections.text.heading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "id": "title_sub",
+        "type": "text",
+        "label": "t:sections.text.subheading.label",
+        "default": "Highlight a popular product collections on mobile"
+      },
+      {
+        "type": "select",
+        "id": "title_sub_outline",
+        "label": "t:sections.text.outline.subheading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_sub_size",
+        "type": "range",
+        "label": "t:sections.text.subheading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 30
+      },
+      {
+        "id": "title_alignment",
+        "type": "text_alignment",
+        "label": "t:sections.text.alignment.title.label",
+        "default": "center"
+      },
+      {
+        "id": "section_color",
+        "type": "color",
+        "label": "t:sections.text.color.label"
+      },
+      {
+        "id": "section_color_hover",
+        "type": "color",
+        "label": "t:sections.text.hover.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.options.label"
+      },
+      {
+        "id": "show_images",
+        "type": "checkbox",
+        "label": "t:sections.image.show.label",
+        "default": true
+      },
+      {
+        "id": "enable_lazy",
+        "type": "checkbox",
+        "label": "t:sections.general.lazy.multiple.label",
+        "default": true
+      },
+      {
+        "id": "type",
+        "type": "select",
+        "label": "t:sections.general.display.label",
+        "options": [
+          {
+            "value": "tags",
+            "label": "t:sections.general.tags.label"
+          },
+          {
+            "value": "products",
+            "label": "t:sections.general.products.label"
+          },
+          {
+            "value": "titles",
+            "label": "t:sections.general.titles.label"
+          }
+        ],
+        "default": "products"
+      },
+      {
+        "id": "truncate",
+        "type": "checkbox",
+        "label": "t:sections.general.truncate.label",
+        "default": true
+      },
+      {
+        "id": "truncate_count",
+        "type": "range",
+        "label": "t:sections.general.display_list.label",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "t:sections.general.collection.label",
+        "settings": [
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "t:sections.general.collection.label"
+          },
+          {
+            "id": "block_title",
+            "type": "text",
+            "label": "t:sections.general.title_custom.label"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "t:sections.image.custom.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.section.titles.mobile_collections.content",
+        "blocks": [
+          {
+            "type": "collection",
+            "settings": {}
+          },
+          {
+            "type": "collection",
+            "settings": {}
+          },
+          {
+            "type": "collection",
+            "settings": {}
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+	  "templates": ["password"]
+    }
+  }
+{% endschema %}

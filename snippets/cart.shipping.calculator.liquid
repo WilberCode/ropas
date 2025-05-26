@@ -1,0 +1,90 @@
+{% if cart.requires_shipping %}
+  <div id="shipping-calculator" class="shipping-calculator{% if inline %} shipping-calculator-inline{% endif %}">
+    
+    {% if inline %}
+    <div class="shipping-calculator-inline-header">
+      <button type="button" class="link-group shipping-calculator-toggle" data-shipping-calculator-toggle data-toggle-text="{{ 'cart.shipping_calculator.hide' | t | escape }}" data-shipping-calculator-title="{{ 'cart.shipping_calculator.show' | t | escape }}">
+        <span><span class="link-text">{{ 'cart.shipping_calculator.show' | t }}</span></span>
+        <span class="link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>      
+      </button>
+    </div>
+    {% endif %}
+
+    <div class="shipping-calculator-fields{% if inline %} slider-v{% endif %}">
+    
+      <div class="shipping-calculator-field input-wrapper{% if inline %} first{% endif %}">
+
+        <div class="option-header">
+          <label for="address_country">{{ 'cart.shipping_calculator.country' | t }}</label>
+        </div>
+
+        {%- liquid
+          capture default_country
+            if shop.customer_accounts_enabled and customer
+              echo customer.default_address.country
+            elsif section.settings.shipping_calculator_default_country != ''
+              echo section.settings.shipping_calculator_default_country | escape
+            else
+              echo shop.address.country
+            endif
+          endcapture
+        -%}
+
+        <div class="option-values">     
+          <div class="option-select"> 
+            <select id="address_country" class="scroll-bar-v" name="address[country]" data-default="{{ default_country | strip }}">{{ country_option_tags }}</select>
+            <span class="option-select-arrow">
+              {%- render 'icons', id: 'arrow', size: 12 -%}
+            </span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="shipping-calculator-field option" id="address_province_container" style="display:none;">
+
+        <div class="option-header">
+          <label for="address_province" id="address_province_label">{{ 'cart.shipping_calculator.province' | t }}</label>
+        </div>
+
+        {%- liquid
+          capture default_province
+            if shop.customer_accounts_enabled and customer
+              echo customer.default_address.province
+            else
+              echo shop.address.province
+            endif
+          endcapture
+        -%}
+
+        <div class="option-values">     
+          <div class="option-select"> 
+            <select id="address_province" class="scroll-bar-v" name="address[province]" data-default="{{ default_province | strip | escape }}" ></select>
+            <span class="option-select-arrow">
+              {%- render 'icons', id: 'arrow', size: 12 -%}
+            </span>
+          </div>
+        </div>
+          
+      </div>
+
+      <div class="shipping-calculator-field input-wrapper">
+        <div class="option-header">
+          <label for="address_zip">{{ 'cart.shipping_calculator.postal_code' | t }}</label>
+        </div>
+        <input type="text" id="address_zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip | strip }}"{% endif %}/>
+      </div>
+
+      {% unless section.settings.enable_menu_form %}
+        <button class="btn btn-{% if additional_checkout_buttons %}primary{% else %}secondary{% endif %} btn-spinner" type="button" data-shipping-calculator-submit>
+          <span data-button-text>{{ 'cart.shipping_calculator.submit' | t }}</span>
+          <span class="spinner">&nbsp;</span>
+        </button>
+      {% endunless %}
+      
+    </div>
+
+    <div id="wrapper-response" class="slider-v"><div class="shipping-calculator-response"></div></div>
+    
+</div>
+{% endif %}

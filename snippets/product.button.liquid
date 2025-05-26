@@ -1,0 +1,5 @@
+{% if button_link != blank and button_text != blank %}
+  <div class="product-form-inline-atc product-block" {{ block.shopify_attributes }}>
+    <a href="{{ button_link }}" class="btn btn-{{ button_style }} {% if background_color %}alt {% endif %}btn-full-width" type="submit" title="{{ button_text | escape }}">{{ button_text }}</a>    
+  </div>
+{% endif %}

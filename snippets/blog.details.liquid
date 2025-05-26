@@ -1,0 +1,83 @@
+<article class="slide article-excerpt{% unless article.image or section_onboarding %} article-excerpt-no-image{% endunless %}{% if borders %} article-excerpt-borders{% endif %}{% if forloop.last == true %} last{% endif %} text-left" data-article-excerpt>
+  
+  {% if article %}
+  
+    {% if article.image %}
+      <figure class="text-center article-excerpt-image height-padding-{{ padding }}">
+        <a href="{{ article.url }}" title="{{ article.title | escape }}" class="{{ insta_filter }}" tabindex="-1">
+          {%- liquid
+            capture alt
+              if article.image.alt != blank
+                echo article.image.alt | escape
+              else
+                echo article.title | escape
+              endif
+            endcapture
+            if lazy_total != blank
+              if forloop_index <= lazy_total
+                assign lazy = lazy
+              else
+                assign lazy = 'lazy'
+              endif
+            endif
+            if padding == 'original'
+              render 'image.load', img_src: article.image, size: size, new_size: size, sizes: sizes, alt: alt, lazy: lazy
+            else
+              render 'image.load', img_src: article.image, size: size, new_size: size, padding: padding, sizes: sizes, alt: alt, image_position: image_position, background: true, lazy: lazy
+            endif      
+          -%}
+        </a>
+      </figure>
+    {% endif %}
+
+    <div class="article-excerpt-content{% if section.settings.post_limit == 1 %} single{% endif %}">
+      {% if section.settings.include_author or section.settings.include_date %}
+      <p class="article-excerpt-date">
+        {% if section.settings.include_author %}{{ 'article.author' | t: author: article.author }}{% endif %}
+        {% if section.settings.include_author and section.settings.include_date %}<span class="info-separator">&middot;</span>{% endif %}
+        {% if section.settings.include_date %}{{ article.published_at | date: format: settings.month_day_year }}{% endif %} 
+      </p>
+      {% endif %}
+      <h3 class="article-excerpt-title"><a href="{{ article.url }}" title="{{ article.title | escape }}" class="underline keyed inside">{{ article.title }}</a></h3>
+      {% if excerpt > 0 %}
+      <div class="article-excerpt-rte">
+        <p>
+          {%- liquid
+            if article.excerpt != blank
+              echo article.excerpt | strip_html | truncatewords: excerpt
+            else
+              echo article.content | strip_html | truncatewords: excerpt
+            endif
+          -%}
+        </p>
+      </div>
+      {% endif %}
+      <a href="{{ article.url }}" title="{{ article.title | escape }}" class="link-group" tabindex="-1">
+        <span><span class="link-text">{{ 'article.excerpt.read_more' | t }}</span></span>
+        <span class="link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>
+      </a>
+    </div>
+  
+  {% else %}
+    
+    <figure class="article-excerpt-image"><a href="{{ routes.root_url }}" title="{{ shop.name | escape }}">{{ 'image' | placeholder_svg_tag: 'placeholder-image placeholder-svg' }}</a></figure>
+
+    <div class="article-excerpt-content">
+      {% if section.settings.include_author or section.settings.include_date %}
+      <p class="article-excerpt-date">
+        {% if section.settings.include_author %}{{ 'article.author' | t: author: article.author }}{% endif %}
+        {% if section.settings.include_author and section.settings.include_date %}<span class="info-separator">&middot;</span>{% endif %}
+        {% if section.settings.include_date %}{{ 'article.onboarding.excerpt.date' | t }}{% endif %}
+      </p>
+      {% endif %}
+      <h4 class="article-excerpt-title">{{ 'article.onboarding.excerpt.title' | t }}</h4>
+      {% if excerpt > 0 %}<div class="article-excerpt-rte"><p>{{ 'article.onboarding.excerpt.content' | t |  truncatewords: excerpt }}</p></div>{% endif %}
+      <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="link-group">
+        <span><span class="link-text">{{ 'article.excerpt.read_more' | t }}</span></span>
+        <span class="link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>      
+      </a>
+    </div>
+  
+  {% endif %}
+  
+</article>

@@ -1,0 +1,69 @@
+{%- liquid
+  assign social_image = false
+  assign social_title = false
+  if request.page_type == 'article'
+    assign social_url = shop.url | append: article.url
+    assign social_title = article.title
+    assign social_image = article | image_url
+  elsif request.page_type == 'product'
+    assign social_url = shop.url | append: product.url
+    assign social_title = product.title
+    assign social_image = product.featured_media.preview_image | image_url
+  elsif request.page_type == 'password'
+    assign social_url = shop.url
+    assign social_title = shop.name
+    assign social_image = section.settings.logo | image_url
+  endif
+  assign platforms = 0
+  assign social_platforms = 'facebook|x|pinterest|email' | split: '|'
+  for platform in social_platforms
+    capture setting
+      echo 'share_widget_'
+      echo platform
+    endcapture
+    assign platform_enabled = settings[setting]
+    if platform_enabled
+      assign platforms = platforms | plus: 1
+    endif
+  endfor
+-%}
+
+{% if platforms > 0 %}
+  <div class="share-buttons-wrapper" {{ block.shopify_attributes }}>
+    <span class="share-buttons-label{% if block %} visually-hidden{% endif %}">{{ 'general.social.share' | t }}</span>
+    <div class="share-buttons">
+      {% if settings.share_widget_facebook %}
+        {%- assign title = 'general.social.facebook_share_html' | t: social_title: social_title | escape -%}
+        <a href="https://www.facebook.com/sharer.php?u={{ social_url }}" 
+           target="_blank" 
+           role="button" 
+           aria-label="{{ title }}" 
+           title="{{ title }}">{%- render 'icons.social', id: 'facebook' -%}</a>
+      {% endif %}
+      {% if settings.share_widget_x %}
+        {%- assign title = 'general.social.x_share_html' | t: social_title: social_title | escape -%}
+        <a href="https://x.com/intent/tweet?text={{ social_title | url_param_escape }}&url={{ social_url }}" 
+           target="_blank" 
+           role="button" 
+           aria-label="{{ title }}" 
+           title="{{ title }}">{%- render 'icons.social', id: 'x' -%}</a>
+      {% endif %}
+      {% if settings.share_widget_pinterest and social_image %}
+        {%- assign title = 'general.social.pinterest_share_html' | t: social_title: social_title | escape -%}
+        <a href="https://pinterest.com/pin/create/button/?url={{ social_url }}&media={{ social_image }}&description={{ social_title | url_param_escape }}" 
+           target="_blank" 
+           role="button" 
+           aria-label="{{ title }}" 
+           title="{{ title }}">{%- render 'icons.social', id: 'pinterest' -%}</a>
+      {% endif %}
+      {% if settings.share_widget_email %}
+        {%- assign title = 'general.social.email_share_html' | t: social_title: social_title | escape -%}
+        <a href="mailto:?subject={{ social_title | url_param_escape }}&body={{ 'general.social.email_body_html' | t: shop: shop.name, social_title: social_title, social_url: social_url }}" 
+           target="_blank" 
+           role="button" 
+           aria-label="{{ title }}" 
+           title="{{ title }}">{%- render 'icons.social', id: 'email' -%}</a>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

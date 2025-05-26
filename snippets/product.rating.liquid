@@ -1,0 +1,52 @@
+{%- if product.metafields.reviews.rating.value != blank -%}
+
+{%- liquid
+  assign rating_value_rating = product.metafields.reviews.rating.value.rating  
+  assign rating_count = product.metafields.reviews.rating_count
+  assign rating_scale_max = product.metafields.reviews.rating.value.scale_max
+  assign rating_decimal = 0
+  assign decimal = rating_value_rating | modulo: 1
+  if decimal >= 0.3 and decimal <= 0.7
+    assign rating_decimal = 0.5
+  elsif decimal > 0.7
+    assign rating_decimal = 1
+  endif  
+  capture rating_value
+    echo rating_value_rating | round: 1
+    echo ' / '
+    echo rating_scale_max
+  endcapture  
+-%}
+
+{% unless grid %}
+<style>
+.stars {
+  --percent: calc((var(--rating) / var(--rating_max) + var(--rating_decimal) * var(--star_size) / (var(--rating_max) * (var(--star_spacing) + var(--star_size)))) * 100%);
+}
+</style>
+{% endunless %}
+
+<div class="reviews product-block" {{ block.shopify_attributes }}>
+  
+  {%- capture stars -%}
+  <span class="stars-rating" role="img" aria-label="{{ 'product.reviews' | t: total: rating_value, count: rating_count | escape }}">
+    <span class="stars" 
+          style="--rating: {{ rating_value_rating | floor }};--rating_max: {{ rating_scale_max }}; --rating_decimal: {{ rating_decimal }};" 
+          aria-hidden="true"></span>
+  </span>
+  {%- endcapture -%}
+  
+  {% if style == 'text' %} 
+  <span class="stars-count">{{ 'product.reviews' | t: total: rating_value, count: rating_count }}</span>
+  {% elsif style == 'stars' or grid %}
+  
+  <span class="stars-count grid">{{ rating_value_rating | round: 1 }}</span>
+  <span class="stars-rating grid" role="img" aria-label="{{ 'product.reviews' | t: total: rating_value, count: rating_count | escape }}">
+    <span class="star" aria-hidden="true"></span>
+  </span>
+  
+  {% else %}
+  {{ stars }}<span class="stars-count">{{ 'product.reviews' | t: total: rating_value, count: rating_count }}</span>
+  {% endif %}
+</div>
+{%- endif -%}

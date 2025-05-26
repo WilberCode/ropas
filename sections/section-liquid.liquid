@@ -1,0 +1,153 @@
+{% unless section.settings.liquid == blank %}
+
+  {%- liquid
+    assign background_color = false
+    if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background
+    endif  
+    if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background_gradient
+    endif
+  -%}
+  
+  {% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+      --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+      --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+      {%- if background_color -%}
+      --color_background:{{ background_color_section }};
+      {%- endif -%}
+    }
+  {% endstyle %}
+  
+  <div class="dynamic-section dynamic-section-{{ section.id }}">
+    <section data-section-id="{{ section.id }}" 
+             data-section-type="liquid-{{ section.id }}">
+      <div class="section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}">
+  
+        {%- liquid
+          if section.settings.liquid != blank
+            echo section.settings.liquid
+          else
+            render 'onboarding'
+          endif
+        -%}
+  
+      </div>
+    </section>
+  </div>
+
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.liquid.content",
+    "settings": [
+      {
+         "type": "liquid",
+         "id": "liquid",
+         "label": "t:sections.section.titles.liquid.content",
+         "default": "<div class='text-center'><h2>{{ shop.name }}</h2><p>{{ powered_by_link }}</p></div>"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "margin_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.section.titles.liquid.content"
+      }
+    ]
+  }
+{% endschema %}

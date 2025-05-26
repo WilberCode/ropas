@@ -1,0 +1,174 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "a8607f4f-199f-4fb9-abb2-50d636a75d46": {
+      "type": "section-image-with-text-overlay",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "Tu Carrito",
+        "title_h1": true,
+        "title_outline": "title-outline title-outline-1",
+        "title_size": 66,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "text_border": true,
+        "content": "",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": true,
+        "layout": "overlay-center-center",
+        "content_width": 100,
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "rgba(0,0,0,0)",
+        "text_background_gradient": "",
+        "text_background_opacity": 0,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 46,
+        "enable_lazy": false,
+        "image_desktop": "shopify:\/\/shop_images\/BANNER_CATEGORIA_PHBRANDS-03_1.jpg",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "enable_lazy": false,
+        "quantity_enable": true,
+        "enable_checkout_lock_icon": true,
+        "show_notes": false,
+        "notes_placeholder": "Write any special instructions for your shipment here",
+        "show_msg": false,
+        "show_calc": false,
+        "shipping_calculator_default_country": "United States",
+        "enable_menu_form": true,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 10,
+        "padding_border": true
+      }
+    },
+    "b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7": {
+      "type": "section-logo-list",
+      "blocks": {
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-0": {
+          "type": "logo",
+          "settings": {
+            "block_img": "shopify:\/\/shop_images\/152x132_BANNERS_MARCAS_PH_ECOM_1.webp",
+            "block_img_width": 190,
+            "link": "shopify:\/\/collections\/vissla"
+          }
+        },
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-1": {
+          "type": "logo",
+          "settings": {
+            "block_img": "shopify:\/\/shop_images\/152x132_BANNERS_MARCAS_PH_ECOM_12.webp",
+            "block_img_width": 190,
+            "link": "shopify:\/\/collections\/sisstrevolution"
+          }
+        },
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-2": {
+          "type": "logo",
+          "settings": {
+            "block_img": "shopify:\/\/shop_images\/152x132_BANNERS_MARCAS_PH_ECOM_2.webp",
+            "block_img_width": 190,
+            "link": "shopify:\/\/collections\/amuse"
+          }
+        },
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-3": {
+          "type": "logo",
+          "settings": {
+            "block_img": "shopify:\/\/shop_images\/152x132_BANNERS_MARCAS_PH_ECOM_13.webp",
+            "block_img_width": 190,
+            "link": "shopify:\/\/collections\/dunkelvolk"
+          }
+        },
+        "logo_LbFpHQ": {
+          "type": "logo",
+          "settings": {
+            "block_img": "shopify:\/\/shop_images\/152x132_BANNERS_MARCAS_PH_ECOM_14.webp",
+            "block_img_width": 190,
+            "link": "shopify:\/\/collections\/reef"
+          }
+        }
+      },
+      "block_order": [
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-0",
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-1",
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-2",
+        "template--17550831943992__b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7-1673895252fbc8afe0-3",
+        "logo_LbFpHQ"
+      ],
+      "settings": {
+        "title": "",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "enable_lazy": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    }
+  },
+  "order": [
+    "a8607f4f-199f-4fb9-abb2-50d636a75d46",
+    "main",
+    "b4c439ca-84f5-4d9e-a345-5d5d9ce6adc7"
+  ]
+}

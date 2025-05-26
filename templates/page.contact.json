@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "214d5972-1ee4-4a6b-aef7-a0a69da1ce7a": {
+      "type": "section-image-with-text-overlay",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "Image with text overlay",
+        "title_h1": true,
+        "title_outline": "none",
+        "title_size": 36,
+        "title_sub": "{{ page.title }}",
+        "title_sub_outline": "title-outline title-outline-1",
+        "title_sub_size": 72,
+        "text_border": true,
+        "content": "<p>Say a bit about your brand, a specific product, or promotion<\/p>",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": true,
+        "layout": "overlay-center-center",
+        "content_width": 100,
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "rgba(0,0,0,0)",
+        "text_background_gradient": "",
+        "text_background_opacity": 0,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 50,
+        "enable_lazy": false,
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 40,
+        "padding_border": false
+      }
+    },
+    "main": {
+      "type": "main-page-contact",
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "text": "both",
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    }
+  },
+  "order": [
+    "214d5972-1ee4-4a6b-aef7-a0a69da1ce7a",
+    "main"
+  ]
+}

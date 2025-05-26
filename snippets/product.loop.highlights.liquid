@@ -1,0 +1,9 @@
+<div class="product-highlights{% if product_emphasize %} product-highlights-emphasized{% endif %}" data-product-highlights>
+  {%- liquid
+    if product_emphasize
+      render 'product.loop.highlights.emphasized', products: products, product_item_style: product_item_style, product_row_count: product_row_count, product_count: product_count, products_per_row: products_per_row, products_row_count: products_row_count, product_emphasize: product_emphasize, lazy: lazy
+    else
+      render 'product.loop.highlights.default', products: products, complementary: complementary, product_item_style: product_item_style, product_count: product_count, products_per_row: products_per_row, products_row_count: products_row_count, product_emphasize: product_emphasize, lazy: lazy
+    endif
+  -%}
+</div>

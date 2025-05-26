@@ -1,0 +1,51 @@
+<div class="product-recommendations product-recommendations-slide product-complementary{% if enable_slide %} product-slide{% endif %}{% if product.metafields.shopify--discovery--product_recommendation.complementary_products.value == blank %} hidden{% endif %}">
+
+  {%- liquid
+    assign products_per_row = 5
+    assign product_count = product_count
+    assign product_item_style = settings.product_item_style
+    assign product_emphasize = false
+    if settings.enable_image_crop and product_item_style != 'natural'
+      assign product_item_style = product_item_style | prepend: 'cropped-'
+    endif
+  -%}
+
+  <section class="section-product-recommendations product-block"           
+           data-section-id="{{ section.id }}-complementary-images" 
+           data-section-type="slider-{{ section.id }}-complementary-images"
+           data-url="{{ 'script.slider.js' | asset_url }}"  
+           data-slider-use="true"
+           data-slider-breakpoint="medium"
+           {{ block.shopify_attributes }}>
+
+    <div class="product-slide-content" data-height>
+      <div class="product-slide-space">
+        {% if heading != blank and enable_slide == false %}
+        <label>{{ heading }}</label>
+        {% endif %}    
+        <div class="slider-container">
+          <div class="slider medium scroll-bar-h recommendations">
+            {%- render 'product.loop.highlights-backup', products: product.metafields.shopify--discovery--product_recommendation.complementary_products.value, complementary: true, product_count: product_count, product_item_style: product_item_style, products_per_row: products_per_row, products_row_count: section.settings.products_row_count, product_emphasize: product_emphasize, lazy: lazy -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- liquid      
+      if enable_slide
+        capture title
+          if heading != blank
+            echo heading
+          else
+            echo 'product.show_more' | t
+          endif
+        endcapture
+        echo '<button type="button" title="'
+        echo title | escape
+        echo '" class="product-slide-btn">'
+        echo title
+        echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+        echo '</button>'
+      endif
+    -%}
+  </section>
+</div>

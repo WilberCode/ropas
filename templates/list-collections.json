@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title_enable": true,
+        "title": "",
+        "title_outline": "none",
+        "title_size": 24,
+        "title_sub": "View the collections",
+        "title_sub_outline": "title-outline title-outline-1",
+        "title_sub_size": 48,
+        "section_color": "",
+        "enable_lazy": false,
+        "collection_images": "collection",
+        "image_height": "original",
+        "image_position": "50-50",
+        "insta_filter": "none",
+        "collections_per_row": 2,
+        "collections_per_page": 8,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+ 
+    "3c5b358f-a981-4114-a891-551bfeaaabc2": {
+      "type": "section-blog-posts",
+      "settings": {
+        "title": "",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "blog": "",
+        "post_limit": 4,
+        "include_border": true,
+        "enable_lazy": true,
+        "image_height": "original",
+        "image_position": "50-50",
+        "insta_filter": "none",
+        "include_author": false,
+        "include_date": true,
+        "excerpt_limit": 100,
+        "enable_slider": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 10,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 10,
+        "padding_border": false
+      }
+    }
+  },
+  "order": [
+    "main", 
+    "3c5b358f-a981-4114-a891-551bfeaaabc2"
+  ]
+}

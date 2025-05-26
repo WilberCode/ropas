@@ -1,0 +1,194 @@
+{%- liquid
+  capture svg_size
+    if size
+      echo size
+    else
+      echo '24'
+    endif
+  endcapture
+-%}
+
+<svg class="icon{{ class }}" viewBox="0 0 24 24" height="{{ svg_size }}" width="{{ svg_size }}" aria-hidden="true" focusable="false" role="presentation" fill="none" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
+
+  {%- case id -%}
+
+  {%- when 'mobilenav-toggle-search' -%}
+  <line x1="9" y1="6" x2="1" y2="6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="10" y1="12" x2="1" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="18" y1="18" x2="1" y2="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <circle cx="17" cy="8" r="4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="23" y1="15" x2="20" y2="11.765" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {%- when 'mobilenav-toggle' -%}
+  <line x1="23" y1="6" x2="1" y2="6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="23" y1="12" x2="1" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="23" y1="18" x2="1" y2="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {%- when 'search' -%}
+  <circle cx="10.5" cy="10.5" r="10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="23.5" y1="23.5" x2="17.571" y2="17.571" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {%- when 'user' -%}
+  <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <circle cx="12" cy="8.75" r="4.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <path d="M18.317,18.5a6.988,6.988,0,0,0-12.634,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  {%- when 'cart-bag' -%}
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.5 9.5V5C7.5 3.80653 7.97411 2.66193 8.81802 1.81802C9.66193 0.974106 10.8065 0.5 12 0.5C13.1935 0.5 14.3381 0.974106 15.182 1.81802C16.0259 2.66193 16.5 3.80653 16.5 5V9.5"></path>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M21.4661 20.5L20.5661 7.5C20.5478 7.22887 20.4273 6.97478 20.2288 6.78914C20.0304 6.60349 19.7688 6.50015 19.4971 6.5H4.50007C4.22832 6.50015 3.96677 6.60349 3.76832 6.78914C3.56986 6.97478 3.44932 7.22887 3.43107 7.5L2.53107 20.5C2.5084 20.8333 2.49707 21.1667 2.49707 21.5C2.49707 22.0304 2.70778 22.5391 3.08286 22.9142C3.45793 23.2893 3.96664 23.5 4.49707 23.5H19.4971C20.0275 23.5 20.5362 23.2893 20.9113 22.9142C21.2864 22.5391 21.4971 22.0304 21.4971 21.5C21.4991 21.1667 21.4887 20.8333 21.4661 20.5Z"></path>
+
+  {%- when 'cart-cart' -%}
+  <path d="M 3.707 4.5 L 22.345 4.5 C 23.004 4.5 23.483 5.127 23.31 5.763 L 21.257 13.289 C 20.901 14.594 19.716 15.5 18.363 15.5 L 6.023 15.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M 0.542 1.819 L 0.92 1.819 C 1.866 1.819 2.682 2.482 2.877 3.407 L 6.32 16.912 C 6.515 17.837 7.331 18.5 8.277 18.5 L 19.654 18.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="7.654" cy="21" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <circle cx="17.654" cy="21" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+
+  {%- when 'quick-eye' -%}
+  <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <path d="M23.38,11.67C22.21,10.35,17.56,5.5,12,5.5S1.79,10.35.62,11.67a.52.52,0,0,0,0,.66C1.79,13.65,6.44,18.5,12,18.5s10.21-4.85,11.38-6.17A.52.52,0,0,0,23.38,11.67Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    
+  {%- when 'quick-cart' -%}
+  <path d="M 21.483 7.5 L 22.345 7.5 C 23.004 7.5 23.483 8.127 23.31 8.763 L 21.257 14.289 C 20.901 15.594 19.716 16.5 18.363 16.5 L 6.023 16.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M 3.707 7.5 L 5.345 7.5"></path>
+  <path d="M 0.542 4.819 L 0.92 4.819 C 1.866 4.819 2.682 5.482 2.877 6.407 L 6.32 17.912 C 6.515 18.837 7.331 19.5 8.277 19.5 L 19.654 19.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="7.654" cy="22" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <circle cx="17.654" cy="22" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="9.294" y1="7.545" x2="17.294" y2="7.545" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="13.294" y1="3.548" x2="13.294" y2="11.548" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+    
+  {% when 'checkout-lock' %}
+  <circle cx="12" cy="15" r="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="12" y1="16" x2="12" y2="19" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <rect x="3.5" y="9.5" width="17" height="14" rx="1" ry="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></rect>
+  <path d="M6.5,6a5.5,5.5,0,0,1,11,0V9.5H6.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  
+  {% when 'close' %}
+  <line x1="0.5" y1="0.499" x2="23.5" y2="23.499" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="23.5" y1="0.499" x2="0.5" y2="23.499" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {% when 'arrow' %}
+  <path d="M.541,5.627,11.666,18.2a.5.5,0,0,0,.749,0L23.541,5.627" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"></path>
+  
+  {% when 'arrow-long-l' %}
+  <polyline points="5.5 7.497 0.5 12.497 5.5 17.497" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></polyline>
+  <line class="arrow-long-r-line" x1="23.5" y1="12.497" x2="0.5" y2="12.497" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {% when 'arrow-long-r' %}
+  <polyline points="18.5 7.497 23.5 12.497 18.5 17.497" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></polyline>
+  <line class="arrow-long-r-line" x1="23.5" y1="12.497" x2="0.5" y2="12.497" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>  
+  
+  {% when 'arrow-l' %}
+  <path d="M18.4.5,5.825,11.626a.5.5,0,0,0,0,.748L18.4,23.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  {% when 'arrow-r' %}
+  <path d="M5.651,23.5,18.227,12.374a.5.5,0,0,0,0-.748L5.651.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  
+  {% when 'contact-directions' %}
+  <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle><path d="M9.5,9.5l7.39-3.043a.5.5,0,0,1,.653.653L14.5,14.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M14.5,14.5l-5-5L6.457,16.89a.5.5,0,0,0,.653.653Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    
+  {% when 'contact-email' %}
+  <path d="M23.5,2,.931,11.323a.7.7,0,0,0,.08,1.318L9.5,15Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M23.5,2,19.65,20.286a.9.9,0,0,1-1.376.562L9.5,15Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M9.5,15V21.48a.519.519,0,0,0,.967.261l2.561-4.39" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  
+  {% when 'contact-hours' %}
+  <circle cx="12" cy="12.001" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="18" y1="18.001" x2="13.057" y2="13.059" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <circle cx="12" cy="12.001" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="12" y1="6.501" x2="12" y2="10.501" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  
+  {% when 'contact-phone' %}
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17.5 0.5H6.5C5.39543 0.5 4.5 1.39543 4.5 2.5V21.5C4.5 22.6046 5.39543 23.5 6.5 23.5H17.5C18.6046 23.5 19.5 22.6046 19.5 21.5V2.5C19.5 1.39543 18.6046 0.5 17.5 0.5Z"></path>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M19.5 19.5H4.5"></path>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.5 2.5H14.5"></path>
+  <path stroke="currentColor" d="M12 21.5C11.8619 21.5 11.75 21.3881 11.75 21.25C11.75 21.1119 11.8619 21 12 21"></path>
+  <path stroke="currentColor" d="M12 21.5C12.1381 21.5 12.25 21.3881 12.25 21.25C12.25 21.1119 12.1381 21 12 21"></path>
+  
+  {% when 'sale-tag' %}
+  <circle cx="18" cy="6" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <path d="M.854,12.646a1.207,1.207,0,0,0,0,1.708l8.792,8.792a1.207,1.207,0,0,0,1.708,0L22.793,11.707A2.414,2.414,0,0,0,23.5,10V1.5a1,1,0,0,0-1-1H14a2.414,2.414,0,0,0-1.707.707Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  
+  {% when 'plus' %}
+  <line x1="12" y1="4" x2="12" y2="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="20" y1="12" x2="4" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  
+  {% when 'minus' %}
+  <line x1="20" y1="12" x2="4" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+
+  {% when 'checkmark' %}  
+  <path d="M18,7l-6.38,8.66a1,1,0,0,1-.68.4,1,1,0,0,1-.75-.21L6,12.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+    
+  {% when 'xmark' %}
+  <circle cx="11.999" cy="12" r="11" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <line x1="16.241" y1="7.758" x2="7.756" y2="16.243" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <line x1="16.241" y1="16.243" x2="7.756" y2="7.758" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  
+  {% when '3D' %}
+  <path fill="currentColor" d="M19.594 5.063l-7.688-4.5c-0.868-0.505-1.945-0.505-2.813 0l-7.688 4.5c-0.863 0.51-1.406 1.436-1.406 2.438v8.969c0 1.004 0.54 1.962 1.406 2.469l7.688 4.469c0.868 0.503 1.944 0.503 2.813 0l7.688-4.469c0.864-0.509 1.408-1.467 1.406-2.469v-8.969c-0.002-1.003-0.541-1.93-1.406-2.438zM2.281 17.406c-0.326-0.195-0.533-0.558-0.531-0.938v-8.969c-0.002-0.379 0.205-0.743 0.531-0.938l7.687-4.5c0.321-0.186 0.74-0.186 1.062 0l7.687 4.5c0.124 0.076 0.229 0.192 0.312 0.312l-8.313 4.25c-0.668 0.327-1.093 1.006-1.094 1.75v8.813l-7.344-4.281z"></path>
+    
+  {% when 'model-thumb' %}
+  <path d="M1,25H25V1H1Z" fill="none"/>
+  <path d="M19.13,8.28,14,5.32a2,2,0,0,0-2,0l-5.12,3a2,2,0,0,0-1,1.76V16a2,2,0,0,0,1,1.76l5.12,3a2,2,0,0,0,2,0l5.12-3a2,2,0,0,0,1-1.76V10A2,2,0,0,0,19.13,8.28Zm-6.4,11.1-5.12-3A.53.53,0,0,1,7.35,16V10a.53.53,0,0,1,.27-.46l5.12-3a.53.53,0,0,1,.53,0l5.12,3-4.72,2.68a1.33,1.33,0,0,0-.67,1.2v6a.53.53,0,0,1-.26,0Z" fill="currentColor" style="isolation:isolate"/>
+  
+  {% when 'play-thumb' %}
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M1 25H25V1H1V25Z" fill="none"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.71814 6.71984C9.0517 6.31605 8.19995 6.79588 8.19995 7.5751V18.311C8.19995 19.1138 9.09826 19.5893 9.76217 19.1379L18.1123 13.4612C18.7146 13.0518 18.6912 12.1564 18.0682 11.779L9.71814 6.71984Z" fill="currentColor"/>
+
+  {% when 'filter' %}
+  
+  <line x1="4" y1="6" x2="20" y2="6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <circle id="circle-1" cx="16" cy="6" r="2" fill="#fff" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <animate xlink:href="#circle-1" 
+           attributeName="cx" 
+           begin="filter_svg.mouseover" 
+           dur="0.25s"
+           fill="freeze"
+           from="16"
+           to="8"/>
+  <animate xlink:href="#circle-1" 
+           attributeName="cx" 
+           begin="filter_svg.mouseout" 
+           dur="0.25s"
+           fill="freeze"
+           from="8"
+           to="16"/>  
+  <line x1="4" y1="12" x2="20" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <circle id="circle-2" cx="8" cy="12" r="2" fill="#fff" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <animate xlink:href="#circle-2" 
+           attributeName="cx" 
+           begin="filter_svg.mouseover" 
+           dur="0.25s"
+           fill="freeze"
+           from="8"
+           to="16"/>
+  <animate xlink:href="#circle-2" 
+           attributeName="cx" 
+           begin="filter_svg.mouseout" 
+           dur="0.25s"
+           fill="freeze"
+           from="18"
+           to="8"/>
+  
+  <line x1="4" y1="18" x2="20" y2="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></line>
+  <circle id="circle-3" cx="16" cy="18" r="2" fill="#fff" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></circle>
+  <animate xlink:href="#circle-3" 
+           attributeName="cx" 
+           begin="filter_svg.mouseover" 
+           dur="0.25s"
+           fill="freeze"
+           from="16"
+           to="8"/>
+  <animate xlink:href="#circle-3" 
+           attributeName="cx" 
+           begin="filter_svg.mouseout" 
+           dur="0.25s"
+           fill="freeze"
+           from="8"
+           to="16"/>
+  
+  <rect id="filter_svg" class="rect" x="0" y="0" fill="#fff" width="24" height="24" rx="0" ry="0"></rect>
+  
+  {%- endcase -%}
+  
+</svg>

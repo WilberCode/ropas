@@ -1,0 +1,43 @@
+{% if paginate.previous or paginate.next %}
+<ul class="pagination" role="navigation" aria-label="{{ 'pagination.pagination' | t }}">
+
+  {%- liquid
+    if paginate.next
+      assign paginate_next = true
+    else
+      assign paginate_next = false
+    endif
+  -%}
+  
+  {% if paginate.previous %}
+    <li class="pagination-previous">
+      <a href="{{ paginate.previous.url }}" title="{{ 'pagination.prev' | t | escape }}">{{ 'pagination.prev' | t }}</a>
+      <span class="info-separator" aria-hidden="true">&middot;</span>
+    </li>
+  {% endif %}
+
+  {% for part in paginate.parts %}
+
+    {%- liquid
+      capture part_title
+        if part.is_link          
+          assign alt = 'structured_data.breadcrumbs.page' | t: page: part.title | prepend: ' ' | prepend: title
+          echo part.title | link_to: part.url, title: alt
+        else
+          echo part.title | replace: '&hellip;', '&middot;'
+        endif
+      endcapture
+    -%}
+
+    <li>
+      <span{% unless part.is_link %} class="{% if part.title == '&hellip;' %}pagination-ellipsis{% else %}pagination-active{% endif %}"{% endunless %}>{{ part_title }}</span>{% unless forloop.last and paginate_next == false %}<span class="info-separator" aria-hidden="true">&middot;</span>{% endunless %}
+    </li>
+
+  {% endfor %}
+
+  {% if paginate_next %}
+    <li class="pagination-next"><a href="{{ paginate.next.url }}" title="{{ 'pagination.next' | t | escape }}">{{ 'pagination.next' | t }}</a></li>
+  {% endif %}
+  
+</ul>
+{% endif %}

@@ -1,0 +1,64 @@
+<!doctype html>
+
+{%- liquid
+  assign rtl = false
+  assign rtl_list = 'ae,ar,arc,bcc,bqi,ckb,dv,fa,glk,ha,he,kwh,ks,ku,mzn,nqo,pnb,ps,sd,ug,ur,yi'
+  assign iso_code = localization.language.iso_code | split: '-' | first
+  if rtl_list contains iso_code
+    assign rtl = true
+  endif
+-%}
+
+<html class="{% unless request.page_type == 'password' %}no-js{% else %}js{% endunless %}" lang="{{ request.locale.iso_code }}"{% if rtl %} dir="rtl"{% endif %}>
+  <head>
+    {%- liquid
+      render 'head'
+      echo content_for_header
+      render 'javascript'
+      render 'schema'
+	-%}
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "kvlhgpx4hy");
+  </script> 
+    <!-- comentario -->
+  </head>
+
+  <body data-section-type="check" class="page-template-{% if request.page_type == 'page' or request.page_type == 'blog' or request.page_type == 'article' or request.page_type == 'search' or request.page_type == 'list-collections' or request.page_type == 'password' or request.page_type == '404' or request.page_type == blank %}template{% elsif request.page_type == 'collection' or request.page_type == 'search' %}collection{% elsif request.page_type == 'captcha' or request.page_type == 'policy' %}index{% else %}{{ template | split: '.' | first | split: '/' | first | replace: '_', '-' }}{% endif %} isDesktop{% if rtl %} rtl{% endif %}">
+    <div id="ajaxBusy" style="background:var(--color_background);content:'';height:100%;margin:0px;padding:0px;position:fixed;right:0;top:0;width:100%;z-index: 999999;"><div class="spinner"></div></div>
+    <a href="#content" title="{{ 'general.skipto' | t | escape }}" class="skip-to text-center">{{ 'general.skipto' | t }}</a>
+    {% if request.page_type == 'password' %}
+      <main id="content" class="site-main">
+        {{ content_for_layout }}
+      </main>
+    {% else %}
+      {%- liquid
+        render 'noScript'
+        sections 'header-group'
+      -%}
+      <main id="content" class="site-main{% if request.page_type == 'index' %} index-wrapper{% endif %}">
+        {%- liquid
+          echo content_for_layout
+        -%}
+      </main>
+      {% sections 'footer-group' %}
+    {% endif %}
+    <div class="modal-container" data-modal-container>
+      <div class="modal" data-modal tab-index="-1">
+        <div class="modal__header-container">
+          <div class="modal__header" data-modal-header></div>
+          <button type="button" class="modal__header-close" aria-label="{{ 'general.form.close' | t | escape }}" data-modal-close>{%- render 'icons', id: 'close', size: 18 -%}</button>
+        </div>
+        <div class="modal__content scroll-bar-v" data-modal-content></div>
+      </div>
+      <div class="modal-background" data-modal-background></div>
+    </div>
+  
+	 {% include 'shine-trust.liquid' %}
+
+	 </body>
+</html>

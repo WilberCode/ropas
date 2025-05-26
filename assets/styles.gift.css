@@ -1,0 +1,98 @@
+.giftcard {
+	margin-bottom: 80px;
+	text-align: center;
+}
+
+.giftcard-card {
+	position: relative;
+	max-width: 640px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.giftcard-image {
+	opacity: 0.1;
+}
+
+.giftcard-code {
+	position: absolute;
+	top: 70%;
+	right: 0;
+	left: 0;
+	text-align: center;
+}
+
+.giftcard-code-value {
+	display: inline-block;
+	padding: 8px 16px;
+	font-family: monospace;
+	font-size: var(--body_font_size_24);
+	background: var(--color_background);
+}
+
+.giftcard-disabled .giftcard-code-value {
+	color: var(--color_text_modify_5);
+	text-decoration: line-through;
+}
+
+.giftcard-balance {
+	margin-top: 32px;
+	margin-bottom: 32px;
+	font-size: var(--body_font_size_18);
+}
+
+.giftcard-balance-remainder {
+	font-style: var(--body_font_style_italic);
+	margin-left: 5px;
+	font-size: var(--body_font_size_16);
+	color: var(--color_text_modify_5);
+}
+
+.giftcard-meta {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.giftcard-qrcode {
+	width: 120px;
+	margin: 32px auto;
+}
+
+.giftcard-action-applewallet {
+	display: inline-block;
+	margin-top: 32px;
+	margin-bottom: 16px;
+}
+
+@media print {
+	.page-template-gift-card .shopify-section .site-footer {
+		display: none;
+	}
+
+	.page-template-gift-card .shopify-section.site-header > :not(.site-header-wrapper) * {
+		display: none;
+	}
+
+	.page-template-gift-card .shopify-section.site-header > .site-header-wrapper > *:not(.site-logo) {
+		display: none;
+	}
+
+	.page-template-gift-card .shopify-section .site-logo {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.page-template-gift-card .shopify-section .site-logo-image-mobile {
+		display: none;
+	}
+}
+
+.js .page-template-gift-card #ajaxBusy {
+	background: var(--color_background_modify_75) !important;
+	display: none;
+}
+
+.js .page-template-gift-card #content {
+	display: block;
+	opacity: 1;
+}

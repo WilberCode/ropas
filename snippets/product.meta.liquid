@@ -1,0 +1,27 @@
+{%- assign meta_size = meta | strip_html -%}
+{% if meta != blank and meta_size.size > 0 %}
+  <div class="meta product-block{% if enable_slide %} product-slide{% endif %}" {{ block.shopify_attributes }}>
+    <div class="product-slide-content" data-height>
+      <div class="product-slide-space text-{{ alignment }}">
+        {{ meta }}
+      </div>
+    </div>
+    {%- liquid      
+      if enable_slide
+        capture title
+          if heading != blank
+            echo heading
+          else
+            echo 'product.show_more' | t
+          endif
+        endcapture
+        echo '<button type="button" title="'
+        echo title | escape
+        echo '" class="product-slide-btn">'
+        echo title
+        echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+        echo '</button>'
+      endif
+    -%}
+  </div>
+{% endif %}

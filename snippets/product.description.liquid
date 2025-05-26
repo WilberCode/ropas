@@ -1,0 +1,33 @@
+{%- assign description_size = description | strip_html -%}
+{%- if description_size.size > 0 or product.description != blank -%}
+  <div class="product-block product-rte rte{% if enable_slide %} product-slide{% endif %}" {{ block.shopify_attributes }}>
+    <div class="product-slide-content" data-height>
+      <div class="product-slide-space">
+        {%- liquid
+          if description != blank
+            echo description
+          elsif product.description != blank
+            echo product.description
+          endif
+        -%}
+      </div>
+    </div>
+    {%- liquid
+      if enable_slide
+        capture title
+          if heading != blank
+            echo heading
+          else
+            echo 'product.show_more' | t
+          endif
+        endcapture
+        echo '<button type="button" title="'
+        echo title | escape
+        echo '" class="product-slide-btn">'
+        echo title
+        echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+        echo '</button>'
+      endif
+    -%}  
+  </div>
+{%- endif -%}

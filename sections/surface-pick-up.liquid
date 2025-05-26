@@ -1,0 +1,90 @@
+<template data-html="surface-pick-up-embed">
+  {%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+  {% if product_variant.available and pick_up_availabilities.size > 0 %}
+  {%- assign closest_location = pick_up_availabilities.first -%}
+
+  <div class="surface-pick-up-embed surface-pick-up-embed--{% if closest_location.available %}available{% else %}unavailable{% endif %} product-block">
+    
+    {%- liquid
+      if closest_location.available
+        render 'icons', id: 'checkmark', class: ' surface-pick-up-embed__in-stock-icon surface-pick-up-embed__svg-placeholder', size: 14
+      else
+        render 'icons', id: 'xmark', class: ' surface-pick-up-embed__out-of-stock-icon surface-pick-up-embed__svg-placeholder', size: 14
+      endif
+    -%}
+
+    <div class="surface-pick-up-embed__location-info">
+      {% if closest_location.available %}
+      <h3 class="surface-pick-up-embed__location-availability">{{ 'store_availability.general.available_for_pick_up_at_html' | t: location_name: closest_location.location.name }}</h3>
+      <small class="surface-pick-up-embed__location-pick-up-time">{{ closest_location.pick_up_time }}</small>
+      {% else %}
+      <h3 class="surface-pick-up-embed__location-availability">{{ 'store_availability.general.unavailable_for_pick_up_at_html' | t: location_name: closest_location.location.name }}</h3>
+      {% endif %}
+    </div>
+
+    <button class="surface-pick-up-embed__modal-btn underline keyed-skip" type="button" aria-haspopup="dialog" data-surface-pick-up-embed-modal-btn>
+      {%- liquid
+        if pick_up_availabilities.size > 1
+          echo 'store_availability.general.check_other_stores' | t
+        else
+          echo 'store_availability.general.view_store_info' | t
+        endif
+      -%}
+    </button>
+    
+  </div>
+  {% endif %}
+
+</template>
+
+<template data-html="surface-pick-up-items">
+  {%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+  {% if product_variant.available and pick_up_availabilities.size > 0 %}
+  {%- liquid
+    assign closest_location_country_code = pick_up_availabilities.first.location.address.country_code
+    assign imperialSystemCountries = 'US,MM,LR'  | split: ','
+    if imperialSystemCountries contains closest_location_country_code
+      assign unit_system = 'imperial'
+    else
+      assign unit_system = 'metric'
+    endif
+  -%}
+  <ul class="surface-pick-up-items" role="list">
+    {% for location in pick_up_availabilities %}
+    <li class="surface-pick-up-item surface-pick-up-item--{% if location.available %}available{% else %}unavailable{% endif %}" data-surface-pick-up-item>
+      
+      <div class="surface-pick-up-item__header">
+        <h3 class="surface-pick-up-item__pick-up-location">{{ location.location.name }}</h3>
+        <p class="surface-pick-up-item__pick-up-distance">
+          <span data-distance data-latitude="{{ location.location.latitude }}" data-longitude="{{ location.location.longitude }}"></span>
+          <span data-distance-unit="{{ unit_system }}" data-unit="{% if unit_system == 'imperial' %}{{ 'store_availability.general.miles' | t }}{% else %}{{ 'store_availability.general.kilometers' | t }}{% endif %}"></span>
+        </p>
+      </div>
+
+      <div class="surface-pick-up-item__availability">
+        {%- liquid
+          if location.available
+            render 'icons', id: 'checkmark', class: ' surface-pick-up-embed__in-stock-icon surface-pick-up-embed__svg-placeholder', size: 14
+          else
+            render 'icons', id: 'xmark', class: ' surface-pick-up-embed__out-of-stock-icon surface-pick-up-embed__svg-placeholder', size: 14
+          endif
+          if location.available
+            assign pick_up_time = location.pick_up_time | downcase
+            echo 'store_availability.general.available_for_pick_up_at_time_html' | t: pick_up_time: pick_up_time
+          else
+            echo 'store_availability.general.unavailable_for_pick_up_at_time_html' | t
+          endif
+        -%}
+      </div>
+
+      <address class="surface-pick-up-item__address-info">
+        {{ location.location.address | format_address }}
+        {% if location.location.phone.size > 0 %}<a href="tel:{{ location.location.phone }}" title="{{ location.location.phone }}">{{ location.location.phone }}</a>{% endif %}
+      </address>
+      
+    </li>
+
+    {% endfor %}
+  </ul>
+  {% endif %}
+</template>

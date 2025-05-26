@@ -1,0 +1,567 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1aef2aa3-2b50-4512-b360-13c3c2f65302": {
+      "type": "section-image-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "{{ page.title }}",
+        "title_h1": true,
+        "title_outline": "title-outline title-outline-1",
+        "title_size": 48,
+        "title_sub": "Highlight a popular product collection",
+        "title_sub_outline": "none",
+        "title_sub_size": 72,
+        "text_border": true,
+        "content": "<p>Say a bit about your brand, a specific product, or promotion<\/p>",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": true,
+        "layout": "overlay-center-center",
+        "content_width": 100,
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "rgba(0,0,0,0)",
+        "text_background_gradient": "",
+        "text_background_opacity": 0,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 50,
+        "enable_lazy": false,
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "background": "#f4f4f4",
+        "background_gradient": "",
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 20,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "section_image_GkWnwk": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/NEW-SEAS-V-ZIP-DIGITAL_banner-web_cfc51e04-1e58-4018-9915-1468c478bcab.jpg",
+        "insta_filter": "none",
+        "image_mobile": "shopify:\/\/shop_images\/NEW-SEAS-V-ZIP-DIGITAL-02_banner-movil_6bfb1051-ffae-49c6-8004-7fb8d7dd4039.jpg",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "#000000",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 10,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_product_YBDKK9": {
+      "type": "section-product",
+      "blocks": {
+        "vendor_3J3w3b": {
+          "type": "vendor",
+          "settings": {
+            "title_size": 12
+          }
+        },
+        "title_rNFtBy": {
+          "type": "title",
+          "settings": {
+            "title_h1": true,
+            "title_outline": "none",
+            "title_size": 24
+          }
+        },
+        "sku_rEeLBB": {
+          "type": "sku",
+          "settings": {
+            "sku": true,
+            "barcode": true,
+            "style": false
+          }
+        },
+        "rating_MUQykz": {
+          "type": "rating",
+          "settings": {
+            "style": "both"
+          }
+        },
+        "price_dDaUya": {
+          "type": "price",
+          "settings": {
+            "title_size": 18,
+            "tax": false
+          }
+        },
+        "description_hJtjVF": {
+          "type": "description",
+          "settings": {
+            "description": "",
+            "enable_slide": true,
+            "heading": "Product Information"
+          }
+        },
+        "variants_EhMaxb": {
+          "type": "variants",
+          "settings": {
+            "enable_single": true,
+            "variant_enable": "radio",
+            "rounded": true,
+            "variant_color_enable": "var-img-zoom-block"
+          }
+        },
+        "quantity_rFkRj6": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "form_WmmYid": {
+          "type": "form",
+          "settings": {
+            "enable_custom": "",
+            "enable_cart_redirection": false,
+            "show_payment_button": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "social_687Hbe": {
+          "type": "social",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_3J3w3b",
+        "title_rNFtBy",
+        "sku_rEeLBB",
+        "rating_MUQykz",
+        "price_dDaUya",
+        "description_hJtjVF",
+        "variants_EhMaxb",
+        "quantity_rFkRj6",
+        "form_WmmYid",
+        "social_687Hbe"
+      ],
+      "settings": {
+        "product_handle": "new-seas-4-3-u-zip-wetsuit-black-preventa",
+        "enable_lazy": true,
+        "gallery_position": "left",
+        "gallery_layout": "gallery-left",
+        "insta_filter": "none",
+        "gallery_video_autoplay": true,
+        "gallery_video_looping": true,
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 10,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 10,
+        "padding_border": true
+      }
+    },
+    "section_product_kTJpCy": {
+      "type": "section-product",
+      "blocks": {
+        "vendor_6VxYL9": {
+          "type": "vendor",
+          "settings": {
+            "title_size": 12
+          }
+        },
+        "title_PLH7p9": {
+          "type": "title",
+          "settings": {
+            "title_h1": true,
+            "title_outline": "none",
+            "title_size": 24
+          }
+        },
+        "sku_Wtpxb7": {
+          "type": "sku",
+          "settings": {
+            "sku": true,
+            "barcode": true,
+            "style": false
+          }
+        },
+        "rating_Pi6pin": {
+          "type": "rating",
+          "settings": {
+            "style": "both"
+          }
+        },
+        "price_E6yGw7": {
+          "type": "price",
+          "settings": {
+            "title_size": 18,
+            "tax": false
+          }
+        },
+        "description_KDjjb9": {
+          "type": "description",
+          "settings": {
+            "description": "",
+            "enable_slide": true,
+            "heading": "Product Information"
+          }
+        },
+        "variants_ANpWNc": {
+          "type": "variants",
+          "settings": {
+            "enable_single": true,
+            "variant_enable": "radio",
+            "rounded": true,
+            "variant_color_enable": "var-img-zoom-block"
+          }
+        },
+        "quantity_zceDpa": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "form_gnayhG": {
+          "type": "form",
+          "settings": {
+            "enable_custom": "",
+            "enable_cart_redirection": false,
+            "show_payment_button": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "social_NA96df": {
+          "type": "social",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_6VxYL9",
+        "title_PLH7p9",
+        "sku_Wtpxb7",
+        "rating_Pi6pin",
+        "price_E6yGw7",
+        "description_KDjjb9",
+        "variants_ANpWNc",
+        "quantity_zceDpa",
+        "form_gnayhG",
+        "social_NA96df"
+      ],
+      "settings": {
+        "product_handle": "new-seas-3-2-u-zip-wetsuit-black",
+        "enable_lazy": true,
+        "gallery_position": "left",
+        "gallery_layout": "gallery-right",
+        "insta_filter": "none",
+        "gallery_video_autoplay": true,
+        "gallery_video_looping": true,
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_idkCnx": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-06.jpg",
+        "insta_filter": "none",
+        "image_mobile": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-06.jpg",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "#ffffff",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_image_arDKWD": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL_Mesa_de_trabajo_1_copia.jpg",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "#ffffff",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_image_kJtyxm": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-05.jpg",
+        "insta_filter": "none",
+        "image_mobile": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-05.jpg",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "#ffffff",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_image_WJfrLf": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-04.jpg",
+        "insta_filter": "none",
+        "image_mobile": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-04.jpg",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "#ffffff",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_rich_text_mWzbBF": {
+      "type": "section-rich-text",
+      "blocks": {
+        "text_mJa7qt": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "title_h1": false,
+            "title_outline": "none",
+            "title_size": 42,
+            "title_sub": "hasta 10% off por preventa",
+            "title_sub_outline": "none",
+            "title_sub_size": 30,
+            "text_border": true,
+            "text": "<p><em>Disponible en Perú a partir del <\/em><em><strong>13\/06\/24<\/strong><\/em><em> al <\/em><em><strong>16\/06\/24 <\/strong><\/em><\/p>",
+            "link": "shopify:\/\/products\/new-seas-4-3-u-zip-wetsuit-black-preventa",
+            "button_text": "SHOP NOW",
+            "link_style": "primary",
+            "title_alignment": "center",
+            "block_columns": 3
+          }
+        }
+      },
+      "block_order": [
+        "text_mJa7qt"
+      ],
+      "settings": {
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_video_RPiH7N": {
+      "type": "section-video",
+      "blocks": {
+        "video_zEwaNC": {
+          "type": "video",
+          "settings": {
+            "url": "https:\/\/www.youtube.com\/watch?v=ORjYAirT_cQ&ab_channel=VISSLA",
+            "enable_loop": true,
+            "title": "",
+            "enable_lazy": true,
+            "placeholder": "shopify:\/\/shop_images\/NEW-SEAS-V-ZIP-BANNER-1280x720.jpg",
+            "insta_filter": "none",
+            "style": "dark"
+          }
+        }
+      },
+      "block_order": [
+        "video_zEwaNC"
+      ],
+      "settings": {
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_gallery_ainNDE": {
+      "type": "section-image-gallery",
+      "blocks": {
+        "image_QenWPr": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-10.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 1
+          }
+        },
+        "image_JCQiJj": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/NEW_SEAS_SURF.00_18_08_08.Still038.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_3QHP7V": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/NEW_SEAS_V-ZIP_DIGITAL-08.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_bca4nE": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/KLEIN_Hawaii_December2022_03587.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        }
+      },
+      "block_order": [
+        "image_QenWPr",
+        "image_JCQiJj",
+        "image_3QHP7V",
+        "image_bca4nE"
+      ],
+      "settings": {
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 40,
+        "image_height": "original",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+   
+  },
+  "order": [
+    "1aef2aa3-2b50-4512-b360-13c3c2f65302",
+    "main",
+    "section_image_GkWnwk",
+    "section_product_YBDKK9",
+    "section_product_kTJpCy",
+    "section_image_idkCnx",
+    "section_image_arDKWD",
+    "section_image_kJtyxm",
+    "section_image_WJfrLf",
+    "section_rich_text_mWzbBF",
+    "section_video_RPiH7N",
+    "section_image_gallery_ainNDE", 
+  ]
+}

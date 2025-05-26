@@ -1,0 +1,518 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_slideshow_2_78zzYM": {
+      "type": "section-slideshow-2",
+      "blocks": {
+        "slide_pVDXUE": {
+          "type": "slide",
+          "settings": {
+            "title": "Diapositiva",
+            "link": "",
+            "layout": "overlay-center-center",
+            "image_desktop": "shopify://shop_images/BANNER_1.jpg",
+            "enable_video": false,
+            "video_url": "https://youtu.be/_9VUPq3SxOc",
+            "external_video": ""
+          }
+        },
+        "slide_PDPpWt": {
+          "type": "slide",
+          "settings": {
+            "title": "Diapositiva",
+            "link": "",
+            "layout": "overlay-center-center",
+            "image_desktop": "shopify://shop_images/BANNER_3.jpg",
+            "enable_video": false,
+            "video_url": "https://youtu.be/_9VUPq3SxOc",
+            "external_video": ""
+          }
+        },
+        "slide_gcjx9x": {
+          "type": "slide",
+          "settings": {
+            "title": "Diapositiva",
+            "link": "",
+            "layout": "overlay-center-center",
+            "enable_video": true,
+            "video_url": "https://youtu.be/ETQxQ2S9CbU",
+            "external_video": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_pVDXUE",
+        "slide_PDPpWt",
+        "slide_gcjx9x"
+      ],
+      "name": "Diapositivas",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "full_width": true,
+        "enable_lazy": true,
+        "should_autoplay": false,
+        "slide_autoplay": 3,
+        "button_alignment": "right",
+        "background": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "section_collections_list_AazgiU": {
+      "type": "section-collections-list",
+      "blocks": {
+        "collection_iri8PG": {
+          "type": "collection",
+          "settings": {
+            "collection": "promociones",
+            "block_title": "NEW WETSUITS VISSLA",
+            "block_title_size": 36,
+            "block_title_sub": "Winter Collection ❄️",
+            "block_title_sub_size": 24,
+            "show_description": true,
+            "text_border": true,
+            "custom_description": "<p>Wetsuits con todo lo que necesitas y nada que no necesitas. Descubre nuestra nueva coleccion de wetsuits de invierno Vissla y Sisstrevolution</p>",
+            "link_text": "Comprar",
+            "link_style": "text",
+            "title_alignment": "left",
+            "block_columns": 2,
+            "enable_lazy": false,
+            "insta_filter": "none",
+            "desktop_alignment": "left",
+            "mobile_alignment": "top"
+          }
+        },
+        "collection_dGYmGy": {
+          "type": "collection",
+          "settings": {
+            "collection": "dia-del-madre",
+            "block_title": "NEW TEES VISSLA",
+            "block_title_size": 36,
+            "block_title_sub": "WINTER COLLECTION",
+            "block_title_sub_size": 24,
+            "show_description": true,
+            "text_border": true,
+            "custom_description": "<p>Hechos con 100% algodón peruano. </p>",
+            "link_text": "Comprar",
+            "link_style": "text",
+            "title_alignment": "right",
+            "block_columns": 2,
+            "enable_lazy": false,
+            "insta_filter": "none",
+            "desktop_alignment": "right",
+            "mobile_alignment": "top"
+          }
+        },
+        "collection_YQKt7G": {
+          "type": "collection",
+          "settings": {
+            "collection": "dia-del-madre",
+            "block_title": "NEW CROPS & TEES",
+            "block_title_size": 36,
+            "block_title_sub": "WOMEN COLLECTION",
+            "block_title_sub_size": 24,
+            "show_description": true,
+            "text_border": true,
+            "custom_description": "<p>Conoce más de los nuevos polos, crops y crewnecks de Sisstrevolution.</p>",
+            "link_text": "Comprar",
+            "link_style": "text",
+            "title_alignment": "left",
+            "block_columns": 2,
+            "enable_lazy": false,
+            "insta_filter": "none",
+            "desktop_alignment": "left",
+            "mobile_alignment": "top"
+          }
+        }
+      },
+      "block_order": [
+        "collection_iri8PG",
+        "collection_dGYmGy",
+        "collection_YQKt7G"
+      ],
+      "settings": {
+        "title": "",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 36,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 20,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_EhUYji": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "link": "shopify://collections/surfing-essentials",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "padding_x_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_x_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "f4b27ba9-febf-466e-9b9f-e31cd9b4c41a": {
+      "type": "section-logo-list",
+      "blocks": {
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-1": {
+          "type": "logo",
+          "settings": {
+            "block_img_width": 170,
+            "link": "shopify://collections/vissla"
+          }
+        },
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-2": {
+          "type": "logo",
+          "settings": {
+            "block_img_width": 170,
+            "link": "shopify://collections/sisstrevolution"
+          }
+        },
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-3": {
+          "type": "logo",
+          "settings": {
+            "block_img_width": 190,
+            "link": "shopify://collections/amuse"
+          }
+        },
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-4": {
+          "type": "logo",
+          "settings": {
+            "block_img_width": 190,
+            "link": "shopify://collections/dunkelvolk"
+          }
+        },
+        "logo_kkpeUy": {
+          "type": "logo",
+          "settings": {
+            "block_img_width": 190,
+            "link": "shopify://collections/reef"
+          }
+        }
+      },
+      "block_order": [
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-1",
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-2",
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-3",
+        "template--17550832271672__f4b27ba9-febf-466e-9b9f-e31cd9b4c41a-16738927941448cda4-4",
+        "logo_kkpeUy"
+      ],
+      "settings": {
+        "title": "",
+        "title_h1": true,
+        "title_outline": "none",
+        "title_size": 24,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "left",
+        "section_color": "",
+        "enable_lazy": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 30,
+        "padding_bottom_desktop": 60,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    },
+    "f9800d96-f998-4a37-ad5a-675f3cac13bc": {
+      "type": "section-rich-text",
+      "blocks": {
+        "template--17550832271672__f9800d96-f998-4a37-ad5a-675f3cac13bc-1673893154d4ef5e93-0": {
+          "type": "text",
+          "settings": {
+            "title": "El Mar es Nuestro Hogar",
+            "title_h1": false,
+            "title_outline": "none",
+            "title_size": 30,
+            "title_sub": "",
+            "title_sub_outline": "none",
+            "title_sub_size": 48,
+            "text_border": false,
+            "text": "<p>Fundada en el año 2017 por reconocidos amantes del mar y de Punta Hermosa, somos una tienda especializada donde trabajamos en lo que nos apasiona representando a las mejores marcas del mundo del surf que tengan valores y respeto por nuestra cultura y el medioambiente. ¡Disfruta con nosotros de las aventuras que el mar y la naturaleza te pueden ofrecer!</p>",
+            "link": "",
+            "button_text": "Read More",
+            "link_style": "text",
+            "title_alignment": "center",
+            "block_columns": 3
+          }
+        }
+      },
+      "block_order": [
+        "template--17550832271672__f9800d96-f998-4a37-ad5a-675f3cac13bc-1673893154d4ef5e93-0"
+      ],
+      "settings": {
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "#000000",
+        "background_gradient": "",
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 20,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "section_image_GFg4YB": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": false,
+        "image_desktop": "shopify://shop_images/BANNER_3.jpg",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "link": "shopify://collections/dunkelvolk",
+        "image_alignment": "center",
+        "image_width": 1920,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_x_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 0,
+        "padding_x_desktop": 0,
+        "margin_bottom_desktop": 40,
+        "padding_border": false
+      }
+    },
+    "section_video_HMGPih": {
+      "type": "section-video",
+      "blocks": {
+        "video_dUHHMF": {
+          "type": "video",
+          "settings": {
+            "url": "https://www.youtube.com/watch?v=BALniK6a2NM",
+            "enable_loop": true,
+            "title": "",
+            "enable_lazy": true,
+            "insta_filter": "none",
+            "style": "dark"
+          }
+        },
+        "text_KMfKCi": {
+          "type": "text",
+          "settings": {
+            "title": "Vissla",
+            "title_h1": false,
+            "title_outline": "none",
+            "title_size": 24,
+            "title_sub": "To Protect & Surf",
+            "title_sub_outline": "none",
+            "title_sub_size": 36,
+            "text_border": true,
+            "text": "<p>Conoce nuestro programa de 8 soluciones simples que ayudan al sostenimiento del medio ambiente y la mejora de nuestro impacto en este. </p>",
+            "link": "#",
+            "button_text": "Leer Más",
+            "link_style": "text",
+            "title_alignment": "center",
+            "block_color": "",
+            "block_color_hover": "",
+            "block_line": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_dUHHMF",
+        "text_KMfKCi"
+      ],
+      "settings": {
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_with_text_cqHBwU": {
+      "type": "section-image-with-text",
+      "blocks": {
+        "content_CXAz8H": {
+          "type": "content",
+          "settings": {
+            "block_title": "",
+            "block_title_h1": false,
+            "block_title_outline": "none",
+            "block_title_size": 36,
+            "block_title_sub": "Somos Punta Hermosa",
+            "block_title_sub_outline": "none",
+            "block_title_sub_size": 30,
+            "text_border": true,
+            "block_text": "<p>PH Surf Supplies se fundó en el año 2017 con el objetivo de comercializar accesorios de surf eco-amigables y de alta calidad que sean funcionales, duraderos y elegantes. Nuestra prioridad es el Medio Ambiente y la comunidad Punta Hermosina en la que convivimos. Por esta razón, priorizamos la sostenibilidad, el uso de materiales reciclados y los métodos de producción ecológicos.</p>",
+            "link": "shopify://pages/nosotros",
+            "button_text": "Leer Más",
+            "link_style": "text",
+            "title_alignment": "right",
+            "block_columns": 2,
+            "enable_lazy": true,
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "desktop_alignment": "right",
+            "mobile_alignment": "top"
+          }
+        }
+      },
+      "block_order": [
+        "content_CXAz8H"
+      ],
+      "settings": {
+        "title": "",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 20,
+        "background": "#f5f5f5",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 20,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_blog_posts_DQ3Pjm": {
+      "type": "section-blog-posts",
+      "disabled": true,
+      "settings": {
+        "title": "Blog posts",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "Highlight a popular blog",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "blog": "",
+        "post_limit": 4,
+        "include_border": true,
+        "enable_lazy": true,
+        "image_height": "original",
+        "image_position": "50-50",
+        "insta_filter": "none",
+        "include_author": true,
+        "include_date": true,
+        "excerpt_limit": 100,
+        "enable_slider": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_product_list_Wbbr7a": {
+      "type": "section-product-list",
+      "disabled": true,
+      "settings": {
+        "title": "Product list",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "Highlight a list of popular products",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "collection": [
+          "7-seas-20l-dry-pack",
+          "26-smiles-skates"
+        ],
+        "products_row_count": 1,
+        "products_per_row": 5,
+        "product_emphasize": true,
+        "enable_lazy": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    }
+  },
+  "order": [
+    "section_slideshow_2_78zzYM",
+    "section_collections_list_AazgiU",
+    "section_image_EhUYji",
+    "f4b27ba9-febf-466e-9b9f-e31cd9b4c41a",
+    "f9800d96-f998-4a37-ad5a-675f3cac13bc",
+    "section_image_GFg4YB",
+    "section_video_HMGPih",
+    "section_image_with_text_cqHBwU",
+    "section_blog_posts_DQ3Pjm",
+    "section_product_list_Wbbr7a"
+  ]
+}

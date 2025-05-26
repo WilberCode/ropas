@@ -1,0 +1,1951 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "colors": {
+      "name": "الألوان",
+      "settings": {
+        "typography": {
+          "content": "الطباعة"
+        },
+        "typography_header_links": {
+          "label": "روابط الرأس"
+        },
+        "typography_headings": {
+          "label": "العناوين"
+        },
+        "typography_body_text": {
+          "label": "نص أساسي"
+        },
+        "typography_body_text_hover": {
+          "label": "تحوم النص الأساسي"
+        },
+        "typography_label_text": {
+          "label": "نص التسمية"
+        },
+        "elements": {
+          "content": "العناصر"
+        },
+        "elements_background": {
+          "label": "خلفية"
+        },
+        "elements_accent": {
+          "label": "التمييز"
+        },
+        "elements_sale": {
+          "label": "سعر البيع"
+        },
+        "elements_rating_star": {
+          "label": "لون نجمة التصنيف"
+        },
+        "elements_rating_background": {
+          "label": "لون خلفية نجمة التصنيف"
+        },
+        "elements_line": {
+          "label": "لون الخط"
+        },
+        "elements_success": {
+          "label": "لون عملية ناجحة"
+        },
+        "elements_error": {
+          "label": "لون الخطأ"
+        },
+        "elements_variant": {
+          "label": "عنوان عينة اللون"
+        },
+        "elements_color": {
+          "label": "لون حامل مخصص",
+          "info": "واحد لكل سطر، مثال: Red:#3f0"
+        }
+      }
+    },
+    "buttons": {
+      "name": "أزرار",
+      "settings": {
+        "border_thickness": {
+          "label": "سمك الحدود"
+        },
+        "corner_radius": {
+          "label": "نصف قطر الزاوية"
+        },
+        "primary": {
+          "content": "الزر الأساسي"
+        },
+        "primary_border": {
+          "label": "لون الحدود"
+        },
+        "primary_background": {
+          "label": "لون الخلفية"
+        },
+        "primary_text": {
+          "label": "لون الخط"
+        },
+        "secondary": {
+          "content": "الزر الثانوي"
+        },
+        "secondary_border": {
+          "label": "لون الحدود"
+        },
+        "secondary_background": {
+          "label": "لون الخلفية"
+        },
+        "secondary_text": {
+          "label": "لون الخط"
+        }
+      }
+    },
+    "typography": {
+      "name": "الطباعة",
+      "settings": {
+        "headings": {
+          "content": "العناوين"
+        },
+        "headings_font": {
+          "label": "الخط"
+        },
+        "headings_uppercase": {
+          "label": "عناوين مكتوبة بأحرف كبيرة"
+        },
+        "headings_base": {
+          "label": "إضافة إلى حجم الخط الأساسي أو طرح منه",
+          "info": "الحجم الأساسي: 18px"
+        },
+        "body": {
+          "content": "الجسم"
+        },
+        "body_font": {
+          "label": "الخط"
+        },
+        "body_base": {
+          "label": "إضافة إلى حجم الخط الأساسي أو طرح منه",
+          "info": "الحجم الأساسي: 14px"
+        },
+        "labels": {
+          "content": "البطاقات"
+        },
+        "labels_font": {
+          "label": "الخط"
+        },
+        "labels_base": {
+          "label": "إضافة إلى حجم الخط الأساسي أو طرح منه",
+          "info": "الحجم الأساسي: 12px"
+        }
+      }
+    },
+    "search": {
+      "name": "بحث",
+      "settings": {
+        "options": {
+          "content": "خيارات"
+        },
+        "options_enable": {
+          "label": "تمكين البحث التنبئي"
+        },
+        "options_per": {
+          "label": "عدد نتائج البحث التنبؤية"
+        },
+        "type": {
+          "content": "نوع"
+        },
+        "type_products": {
+          "label": "تضمين المنتجات"
+        },
+        "type_collections": {
+          "label": "تضمين المجموعات"
+        },
+        "type_articles": {
+          "label": "تضمين المقالات"
+        },
+        "type_pages": {
+          "label": "تضمين الصفحات"
+        },
+        "fields": {
+          "content": "المجالات"
+        },
+        "fields_author": {
+          "label": "تضمين المؤلف"
+        },
+        "fields_body": {
+          "label": "تضمين الجسم"
+        },
+        "fields_product_type": {
+          "label": "تضمين نوع المنتج"
+        },
+        "fields_tags": {
+          "label": "تضمين العلامات"
+        },
+        "fields_title": {
+          "label": "تضمين العنوان"
+        },
+        "fields_barcode": {
+          "label": "تضمين البار كود"
+        },
+        "fields_sku": {
+          "label": "تضمين وحدة إدارة المخزون (SKU)"
+        },
+        "fields_variants": {
+          "label": "تضمين عناوين مختلفة"
+        },
+        "fields_vendor": {
+          "label": "تضمين البائع"
+        }
+      }
+    },
+    "products": {
+      "name": "شبكات المنتجات",
+      "settings": {
+        "products_badges": {
+          "label": "إظهار الشارات"
+        },
+        "products_insta": {
+          "label": "فلتر إنستا",
+          "option_0": {
+            "label": "لا شيء"
+          },
+          "option_1": {
+            "label": "1977"
+          },
+          "option_2": {
+            "label": "Aden"
+          },
+          "option_3": {
+            "label": "Amaro"
+          },
+          "option_4": {
+            "label": "Ashby"
+          },
+          "option_5": {
+            "label": "Brannan"
+          },
+          "option_6": {
+            "label": "Brooklyn"
+          },
+          "option_7": {
+            "label": "Charmes"
+          },
+          "option_8": {
+            "label": "Clarendon"
+          },
+          "option_9": {
+            "label": "Crema"
+          },
+          "option_10": {
+            "label": "Dogpatch"
+          },
+          "option_11": {
+            "label": "Earlybird"
+          },
+          "option_12": {
+            "label": "Gingham"
+          },
+          "option_13": {
+            "label": "Ginza"
+          },
+          "option_14": {
+            "label": "Hefe"
+          },
+          "option_15": {
+            "label": "Helena"
+          },
+          "option_16": {
+            "label": "Hudson"
+          },
+          "option_17": {
+            "label": "Inkwell"
+          },
+          "option_18": {
+            "label": "Juno"
+          },
+          "option_19": {
+            "label": "Kelvin"
+          },
+          "option_20": {
+            "label": "Lark"
+          },
+          "option_21": {
+            "label": "Lofi"
+          },
+          "option_22": {
+            "label": "Ludwig"
+          },
+          "option_23": {
+            "label": "Maven"
+          },
+          "option_24": {
+            "label": "Mayfair"
+          },
+          "option_25": {
+            "label": "Moon"
+          },
+          "option_26": {
+            "label": "Nashville"
+          },
+          "option_27": {
+            "label": "Perpetua"
+          },
+          "option_28": {
+            "label": "Poprocket"
+          },
+          "option_29": {
+            "label": "Reyes"
+          },
+          "option_30": {
+            "label": "Rise"
+          },
+          "option_31": {
+            "label": "Sierra"
+          },
+          "option_32": {
+            "label": "Skyline"
+          },
+          "option_33": {
+            "label": "Slumber"
+          },
+          "option_34": {
+            "label": "Stinson"
+          },
+          "option_35": {
+            "label": "Sutro"
+          },
+          "option_36": {
+            "label": "Toaster"
+          },
+          "option_37": {
+            "label": "Valencia"
+          },
+          "option_38": {
+            "label": "Vesper"
+          },
+          "option_39": {
+            "label": "Walden"
+          },
+          "option_40": {
+            "label": "Willow"
+          },
+          "option_41": {
+            "label": "X-Pro 2"
+          }
+        },
+        "products_ratio": {
+          "label": "نسبة عرض صورة المنتج إلى ارتفاعها",
+          "option_1": {
+            "label": "طبيعي"
+          },
+          "option_2": {
+            "label": "قصير (4:3)"
+          },
+          "option_3": {
+            "label": "مربع (1:1)"
+          },
+          "option_4": {
+            "label": "طويل (2:3)"
+          }
+        },
+        "products_crop": {
+          "label": "تفعيل اقتصاص الصورة",
+          "info": "إذا تم تعطيل هذا الخيار، توضع مسافة بيضاء حول الصورة. ليس له أي تأثير عند ضبط نسبة العرض إلى الارتفاع للوسائط على طبيعي"
+        },
+        "products_second": {
+          "label": "إظهار صورة المنتج الثاني عند المرور فوقه"
+        },
+        "products_vendor": {
+          "label": "عرض بائع المنتج"
+        },
+        "products_meta": {
+          "label": "عرض البيانات التعريفية للمنتج",
+          "info": "يتطلب حقل تعريف مع تعيين 'مساحة الاسم والمفتاح' على 'custom.display_data'"
+        },
+        "products_sale": {
+          "label": "إظهار سعر البيع الأصلي"
+        },
+        "products_rating": {
+          "label": "عرض تقييم المنتج"
+        }
+      }
+    },
+    "quick": {
+      "name": "نظرة سريعة",
+      "settings": {
+        "products_quick": {
+          "label": "تمكين العرض السريع",
+          "icon": {
+            "label": "أيقونة",
+            "cart": {
+              "label": "عربة التسوق"
+            },
+            "eye": {
+              "label": "عين"
+            }
+          },
+          "vendor": {
+            "label": "عرض البائع"
+          },
+          "title": {
+            "label": "عرض العنوان"
+          },
+          "sku": {
+            "label": "عرض SKU"
+          },
+          "barcode": {
+            "label": "اظهر الشفرة"
+          },
+          "sku-barcode": {
+            "label": "إظهار التسمية"
+          },
+          "rating": {
+            "label": "عرض التصنيف"
+          },
+          "price": {
+            "label": "عرض السعر"
+          },
+          "payments": {
+            "label": "عرض أقساط ShopPay"
+          },
+          "variants": {
+            "label": "عرض المتغيرات"
+          },
+          "quantity": {
+            "label": "عرض الكمية"
+          },
+          "form": {
+            "label": "إظهار أزرار الشراء"
+          }
+        }
+      }
+    },
+    "general": {
+      "name": "عام",
+      "settings": {
+        "general_currency": {
+          "content": "رموز العملات",
+          "info": "تعرض أسعار سلة التسوق والدفع دائماً رموز العملات. مثال: 1.00 دولار أمريكي",
+          "label": "إظهار رموز العملات"
+        },
+        "general_date": {
+          "content": "التاريخ",
+          "info": "يحتوي تنسيق التاريخ على خيارات وتنسيقات عرض للغات مختلفة. [اطلع على المزيد من المعلومات] (https:\/\/redplugdesign.zendesk.com\/hc\/en-us\/articles\/11446526567699)",
+          "label": "تنسيق التاريخ",
+          "option_1": {
+            "label": "15 ديس، 2022"
+          },
+          "option_2": {
+            "label": "12\/15\/2022"
+          },
+          "option_3": {
+            "label": "15 كانون الأول (ديسمبر)، 2022"
+          },
+          "option_4": {
+            "label": "15 كانون الأول (ديسمبر)، 2022 الساعة 8:00 صباحاً"
+          },
+          "option_5": {
+            "label": "الخميس 15 كانون الأول (ديسمبر)، 2022 الساعة 8:00 صباحاً -0500"
+          },
+          "option_6": {
+            "label": "في كانون الأول (ديسمبر) 2022"
+          }
+        },
+        "general_gift": {
+          "content": "بطاقة هدايا",
+          "label": "صورة"
+        },
+        "general_liquid": {
+          "label": "HTML للعلامة <head>"
+        },
+        "general_custom_css": {
+          "content": "CSS مخصص",
+          "label": "CSS"
+        }
+      }
+    },
+    "social": {
+      "name": "وسائل التواصل الاجتماعي",
+      "settings": {
+        "social_sharing": {
+          "content": "المشاركة على وسائل التواصل الاجتماعي"
+        },
+        "social_sharing_facebook": {
+          "label": "مشاركة على فيسبوك"
+        },
+        "social_sharing_twitter": {
+          "label": "غرّد على تويتر"
+        },
+        "social_sharing_x": {
+          "label": "تغريدة على X"
+        },
+        "social_sharing_pinterest": {
+          "label": "تثبيت على بنترست"
+        },
+        "social_sharing_email": {
+          "label": "أرسل كبريد إلكتروني"
+        },
+        "social_accounts": {
+          "content": "حسابات وسائل التواصل الاجتماعي"
+        },
+        "social_accounts_facebook": {
+          "label": "Facebook"
+        },
+        "social_accounts_threads": {
+          "label": "Threads"
+        },
+        "social_accounts_twitter": {
+          "label": "Twitter"
+        },
+        "social_accounts_x": {
+          "label": "X"
+        },
+        "social_accounts_pinterest": {
+          "label": "Pinterest"
+        },
+        "social_accounts_instagram": {
+          "label": "Instagram"
+        },
+        "social_accounts_tiktok": {
+          "label": "TikTok"
+        },
+        "social_accounts_snapchat": {
+          "label": "Snapchat"
+        },
+        "social_accounts_tumblr": {
+          "label": "Tumblr"
+        },
+        "social_accounts_whatsapp": {
+          "label": "WhatsApp"
+        },
+        "social_accounts_linkedin": {
+          "label": "LinkedIn"
+        },
+        "social_accounts_youtube": {
+          "label": "YouTube"
+        },
+        "social_accounts_vimeo": {
+          "label": "Vimeo"
+        },
+        "social_accounts_medium": {
+          "label": "ميديم"
+        },
+        "social_accounts_rss": {
+          "label": "RSS"
+        },
+        "social_accounts_email": {
+          "label": "عنوان البريد الإلكترونى",
+          "info": "info@example.com"
+        }
+      }
+    },
+    "favicon": {
+      "name": "أيقونة المفضلة",
+      "settings": {
+        "image": {
+          "label": "صورة الأيقونة المفضلة",
+          "info": "يوصى بحجم 48 × 48 بكسل"
+        }
+      }
+    }
+  },
+  "sections": {
+    "collection": {
+      "filter": {
+        "label": "المرشحات",
+        "enable": {
+          "label": "تمكين التصفية"
+        },
+        "color": {
+          "label": "تخطيط سواتش"
+        },
+        "rounded": {
+          "label": "تمكين العينات المستديرة"
+        },
+        "hide": {
+          "label": "إخفاء تسميات العينة"
+        },
+        "disabled": {
+          "label": "إخفاء المرشحات المعطلة"
+        }
+      },
+      "image": {
+        "label": "عرض صورة المجموعة"
+      },
+      "pagination": {
+        "label": "طريقة ترقيم الصفحات",
+        "click": {
+          "label": "اضغط لتحميل المزيد"
+        },
+        "infinite": {
+          "label": "تمرير لانهائي"
+        },
+        "traditional": {
+          "label": "ترقيم الصفحات التقليدي"
+        }
+      },
+      "sorting": {
+        "label": "تمكين الفرز"
+      },
+      "blocks": {
+        "promotion": {
+          "name": "ترويج",
+          "filter": {
+            "content": "فلتر المجموعة",
+            "info": "ما لم يتم تحديد ذلك، سيظهر الترويج على جميع صفحات المجموعة"
+          },
+          "after": {
+            "label": "عرض بعد X منتجات "
+          }
+        }
+      }
+    },
+    "footer": {
+      "newsletter": {
+        "label": "إظهار النشرة الإخبارية"
+      },
+      "accounts": {
+        "label": "عرض حسابات التواصل الاجتماعي"
+      },
+      "shop": {
+        "info": "عرض زر المتابعة لواجهة متجرك في تطبيق Shop. [يتعلم أكثر](https:\/\/help.shopify.com\/manual\/online-store\/themes\/customizing-themes\/follow-on-shop)",
+        "label": "عرض اتبع على المتجر"
+      },
+      "icons": {
+        "label": "إظهار رموز الدفع"
+      },
+      "language": {
+        "content": "محدد اللغة",
+        "info": "لإضافة لغة، يُرجى الانتقال إلى [إعدادات اللغة.] (\/admin\/settings\/languages)",
+        "label": "تمكين محدد اللغة"
+      },
+      "country": {
+        "content": "محدد البلد\/المنطقة",
+        "info": "لإضافة بلد\/منطقة، يُرجى الانتقال إلى [إعدادات الدفع.] (\/admin\/settings\/payments)",
+        "label": "تمكين محدد العملة"
+      },
+      "sub": {
+        "content": "تذييل فرعي",
+        "label": "نص مخصص"
+      },
+      "blocks": {
+        "text": {
+          "name": "نص غني",
+          "label": "نص"
+        },
+        "menu": {
+          "name": "القائمة",
+          "info": "هذه القائمة لن تُظهِر عناصر القائمة المنسدلة"
+        },
+        "customer": {
+          "name": "روابط العملاء",
+          "content": "إظهار روابط تسجيل الدخول والتسجيل. تأكد من تمكين حسابات العملاء في إعدادات الدفع الخاصة بك في حساب المسؤول على Shopify"
+        }
+      }
+    },
+    "general": {
+      "blog": {
+        "title": {
+          "label": "مدونة"
+        },
+        "number": {
+          "label": "عدد المقالات"
+        },
+        "author": {
+          "label": "عرض المؤلف"
+        },
+        "date": {
+          "label": "عرض التاريخ"
+        },
+        "excerpt": {
+          "label": "حد المقتطف"
+        },
+        "articles": {
+          "label": "مقالات"
+        }
+      },
+      "border": {
+        "label": "عرض الحدود"
+      },
+      "breadcrumbs": {
+        "label": "تفعيل ممرات التصفح"
+      },
+      "cart": {
+        "quantity": {
+          "label": "عرض كمية المنتج"
+        },
+        "lock": {
+          "label": "إظهار رمز القفل على زر الدفع"
+        },
+        "notes": {
+          "label": "تمكين الملاحظات"
+        },
+        "notes_text": {
+          "label": "نص العنصر النائب للملاحظات"
+        },
+        "shipping_tax": {
+          "label": "تعطيل رسالة الضرائب والشحن"
+        },
+        "shipping": {
+          "label": "تفعيل حاسبة الشحن"
+        },
+        "shipping_country": {
+          "label": "الدولة الافتراضية لحاسبة الشحن"
+        }
+      },
+      "collection": {
+        "label": "المجموعة"
+      },
+      "collection_rows": {
+        "label": "صفوف المجموعة"
+      },
+      "collections": {
+        "label": "المجموعات"
+      },
+      "description": {
+        "show": {
+          "label": "إظهار الوصف"
+        },
+        "border": {
+          "label": "إظهار حدود الوصف"
+        },
+        "custom": {
+          "label": "وصف مخصص"
+        }
+      },
+      "display": {
+        "label": "العرض"
+      },
+      "display_list": {
+        "label": "طول قائمة العرض"
+      },
+      "faqs": {
+        "label": "الأسئلة الشائعة"
+      },
+      "form": {
+        "labels_placeholders": {
+          "label": "إظهار التسميات والعناصر النائبة"
+        },
+        "label": {
+          "label": "التسمية"
+        },
+        "labels": {
+          "label": "البطاقات"
+        },
+        "placeholder": {
+          "label": "العنصر النائب"
+        },
+        "placeholders": {
+          "label": "العناصر النائبة"
+        },
+        "both": {
+          "label": "كليهما"
+        },
+        "text": {
+          "label": "مكان كتابة النص"
+        },
+        "required": {
+          "label": "مطلوب"
+        },
+        "dropdown": {
+          "label": "حدد القائمة المنسدلة"
+        },
+        "options": {
+          "default": "الخيار 1، الخيار 2، الخيار 3",
+          "info": "افصل بين الخيارات بفاصلة"
+        },
+        "checkbox": {
+          "label": "خانة اختيار"
+        },
+        "radio": {
+          "label": "أزار انتقاء"
+        }
+      },
+      "heading": {
+        "label": "عنوان"
+      },
+      "height": {
+        "small": {
+          "label": "صغير"
+        },
+        "medium": {
+          "label": "ميديم"
+        },
+        "large": {
+          "label": "كبير"
+        },
+        "original": {
+          "label": "نسبة العرض إلى الارتفاع الأصلية"
+        }
+      },
+      "icons": {
+        "icon": {
+          "label": "أيقونة"
+        },
+        "cart_icon": {
+          "label": "أيقونة عربة التسوق"
+        },
+        "cart": {
+          "label": "عربة التسوق"
+        },
+        "bag": {
+          "label": "حقيبة"
+        }
+      },
+      "lazy": {
+        "single": {
+          "label": "صورة تحميل كسول"
+        },
+        "multiple": {
+          "label": "تحميل الصور كسول"
+        }
+      },
+      "link": {
+        "title": {
+          "label": "رابط"
+        },
+        "title_text": {
+          "label": "نص الرابط"
+        },
+        "title_1": {
+          "label": "الرابط 1"
+        },
+        "title_1_text": {
+          "label": "نص الرابط 1"
+        },
+        "title_2": {
+          "label": "الرابط 2"
+        },
+        "title_2_text": {
+          "label": "نص الرابط 2"
+        }
+      },
+      "logo": {
+        "label": "الشعار",
+        "max": {
+          "label": "أقصى عرض للشعار"
+        },
+        "max_mobile": {
+          "label": "أقصى عرض لشعار الجوال"
+        }
+      },
+      "map": {
+        "address_border": {
+          "label": "إظهار حدود العنوان وساعات العمل"
+        },
+        "address_hours": {
+          "label": "العنوان وساعات العمل"
+        },
+        "text_background": {
+          "label": "خلفية النص"
+        },
+        "text_background_opacity": {
+          "label": "عتامة خلفية النص"
+        },
+        "desktop": {
+          "label": "تخطيط سطح المكتب"
+        },
+        "mobile": {
+          "label": "تخطيط الجوال",
+          "above": {
+            "label": "فوق الخريطة"
+          },
+          "below": {
+            "label": "أدنى الخريطة"
+          }
+        },
+        "address": {
+          "label": "عنوان الخريطة"
+        },
+        "google": {
+          "label": "مفتاح API لخرائط جوجل",
+          "info": "سيتعين عليك [تسجيل مفتاح API لخرائط جوجل] (https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/map-section-api-key) لعرض الخريطة"
+        },
+        "colors": {
+          "label": "استخدم ألوان مخصصة للخريطة",
+          "foreground": {
+            "label": "لون مقدمة الخريطة"
+          },
+          "background": {
+            "label": "لون خلفية الخريطة"
+          }
+        },
+        "zoom": {
+          "label": "تكبير"
+        },
+        "image": {
+          "label": "صورة الخلفية",
+          "info": "تُعرض هذه الصورة عندما تكون الخريطة غير مستخدمة أو تعذر تحميلها"
+        }
+      },
+      "mobile_collections_note": {
+        "content": "ملاحظة: هذا مرئي على شاشات الجوال فحسب. استخدم محدد الشاشة الموجود أعلى محرر السمات للمعاينة"
+      },
+      "name": {
+        "label": "الاسم"
+      },
+      "none": {
+        "label": "لا شيء"
+      },
+      "newsletter": {
+        "label": "النشرة الإخبارية",
+        "show": {
+          "label": "إظهار الاشتراك في النشرة الإخبارية"
+        }
+      },
+      "options": {
+        "label": "خيارات"
+      },
+      "overlay": {
+        "label": "تراكب",
+        "image": {
+          "label": "لون تراكب صورة الخلفية"
+        },
+        "image_full": {
+          "label": "عتامة لون تراكب الصورة ذات العرض الكامل"
+        },
+        "color": {
+          "label": "لون التراكب"
+        },
+        "color_opacity": {
+          "label": "تراكب العتامة"
+        },
+        "background_opacity": {
+          "label": "عتامة لون الخلفية"
+        }
+      },
+      "padding": {
+        "desktop": {
+          "label": "المسافة بين العنصر وحدوده على سطح المكتب"
+        },
+        "mobile": {
+          "label": "المسافة بين العنصر وحدوده على سطح المكتب الجوال"
+        }
+      },
+      "page": {
+        "label": "صفحة"
+      },
+      "position": {
+        "left": {
+          "label": "اليسار"
+        },
+        "center": {
+          "label": "الوسط"
+        },
+        "centered": {
+          "label": "توسيط"
+        },
+        "right": {
+          "label": "اليمين"
+        },
+        "top": {
+          "label": "أعلى"
+        },
+        "bottom": {
+          "label": "أدنى"
+        },
+        "top_left": {
+          "label": "أعلى اليسار"
+        },
+        "top_center": {
+          "label": "أعلى الوسط"
+        },
+        "top_middle": {
+          "label": "أعلى المنتصف"
+        },
+        "top_right": {
+          "label": "أعلى اليمين"
+        },
+        "center_left": {
+          "label": "يسار الوسط"
+        },
+        "center_center": {
+          "label": "وسط الوسط"
+        },
+        "center_right": {
+          "label": "يمين الوسط"
+        },
+        "bottom_left": {
+          "label": "أسفل اليسار"
+        },
+        "bottom_center": {
+          "label": "أسفل الوسط"
+        },
+        "bottom_middle": {
+          "label": "أسفل المنتصف"
+        },
+        "bottom_right": {
+          "label": "أسفل اليمين"
+        },
+        "left_top": {
+          "label": "أعلى اليسار"
+        },
+        "left_middle": {
+          "label": "منتصف اليسار"
+        },
+        "left_bottom": {
+          "label": "أسفل اليسار"
+        },
+        "right_top": {
+          "label": "أعلى اليمين"
+        },
+        "right_middle": {
+          "label": "أعلى المنتصف"
+        },
+        "right_bottom": {
+          "label": "أسفل اليمين"
+        },
+        "outside": {
+          "label": "في الخارج"
+        },
+        "split": {
+          "label": "قسم"
+        }
+      },
+      "product": {
+        "label": "المنتج"
+      },
+      "products": {
+        "label": "المنتجات"
+      },
+      "question": {
+        "label": "سؤال"
+      },
+      "rows": {
+        "label": "صفوف",
+        "number": {
+          "label": "عدد الصفوف"
+        },
+        "products": {
+          "label": "المنتجات في كل صف"
+        },
+        "products_page": {
+          "label": "المنتجات في كل صفحة"
+        },
+        "products_page_desktop": {
+          "label": "المنتجات في كل صف على سطح المكتب"
+        },
+        "items": {
+          "label": "عدد السلع في الصفحة"
+        },
+        "items_row": {
+          "label": "عدد السلع في كل صف"
+        },
+        "collections": {
+          "label": "عدد المجموعات في كل صف على سطح المكتب"
+        },
+        "collections_page": {
+          "label": "عدد المجموعات في كل صفحة"
+        }
+      },
+      "rss": {
+        "label": "عرض موجز RSS"
+      },
+      "slider": {
+        "desktop": {
+          "label": "تفعيل شريط التمرير على سطح المكتب"
+        }
+      },
+      "social": {
+        "label": "تمكين المشاركة على وسائل التواصل الاجتماعي"
+      },
+      "stars": {
+        "label": "النجوم"
+      },
+      "stars_text": {
+        "label": "النجوم والنص"
+      },
+      "sticky": {
+        "label": "تفعيل الخيارات الثابتة",
+        "cart": {
+          "info": "يعرض حاسبة الشحن والدفع في قائمة سفلية مثبتة"
+        },
+        "collection": {
+          "info": "يعرض الفلترة وممرات التصفح والفرز في قائمة سفلية مثبتة"
+        },
+        "product": {
+          "info": "يعرض خيارات المنتج وممرات التصفح والكميات والأزرار في قائمة سفلية مثبتة"
+        }
+      },
+      "tags": {
+        "label": "العلامات"
+      },
+      "tags_show": {
+        "label": "إظهار العلامات"
+      },
+      "testimonial": {
+        "label": "الشهادات"
+      },
+      "text": {
+        "label": "نص"
+      },
+      "text_color": {
+        "label": "لون الخط"
+      },
+      "text_layout": {
+        "label": "تخطيط النص",
+        "info": "لا يؤثر إلا على أجهزة سطح المكتب والأجهزة اللوحية في الوضع الأفقي"
+      },
+      "text_position": {
+        "label": "موقف النص"
+      },
+      "title": {
+        "label": "العنوان"
+      },
+      "title_custom": {
+        "label": "عنوان مخصص"
+      },
+      "title_size": {
+        "label": "حجم العنوان"
+      },
+      "title_sub": {
+        "label": "العنوان الفرعي"
+      },
+      "title_sub_size": {
+        "label": "حجم العنوان الفرعي"
+      },
+      "titles": {
+        "label": "العناوين فقط"
+      },
+      "truncate": {
+        "label": "قطع القائمة"
+      },
+      "twitter": {
+        "label": "اسم المستخدم",
+        "info": "مثال: Shopify"
+      },
+      "video": {
+        "link": {
+          "label": "رابط يوتيوب أو فيميو",
+          "info": "يقبل روابط يوتيوب أو فيميو"
+        },
+        "auto": {
+          "label": "تفعيل التشغيل التلقائي للفيديو"
+        },
+        "enable": {
+          "label": "تفعيل تكرار الفيديو"
+        },
+        "title": {
+          "label": "العنوان"
+        },
+        "placeholder": {
+          "label": "نمط زر العنصر النائب",
+          "option_1": {
+            "label": "داكن"
+          },
+          "option_2": {
+            "label": "فاتح"
+          },
+          "info": "لا يُرى إلا إذا تم تحديد صورة عنصر نائب"
+        }
+      }
+    },
+    "header": {
+      "announcement": {
+        "show": {
+          "label": "عرض الإعلان"
+        },
+        "show_home": {
+          "label": "إظهار على الصفحة الرئيسية فقط"
+        },
+        "text_mobile": {
+          "label": "النص (جوال)",
+          "info": "استخدم هذا الخيار إذا كنت تود عرض نص بديل على الجوال. نوصي به لتقصير نص الإعلان ليناسب للجوال"
+        },
+        "text_size": {
+          "label": "حجم الخط"
+        },
+        "padding": {
+          "label": "المسافة بين العنصر وحدوده"
+        }
+      },
+      "navigation": {
+        "content": "التنقل"
+      },
+      "main": {
+        "label": "القائمة الرئيسية"
+      },
+      "settings": {
+        "content": "الإعدادات"
+      },
+      "sticky": {
+        "label": "تفعيل العنوان الثابت"
+      },
+      "layout": {
+        "label": "التخطيط",
+        "center": {
+          "label": "الشعار في الوسط"
+        },
+        "right": {
+          "label": "القائمة بجانب الشعار"
+        },
+        "below": {
+          "label": "القائمة أسفل الشعار"
+        },
+        "mobile": {
+          "label": "الجوال"
+        }
+      },
+      "account": {
+        "label": "رابط الحساب"
+      },
+      "search": {
+        "label": "تمكين البحث"
+      },
+      "blocks": {
+        "titles": {
+          "mega": {
+            "name": "قائمة ضخمة"
+          },
+          "story": {
+            "name": "شريط القصة"
+          },
+          "contact": {
+            "name": "شريط التواصل"
+          }
+        },
+        "link": {
+          "label": "عنوان الرابط",
+          "column": {
+            "label": "الحد الأدنى لعدد أعمدة روابط سطح المكتب",
+            "info": "هذا لا يشمل العرض الترويجي الممكّن أدناه"
+          },
+          "custom": {
+            "label": "لون الرابط المخصص"
+          },
+          "mega": {
+            "info": "أدخل رابط قائمة المستوى الأعلى بالضبط لإضافة قائمة ضخمة"
+          },
+          "story": {
+            "info": "أدخل رابط قائمة المستوى الأعلى بالضبط لإضافة شريط قصة"
+          },
+          "contact": {
+            "info": "أدخل رابط قائمة المستوى الأعلى بالضبط لإضافة شريط تواصل"
+          }
+        },
+        "image": {
+          "label": "تفعيل اقتصاص الصورة",
+          "first": {
+            "label": "أول منتج للمجموعة"
+          },
+          "info": "إذا تم تعطيل هذا الخيار، توضع مسافة بيضاء حول الصورة. ليس له أي تأثير عند ضبط نسبة العرض إلى الارتفاع للوسائط على طبيعي",
+          "ratio": {
+            "label": "نسبة أبعاد الصورة",
+            "option_1": {
+              "label": "طبيعي"
+            },
+            "option_2": {
+              "label": "قصير (4:3)"
+            },
+            "option_3": {
+              "label": "مربع (1:1)"
+            },
+            "option_4": {
+              "label": "طويل (2:3)"
+            }
+          }
+        },
+        "center": {
+          "label": "توسيط النص"
+        },
+        "promotion": {
+          "content": "ترويج",
+          "enable": {
+            "label": "تمكين الترويج"
+          },
+          "position": {
+            "label": "موضع الترويج",
+            "first": {
+              "label": "أولاً"
+            },
+            "last": {
+              "label": "أخيراً"
+            }
+          },
+          "text": {
+            "label": "نص الترويج"
+          }
+        },
+        "contact": {
+          "label": "معلومات التواصل",
+          "phone": {
+            "label": "رقم الهاتف"
+          },
+          "email": {
+            "label": "عنوان البريد الإلكترونى"
+          },
+          "info": {
+            "label": "معلومات عن المتجر وساعات عمله"
+          },
+          "address": {
+            "label": "عنوان الشارع"
+          },
+          "map": {
+            "label": "عرض الخريطة"
+          }
+        }
+      }
+    },
+    "image": {
+      "column": {
+        "label": "عرض عمود الصورة"
+      },
+      "custom": {
+        "label": "صورة مخصصة",
+        "info": "اختر صورة لإظهارها بدلاً من صورة المجموعة"
+      },
+      "enable": {
+        "label": "تمكين الصورة"
+      },
+      "full": {
+        "label": "العرض الكامل"
+      },
+      "height": {
+        "label": "ارتفاع الصورة"
+      },
+      "insta": {
+        "label": "فلتر إنستا",
+        "option_0": {
+          "label": "لا شيء"
+        },
+        "option_1": {
+          "label": "1977"
+        },
+        "option_2": {
+          "label": "Aden"
+        },
+        "option_3": {
+          "label": "Amaro"
+        },
+        "option_4": {
+          "label": "Ashby"
+        },
+        "option_5": {
+          "label": "Brannan"
+        },
+        "option_6": {
+          "label": "Brooklyn"
+        },
+        "option_7": {
+          "label": "Charmes"
+        },
+        "option_8": {
+          "label": "Clarendon"
+        },
+        "option_9": {
+          "label": "Crema"
+        },
+        "option_10": {
+          "label": "Dogpatch"
+        },
+        "option_11": {
+          "label": "Earlybird"
+        },
+        "option_12": {
+          "label": "Gingham"
+        },
+        "option_13": {
+          "label": "Ginza"
+        },
+        "option_14": {
+          "label": "Hefe"
+        },
+        "option_15": {
+          "label": "Helena"
+        },
+        "option_16": {
+          "label": "Hudson"
+        },
+        "option_17": {
+          "label": "Inkwell"
+        },
+        "option_18": {
+          "label": "Juno"
+        },
+        "option_19": {
+          "label": "Kelvin"
+        },
+        "option_20": {
+          "label": "Lark"
+        },
+        "option_21": {
+          "label": "Lofi"
+        },
+        "option_22": {
+          "label": "Ludwig"
+        },
+        "option_23": {
+          "label": "Maven"
+        },
+        "option_24": {
+          "label": "Mayfair"
+        },
+        "option_25": {
+          "label": "Moon"
+        },
+        "option_26": {
+          "label": "Nashville"
+        },
+        "option_27": {
+          "label": "Perpetua"
+        },
+        "option_28": {
+          "label": "Poprocket"
+        },
+        "option_29": {
+          "label": "Reyes"
+        },
+        "option_30": {
+          "label": "Rise"
+        },
+        "option_31": {
+          "label": "Sierra"
+        },
+        "option_32": {
+          "label": "Skyline"
+        },
+        "option_33": {
+          "label": "Slumber"
+        },
+        "option_34": {
+          "label": "Stinson"
+        },
+        "option_35": {
+          "label": "Sutro"
+        },
+        "option_36": {
+          "label": "Toaster"
+        },
+        "option_37": {
+          "label": "Valencia"
+        },
+        "option_38": {
+          "label": "Vesper"
+        },
+        "option_39": {
+          "label": "Walden"
+        },
+        "option_40": {
+          "label": "Willow"
+        },
+        "option_41": {
+          "label": "X-Pro 2"
+        }
+      },
+      "placeholder": {
+        "label": "صورة العنصر النائب"
+      },
+      "position": {
+        "label": "النقطة المحورية",
+        "option_1": {
+          "label": "أعلى اليسار"
+        },
+        "option_2": {
+          "label": "أعلى الوسط"
+        },
+        "option_3": {
+          "label": "أعلى اليمين"
+        },
+        "option_4": {
+          "label": "يسار الوسط"
+        },
+        "option_5": {
+          "label": "الوسط"
+        },
+        "option_6": {
+          "label": "يمين الوسط"
+        },
+        "option_7": {
+          "label": "أسفل اليسار"
+        },
+        "option_8": {
+          "label": "أسفل الوسط"
+        },
+        "option_9": {
+          "label": "أسفل اليمين"
+        },
+        "info": " انقر فوق 'تعديل' لضبط النقطة المحورية للصورة. ملحوظة: لن يؤثر هذا الإعداد كثيراً إذا كانت أبعاد صورة الخلفية بنفس مساحة القسم تقريباً"
+      },
+      "show": {
+        "label": "عرض الصور"
+      },
+      "title": {
+        "label": "صورة",
+        "alignment": {
+          "label": "محاذاة الصورة"
+        },
+        "desktop": {
+          "label": "صورة سطح المكتب"
+        },
+        "desktop_alignment": {
+          "label": "محاذاة صورة سطح المكتب"
+        },
+        "mobile": {
+          "label": "صورة الجوال"
+        },
+        "mobile_alignment": {
+          "label": "محاذاة صورة الهاتف"
+        }
+      },
+      "width": {
+        "label": "عرض الصورة"
+      }
+    },
+    "product": {
+      "media": {
+        "label": "الوسائط",
+        "content": "اطلع على مزيد من المعلومات حول [أنواع الوسائط] (https:\/\/help.shopify.com\/en\/manual\/products\/product-media\/product-media-types)",
+        "gallery": {
+          "label": "موضع معرض سطح المكتب"
+        },
+        "position": {
+          "label": "التخطيط",
+          "list": {
+            "label": "القائمة"
+          },
+          "gallery": {
+            "label": "المعرض"
+          },
+          "none": {
+            "label": "دون صور مصغرة"
+          },
+          "left": {
+            "label": "الصور المصغرة يسار المعرض"
+          },
+          "below": {
+            "label": "الصور المصغرة أسفل المعرض"
+          },
+          "right": {
+            "label": "الصور المصغرة يمين المعرض"
+          }
+        }
+      },
+      "breadcrumbs": {
+        "sticky": {
+          "label": "في قائمة ثابتة"
+        },
+        "above": {
+          "label": "أعلى تفاصيل المنتج"
+        }
+      },
+      "blocks": {
+        "vendor": {
+          "name": "بائع"
+        },
+        "sku": {
+          "name": "وحدة إدارة المخزون (‎SKU‎)"
+        },
+        "rating": {
+          "name": "تصنيف المنتج",
+          "content": "يتطلب [تطبيق مراجعة المنتج](https:\/\/apps.shopify.com\/search?q=product%20reviews)، و[تعريفات حقول التعريف](https:\/\/help.shopify.com\/en\/manual\/custom-data\/metafields\/metafield-definitions) لـ 'reviews.rating_count' و'reviews.rating'"
+        },
+        "price": {
+          "name": "السعر",
+          "label": "تعطيل الرسالة الضريبية",
+          "size": "حجم السعر"
+        },
+        "shoppay": {
+          "name": "أقساط ShopPay"
+        },
+        "description": {
+          "name": "وصف المنتج"
+        },
+        "variants": {
+          "name": "منتقي المتغير",
+          "single": {
+            "label": "إظهار متغير الخيار الفردي"
+          },
+          "options": {
+            "label": "خيارات متنوعة",
+            "buttons": {
+              "label": "أزرار",
+              "colors": {
+                "label": "الألوان"
+              },
+              "image": {
+                "label": "صورة متغيرة"
+              },
+              "image_magnified": {
+                "label": "صورة متغيرة مكبّرة"
+              }
+            },
+            "dropdowns": {
+              "label": "القوائم المنسدلة"
+            }
+          },
+          "rounded": {
+            "label": "تمكين الأزرار المستديرة"
+          }
+        },
+        "quantity": {
+          "name": "الكمية"
+        },
+        "buy": {
+          "name": "أزرار الشراء",
+          "text": {
+            "label": "نص مخصص للإضافة إلى عربة التسوق"
+          },
+          "redirection": {
+            "label": "تفعيل إعادة توجيه سلة التسوق",
+            "info": "يوجه المستخدمين تلقائياً إلى صفحة سلة التسوق بعد إضافة منتج"
+          },
+          "dynamic": {
+            "label": "إظهار زر الدفع الديناميكي",
+            "info": "يرى كل عميل طريقة الدفع المفضلة له من الطرق المتوفرة في متجرك، مثل باي بال أو آبل باي. [للاطلاع على مزيد من المعلومات] (https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)"
+          },
+          "gift": {
+            "label": "عرض نموذج المستلم لمنتجات بطاقات الهدايا",
+            "info": "عند التمكين ، يمكن إرسال منتجات بطاقات الهدايا اختياريًا إلى المستلم برسالة شخصية."
+          },
+          "sticky": {
+            "label": "رمز عربة التسوق الثابتة"
+          },
+          "lock": {
+            "label": "إظهار رمز القفل على زر الدفع لعربة التسوق الثابتة"
+          }
+        },
+        "pickup": {
+          "name": "الاستلام من المتجر",
+          "label": "تمكين تحديد الموقع الجغرافي",
+          "info": "قدِّم للمستخدمين خياراً بمشاركة مواقعهم لعرض المسافات إلى المتاجر"
+        },
+        "complementary": {
+          "name": "المنتجات التكميلية",
+          "content": "لتحديد المنتجات التكميلية، يُرجى إضافة تطبيق البحث والاكتشاف (Search & Discovery). [للاطلاع على المزيد من المعلومات](https:\/\/shopify.dev\/themes\/product-merchandising\/recommendations)",
+          "label": "عدد المنتجات"
+        },
+        "social": {
+          "name": "أزرار المشاركة على وسائل التواصل الاجتماعي"
+        },
+        "button": {
+          "name": "زر",
+          "style": {
+            "label": "نمط",
+            "primary": {
+              "label": "أساسي"
+            },
+            "secondary": {
+              "label": "ثانوي"
+            }
+          }
+        },
+        "text": {
+          "label": "نمط النص",
+          "paragraph": {
+            "label": "الفقرة"
+          },
+          "paragraph_small": {
+            "label": "فقرة صغيرة"
+          }
+        },
+        "line": {
+          "name": "سطر خصائص السلعة"
+        },
+        "liquid": {
+          "name": "Liquid مخصص",
+          "label": "Liquid",
+          "info": "أضف مقتطفات التطبيق أو تعليمات برمجية أخرى للـ Liquid لإنشاء تخصيصات متقدمة",
+          "enable_metafields": {
+            "label": "تمكين إعادة التحميل عند تغيير المتغير",
+            "info": "يُستخدم لتحديث محتوى الحظر عند تحديد متغير جديد. مفيد لعرض حقول التعريف المتغيرة المعينة"
+          }
+        },
+        "divider": {
+          "name": "مقسم"
+        }
+      },
+      "slide": {
+        "enable": {
+          "label": "تمكين الشريحة"
+        },
+        "heading": {
+          "label": "عنوان الشريحة"
+        }
+      },
+      "emphasize": {
+        "label": "التأكيد على المنتج",
+        "info": "ينشئ تخطيطاً بديلاً على الشاشات الأكبر حجماً"
+      },
+      "recommendations": {
+        "content": "تستخدم التوصيات الديناميكية معلومات الطلب والمنتج لتتغيّر وتتحسّن بمرور الوقت. [للاطلاع على المزيد من المعلومات] (https:\/\/help.shopify.com\/themes\/development\/recommended-products)"
+      }
+    },
+    "section": {
+      "height": {
+        "content": "ارتفاع القسم"
+      },
+      "name": {
+        "content": "القسم"
+      },
+      "settings": {
+        "background_color": {
+          "label": "لون الخلفية"
+        },
+        "background_gradient": {
+          "label": "تدرج الخلفية"
+        },
+        "mobile": {
+          "content": "الجوال"
+        },
+        "desktop": {
+          "content": "سطح المكتب"
+        },
+        "top_pad": {
+          "label": "المسافة العلوية بين العنصر وحدوده"
+        },
+        "bottom_pad": {
+          "label": "المسافة السفلية بين العنصر وحدوده"
+        },
+        "bottom_margin": {
+          "label": "الهامش السفلي"
+        },
+        "border": {
+          "label": "إضافة حد سفلي"
+        }
+      },
+      "titles": {
+        "account": {
+          "content": "الحساب"
+        },
+        "activation": {
+          "content": "تفعيل الحساب"
+        },
+        "addresses": {
+          "content": "العناوين"
+        },
+        "apps": {
+          "content": "تطبيقات"
+        },
+        "article_page": {
+          "content": "صفحة المقال"
+        },
+        "blog_page": {
+          "content": "صفحة المدونة"
+        },
+        "blog_posts": {
+          "content": "منشورات المدونة"
+        },
+        "cart_page": {
+          "content": "صفحة عربة التسوق"
+        },
+        "collection_page": {
+          "content": "صفحة المجموعة"
+        },
+        "collections_list": {
+          "content": "قائمة المجموعات"
+        },
+        "collections_list_page": {
+          "content": "صفحة قائمة المجموعات"
+        },
+        "contact_page": {
+          "content": "صفحة التواصل"
+        },
+        "error": {
+          "content": "404 صفحة"
+        },
+        "faq": {
+          "content": "الأسئلة الشائعة"
+        },
+        "faq_page": {
+          "content": "صفحة الأسئلة الشائعة"
+        },
+        "featured_collection": {
+          "content": "مجموعة مميزة"
+        },
+        "featured_product": {
+          "content": "منتج مميز"
+        },
+        "footer": {
+          "content": "تذييل"
+        },
+        "gallery": {
+          "content": "معرض الصور"
+        },
+        "header": {
+          "content": "الرأس"
+        },
+        "header_announcement": {
+          "content": "شريط الإعلانات"
+        },
+        "header_cart": {
+          "content": "رأس عربة صغيرة"
+        },
+        "image": {
+          "content": "صورة"
+        },
+        "image_overlay": {
+          "content": "صورة مع تراكب نصي"
+        },
+        "image_text": {
+          "content": "صورة مع نص"
+        },
+        "liquid": {
+          "content": "Liquid مخصص"
+        },
+        "login": {
+          "content": "تسجيل الدخول"
+        },
+        "logo_list": {
+          "content": "قائمة الشعارات"
+        },
+        "order": {
+          "content": "الترتيب"
+        },
+        "password": {
+          "content": "إعادة تعيين كلمة المرور"
+        },
+        "password_page": {
+          "content": "صفحة كلمة المرور"
+        },
+        "product_list": {
+          "content": "قائمة المنتجات"
+        },
+        "map": {
+          "content": "الخريطة"
+        },
+        "mobile_collections": {
+          "content": "مجموعات الجوال"
+        },
+        "newsletter": {
+          "content": "النشرة الإخبارية"
+        },
+        "page": {
+          "content": "صفحة"
+        },
+        "product_page": {
+          "content": "صفحة المنتج"
+        },
+        "recommended_products": {
+          "content": "منتجات ذات صله"
+        },
+        "registration": {
+          "content": "التسجيل"
+        },
+        "rich": {
+          "content": "نص غني"
+        },
+        "search": {
+          "content": "بحث"
+        },
+        "search_page": {
+          "content": "صفحة البحث"
+        },
+        "slideshow": {
+          "content": "عرض الشرائح"
+        },
+        "testimonials": {
+          "content": "الشهادات - التوصيات"
+        },
+        "twitter": {
+          "content": "موجز تويتر"
+        },
+        "video": {
+          "content": "فيديو"
+        }
+      },
+      "width": {
+        "title": {
+          "label": "عرض القسم"
+        },
+        "narrow": {
+          "label": "ضيق"
+        },
+        "standard": {
+          "label": "معتاد"
+        },
+        "wide": {
+          "label": "واسع"
+        }
+      }
+    },
+    "slideshow": {
+      "rotate": {
+        "label": "التدوير التلقائي للشرائح"
+      },
+      "delay": {
+        "label": "تأخير التشغيل التلقائي"
+      },
+      "pagination": {
+        "label": "محاذاة ترقيم الصفحات على سطح المكتب"
+      },
+      "pagination_color": {
+        "label": "لون ترقيم الصفحات"
+      },
+      "slide": {
+        "label": "شريحة"
+      }
+    },
+    "text": {
+      "column": {
+        "label": "عرض عمود النص"
+      },
+      "content": {
+        "label": "عرض النص"
+      },
+      "title": {
+        "label": "نص"
+      },
+      "enable": {
+        "label": "تمكين العنوان"
+      },
+      "heading": {
+        "label": "عنوان"
+      },
+      "heading_one": {
+        "label": "استخدم علامة h1"
+      },
+      "heading_size": {
+        "label": "حجم العنوان"
+      },
+      "subheading": {
+        "label": "العنوان الفرعي"
+      },
+      "subheading_size": {
+        "label": "حجم العنوان الفرعي"
+      },
+      "outline": {
+        "heading_outline": {
+          "label": "مخطط العنوان"
+        },
+        "subheading_outline": {
+          "label": "مخطط العنوان الفرعي"
+        },
+        "option_1": {
+          "label": "لا شيء"
+        },
+        "option_2": {
+          "label": "رفيع"
+        },
+        "option_3": {
+          "label": "افتراضي"
+        },
+        "option_4": {
+          "label": "سميك"
+        }
+      },
+      "border": {
+        "label": "إظهار حدود النص"
+      },
+      "alignment": {
+        "title": {
+          "label": "محاذاة النص"
+        },
+        "option_1": {
+          "label": "اليسار"
+        },
+        "option_2": {
+          "label": "الوسط"
+        },
+        "option_3": {
+          "label": "اليمين"
+        }
+      },
+      "color": {
+        "label": "لون الخط"
+      },
+      "hover": {
+        "label": "لون تمرير النص"
+      }
+    }
+  }
+}

@@ -1,0 +1,272 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "background": "#f4f4f4",
+        "background_gradient": "",
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 20,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "section_image_ViyA63": {
+      "type": "section-image",
+      "settings": {
+        "enable_lazy": true,
+        "image_desktop": "shopify:\/\/shop_images\/HOME_CATEGORY_BANNER_NEW_SEAS_SP24.png",
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "link": "",
+        "image_alignment": "center",
+        "image_width": 1240,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_product_WnNqHL": {
+      "type": "section-product",
+      "blocks": {
+        "vendor_tayziy": {
+          "type": "vendor",
+          "settings": {
+            "title_size": 12
+          }
+        },
+        "title_hq3JCn": {
+          "type": "title",
+          "settings": {
+            "title_h1": true,
+            "title_outline": "none",
+            "title_size": 42
+          }
+        },
+        "sku_4Ubpjk": {
+          "type": "sku",
+          "settings": {
+            "sku": true,
+            "barcode": true,
+            "style": false
+          }
+        },
+        "rating_cq7Wix": {
+          "type": "rating",
+          "settings": {
+            "style": "both"
+          }
+        },
+        "price_NAH9ij": {
+          "type": "price",
+          "settings": {
+            "title_size": 24,
+            "tax": false
+          }
+        },
+        "description_apit8A": {
+          "type": "description",
+          "settings": {
+            "description": "",
+            "enable_slide": true,
+            "heading": "Product Information"
+          }
+        },
+        "variants_MfhadV": {
+          "type": "variants",
+          "settings": {
+            "enable_single": true,
+            "variant_enable": "radio",
+            "rounded": true,
+            "variant_color_enable": "var-img-zoom-block"
+          }
+        },
+        "quantity_RyjjQd": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "form_YktYdA": {
+          "type": "form",
+          "settings": {
+            "enable_custom": "",
+            "enable_cart_redirection": false,
+            "show_payment_button": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "social_tRX9JT": {
+          "type": "social",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_tayziy",
+        "title_hq3JCn",
+        "sku_4Ubpjk",
+        "rating_cq7Wix",
+        "price_NAH9ij",
+        "description_apit8A",
+        "variants_MfhadV",
+        "quantity_RyjjQd",
+        "form_YktYdA",
+        "social_tRX9JT"
+      ],
+      "settings": {
+        "product_handle": "",
+        "enable_lazy": true,
+        "gallery_position": "left",
+        "gallery_layout": "gallery-below",
+        "insta_filter": "none",
+        "gallery_video_autoplay": true,
+        "gallery_video_looping": true,
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_video_FGyUbE": {
+      "type": "section-video",
+      "blocks": {
+        "video_VJbnza": {
+          "type": "video",
+          "settings": {
+            "url": "https:\/\/www.youtube.com\/watch?v=ORjYAirT_cQ&t=3s",
+            "enable_loop": true,
+            "title": "",
+            "enable_lazy": true,
+            "placeholder": "shopify:\/\/shop_images\/HOME_CATEGORY_BANNER_NEW_SEAS_SP24.png",
+            "insta_filter": "none",
+            "style": "dark"
+          }
+        }
+      },
+      "block_order": [
+        "video_VJbnza"
+      ],
+      "settings": {
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
+    "section_image_gallery_pC9rUn": {
+      "type": "section-image-gallery",
+      "blocks": {
+        "image_dnBNHN": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/MW433NEW-BLK_7.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_WmznG6": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/MW433NEW-BLK_6.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_8VbXth": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/MW433NEW-BLK_9.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        },
+        "image_GCzXPq": {
+          "type": "image",
+          "settings": {
+            "enable_lazy": true,
+            "block_img_desktop": "shopify:\/\/shop_images\/MW433NEW-BLK_8.jpg",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "link": "",
+            "block_columns": 2
+          }
+        }
+      },
+      "block_order": [
+        "image_dnBNHN",
+        "image_WmznG6",
+        "image_8VbXth",
+        "image_GCzXPq"
+      ],
+      "settings": {
+        "padding_grid_mobile": 20,
+        "padding_grid_desktop": 40,
+        "image_height": "original",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_image_ViyA63",
+    "section_product_WnNqHL",
+    "section_video_FGyUbE",
+    "section_image_gallery_pC9rUn"
+  ]
+}

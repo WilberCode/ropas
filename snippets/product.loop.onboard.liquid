@@ -1,0 +1,30 @@
+{%- assign product_style = product_style | default: 'natural' -%}
+<article class="product-item {% if emphasize %}product-item-{{ forloop_index }} {% endif %}product-item-style-{{ product_style }} product-item-no-image" data-product-item>
+ 
+<a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" tabindex="-1">
+    <figure class="product-item-image" data-product-item-image>
+      {%- liquid
+      capture index
+        cycle 1, 2, 3, 4, 5, 6
+      endcapture
+      echo 'product-' | append: index | placeholder_svg_tag: 'placeholder-svg'
+    -%}
+    </figure>
+  </a>  
+  <div class="product-item-details">
+    <h4 class="product-item-title">
+      <a href="{{ routes.all_products_collection_url }}" title="{{ 'product.onboarding.title' | t | escape }}" class="underline keyed">{{ 'product.onboarding.title' | t }} </a>
+    </h4>
+    {% if settings.vendor_enable %}
+      <span class="product-item-vendor">
+        <a href="{{ routes.all_products_collection_url }}" title="{{ 'product.onboarding.vendor' | t | escape }}" tabindex="-1">{{ 'product.onboarding.vendor' | t }}</a>
+      </span>
+    {% endif %}
+  </div>
+  <div class="product-item-details">
+    <div class="product-price product-item-price">
+      <span class="money" data-variant-price>{% if settings.currency_enable %}{{ 'product.onboarding.price' | t | money_with_currency }}{% else %}{{ 'product.onboarding.price' | t | money }}{% endif %}</span>
+    </div>
+  </div>
+  
+</article>

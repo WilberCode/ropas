@@ -1,0 +1,70 @@
+<div class="sticky-menu-container" data-sticky-menu-container>
+
+  {% if enable_filters %}
+    <div class="sticky-menu-slideout sticky-menu-slideout-refine" tabindex="-1" data-sticky-slideout-refine>
+      <div class="sticky-menu-slideout-header relative container">
+        <h5 id="filtering-label">
+          {{ 'collection.refine.title' | t }}
+        </h5>
+        <button class="sticky-menu-slideout-button-dimiss" type="button" aria-label="{{ 'general.form.close' | t | escape }}" data-sticky-menu-slideout-button-dismiss>{%- render 'icons', id: 'close' -%}</button>
+      </div>
+      <div class="sticky-menu-slideout-content scroll-bar-v container">
+        {%- render 'collection.filters', class: 'sticky', enable_filters_color: enable_filters_color, enable_filters_rounded: enable_filters_rounded, enable_filters_label: enable_filters_label, enable_filters_hide: enable_filters_hide -%}
+      </div>    
+    </div>
+  {% endif %}
+
+  {% if enable_sorting %}
+  <div class="sticky-menu-slideout sticky-menu-slideout-sortby" tabindex="-1" data-sticky-slideout-sortby>
+    <div class="sticky-menu-slideout-header relative container">
+      <h5 id="sorting-label">{{ 'collection.sort_by.title' | t }}</h5>
+      <span>
+        <button class="sticky-menu-slideout-button-dimiss" type="button" aria-label="{{ 'general.form.close' | t }}" data-sticky-menu-slideout-button-dismiss>{%- render 'icons', id: 'close' -%}</button>
+      </span>
+    </div>
+    <fieldset class="sticky-menu-slideout-content scroll-bar-v container sticky-sortBy" role="radiogroup" aria-labelledby="sorting-label">
+      {% for option in collection.sort_options %}
+        {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+        <div class="option-value{% if current_sort contains option.value %} option-selected{% endif %}">
+          <label for="{{ option.value }}" 
+                 class="option-value-name">{{ option.name }}</label>
+          <input id="{{ option.value }}"
+                 class="option-value-input" 
+                 type="radio" 
+                 name="sort" 
+                 value="{{ option.value }}"
+                 title="{{ option.name }}"
+                 {% if current_sort contains option.value %} checked{% endif %}
+                 data-sortby-option>
+        </div>
+      {% endfor %}
+    </fieldset>    
+  </div>
+  {% endif %}
+
+  <div class="sticky-menu container">    
+
+    {%- liquid
+      if enable_breadcrumbs
+        render 'breadcrumbs'
+      endif
+    -%}
+
+    {% if enable_filters or enable_sorting %}
+      <div class="sticky-menu-buttons{% unless enable_filters and enable_sorting %} sticky-menu-buttons-one{% endunless %} sticky-menu-buttons-slideout-closed" data-sticky-menu-buttons-default>
+        {% if enable_sorting %}
+        <button class="btn btn-secondary {% if background_color %}alt {% endif %}sticky-menu-button" type="button" data-sticky-menu-button-sortby>{{ 'collection.sort_by.button_title' | t }}</button>
+        {% endif %}
+        {% if enable_filters %}
+        <button class="btn btn-primary {% if background_color %}alt {% endif %}sticky-menu-button" type="button" data-sticky-menu-button-refine>{{ 'collection.refine.button_title' | t }}</button>
+        {% endif %}
+      </div>
+      <div class="sticky-menu-buttons sticky-menu-buttons-slideout-open" data-sticky-menu-buttons-sortby data-sticky-menu-buttons-refine>      
+        <button class="btn btn-secondary {% if background_color %}alt {% endif %}sticky-menu-button" type="button" data-sticky-menu-button-cancel>{{ 'general.form.cancel' | t }}</button>
+        <button class="btn btn-primary {% if background_color %}alt {% endif %}sticky-menu-button" type="button" data-sticky-menu-button-apply>{{ 'general.form.apply' | t }}</button>
+      </div> 
+    {% endif %}   
+
+  </div>
+
+</div>

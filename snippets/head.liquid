@@ -1,0 +1,259 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="{{ settings.color_accent }}">
+<title>{% if request.page_type == '404' %}{{ '404.title' | t }}{% elsif request.page_type == 'password' %}{{ shop.name | escape }}{% if shop.password_message != blank %} {{ shop.password_message }}{% endif %}{% elsif request.page_type == 'gift_card' %}{{ 'giftcard.redeem.title' | t }}{% elsif request.page_type == 'search' %}{{ page_title | escape }}{% else %}{{ page_title | escape }}{% if current_tags %}{%- capture meta_tags -%}{%- for tag in current_tags -%}{{ tag | split: '_' | last | prepend: ' ' }}{%- endfor -%}{%- endcapture -%}{{ 'title.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} | {{ 'title.page' | t: page: current_page }}{% endif %}{% endif %}{% unless page_title contains shop.name or request.page_type == 'password' %} | {{ shop.name | escape }}{% endunless %}</title> 
+{% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+<link rel="canonical" href="{{ canonical_url }}" />
+{% if settings.favicon != blank %}<link rel="icon" href="{{ settings.favicon | image_url: width: 48, height: 48 }}" type="image/png">{% endif %}
+
+{%- liquid
+  if request.page_type == 'product'
+  	assign og_type = 'product'
+  elsif request.page_type == 'article'
+  	assign og_type = 'article'
+  elsif request.page_type == 'collection'
+  	assign og_type = 'product.group'
+  elsif request.page_type == 'password'
+  	assign og_url = shop.url
+  endif
+  assign og_title = page_title | default: shop.name | escape
+  assign og_url = canonical_url | default: shop.url
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: shop.name | escape
+-%}
+
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description }}">
+
+{%- if page_image -%}
+<meta property="og:image" content="http:{{ page_image | image_url }}">
+<meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
+<meta property="og:image:width" content="{{ page_image.width }}">
+<meta property="og:image:height" content="{{ page_image.height }}">
+{%- endif -%}
+
+{%- if request.page_type == 'product' -%}
+<meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+<meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+{%- endif -%}
+
+{%- unless settings.social_x == blank -%}<meta name="twitter:site" content="{{ settings.social_x | split: 'x.com/' | last | split: 'twitter.com/' | last | prepend: '@' }}">{%- endunless -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title }}">
+<meta name="twitter:description" content="{{ og_description }}">
+
+{% assign header_type = settings.header_type | font_url %}
+{%- if header_type != blank -%}<link href="{{ header_type }}" rel="preload" type="font/woff2" as="font" crossorigin>{% endif %}
+{% assign base_type = settings.base_type | font_url %}
+{%- if base_type != blank -%}<link href="{{ base_type }}" rel="preload" type="font/woff2" as="font" crossorigin>{% endif %}
+{% assign label_type = settings.label_type | font_url %}
+{%- if label_type != blank -%}<link href="{{ label_type }}" rel="preload" type="font/woff2" as="font" crossorigin>{% endif %}
+
+{%- render 'cssVariables' -%}
+
+{% style %}
+  .site-main {
+    display:none;
+    opacity:0;
+    transition: opacity 500ms 500ms;
+  }
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }  
+  .spinner, 
+  .youtube-container:after, 
+  .plyr__video-wrapper:after {
+    animation: spin 0.75s ease-in-out infinite;
+    -webkit-animation: spin 0.75s ease-in-out infinite;
+    border: 3px solid transparent;
+    border-top-color: var(--color_accent);
+    border-radius: 100%;
+    height: 50px;
+    left: calc(50% - (50px/2));
+    position: absolute;
+    top: calc(50% - (50px/2));
+    width: 50px;
+    z-index: 1;  
+  }
+  .spinner:before, 
+  .youtube-container:before, 
+  .plyr__video-wrapper:before {
+    border: 1px solid var(--color_accent_modify_25);
+    border-radius: 100%;
+    content:'';
+    height: 48px;
+    left: calc(50% - (48px/2));
+    position: absolute;
+    top: calc(50% - (48px/2));
+    width: 48px;
+  }
+  html {
+    box-sizing: border-box;
+    background:var(--color_background);
+    color: var(--color_text);
+    font-family: var(--body_font);
+    font-size: var(--body_font_size_14);
+    font-style: var(--body_font_style);
+    font-weight: var(--body_font_weight);
+    line-height: 1.35;
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;
+  }
+  html::before {
+    display: none;
+    content: 'S,M,L';
+  }
+  html::after {
+    display: none;
+    content: 'S';    
+  }
+  @media screen and (min-width: 768px) {
+    html::after {
+      content: 'M';
+    }
+  }
+  @media screen and (min-width: 960px) {
+    html::after {
+      content: 'L';
+    }
+  }
+  body {
+    background: var(--color_background);
+    color: var(--color_text);
+    margin: 0;
+    padding:0;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  *,*::before,*::after {box-sizing: inherit;}
+  summary {list-style: none;}
+  summary::-webkit-details-marker {display: none;}
+  audio,canvas,video{display:inline-block}
+  audio:not([controls]){display:none;height:0}
+  [hidden],.hidden,[data-product-gallery-layout=gallery-left] .slider:not(.slider-loaded) .product-gallery--viewport--figure:not([data-product-gallery-selected="true"]),[data-product-gallery-layout=gallery-right] .slider:not(.slider-loaded) .product-gallery--viewport--figure:not([data-product-gallery-selected="true"]){display:none}
+  a{color: var(--color_text);transition: color 250ms var(--ease_out_cubic),outline-offset 250ms var(--ease_out_cubic);}
+  a:hover{color: var(--color_text_hover);}
+  abbr[title]{border-bottom:1px dotted}
+  b,strong{font-weight:var(--body_font_weight_bold)}
+  dfn,em{font-style:italic;}
+  em strong{font-style:italic;font-weight:var(--body_font_weight_bold)}
+  hr{border-top:1px solid var(--color_border);-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+  mark{background: var(--button_primary_background);color: var(--button_primary_text);padding: 2px;}
+  code,kbd,pre,samp{font-family:monospace, serif;font-size:var(--body_font_size_12)}
+  pre{white-space:pre-wrap}
+  q{quotes:"\201C" "\201D" "\2018" "\2019"}
+  small{font-size:80%}
+  sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+  sup{top:-0.5em}
+  sub{bottom:-0.25em}
+  svg:not(:root){overflow:hidden}
+  figure{margin:0}
+  legend{border:0;padding:0}
+  button,input,select,textarea{background:inherit;color:inherit;font-family:inherit;font-size:100%;margin:0;}
+  button,input{line-height:normal}
+  button,select{text-transform:none}
+  button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+  button[disabled],html input[disabled]{cursor:no-drop!important}
+  input[type="checkbox"],input[type="radio"] {-webkit-appearance: none;-moz-appearance: none;appearance: none;border: 1px solid var(--color_border);box-sizing:border-box;cursor:pointer;margin-right:4px;padding:2px;transition: 250ms;}
+  input[type="checkbox"]:checked,input[type="radio"]:checked {background: var(--color_text) content-box;border-color: var(--color_border);}  
+  input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+  input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+  button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+  textarea{overflow:auto;vertical-align:top}
+  img {border: 0;height: auto;max-width: 100%;vertical-align: top;}
+  img[loading=lazy],img[loading=eager] {background: var(--color_background);opacity:0;transition: opacity 250ms var(--ease_out_quad);width:100%;}
+  table{border-collapse:collapse;border-spacing:0;color: var(--color_text);display:table;margin:0 0 20px;width:100%}
+  th,td{font-size:90%;padding: 2px;vertical-align:baseline;}
+  td{border:1px solid var(--color_border);}
+  p,ul,ol {color: var(--color_text);margin:0 0 20px;}
+  ul,ol {list-style-position: inside;}
+  blockquote{color: var(--color_text);font-style:italic;font-weight:var(--body_font_weight_lighter);font-size:var(--body_font_size_16);line-height:calc(var(--body_font_size_16) * 1.25);font-family:var(--body_font);border-left:3px solid var(--color_border);padding-left:var(--body_font_size_14);margin-bottom:calc(var(--body_font_size_14) + var(--body_font_size_14) / 4);margin-left:0px}
+  *{border:0;margin:0;padding:0;}
+  iframe {border:none;z-index:2;}
+  svg.placeholder-svg {background: var(--color_background_darken_5);}  
+  .relative {position:relative;}
+  .skip-to {display: block;font-size:var(--body_font_size_14);padding:10px 0;position:absolute;top:-999px;width: 100%;}
+  .skip-to.product {left: -100%;padding:10px;top:0;width: auto;z-index: 1;}
+  .rtl .skip-to.product {left: unset;right:-100%;}
+  .slider {overflow-x: auto;overflow-y: hidden;}  
+  .slider.vertical {overflow-x: hidden;overflow-y: auto;}
+  .slideshow .slider.large,.slideshow.slider.large {overflow: hidden;white-space: nowrap;position: relative;}
+  .slider.large.vertical {height:100%;-webkit-overflow-scrolling: touch;}  
+  .slider.slider-enabled {cursor: pointer;display: flex;flex-wrap: nowrap;gap: 30px;-webkit-overflow-scrolling: touch;position: relative;white-space: nowrap;}
+  .slideshow-slide {width:100%;}
+  .slider-v {display:none;}
+  @media screen and (min-width: 768px) {
+    .slider.large.vertical button.product-gallery--media-thumbnail,.slider.large.vertical figure {display: block;}
+  }
+  .slide {display: inline-block;}  
+  @media screen and (min-width: 640px) {
+    .slider-loading .slide:not(.active) {display:none;}
+  }
+  @media screen and (max-width: 959px) {    
+    .slider .article-excerpt {width: 400px;}    
+    .slider.medium {cursor: pointer;-webkit-overflow-scrolling: touch;position: relative;white-space: nowrap;}    
+  }
+  .shopify-model-viewer-ui {
+    --progress-bar-color: var(--color_accent);
+    --progress-bar-height: 2px;
+  }         
+  @supports not selector(::-webkit-scrollbar) {
+    .scroll-bar-v,
+    .scroll-bar-h {
+      scrollbar-color: var(--color_accent) var(--color_accent_modify_25);
+      scrollbar-width: thin;
+    }
+  }
+  .scroll-bar-v::-webkit-scrollbar,
+  .scroll-bar-h::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+  }
+  .scroll-bar-v::-webkit-scrollbar-track,
+  .scroll-bar-h::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 16px 16px var(--color_accent_modify_25);
+    border: solid 7px transparent;
+    border-radius: 16px;
+    margin:4px 0;
+  }
+  .scroll-bar-h::-webkit-scrollbar-track {
+    margin:0 4px;
+  }
+  .scroll-bar-v::-webkit-scrollbar-thumb,
+  .scroll-bar-h::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 16px 16px var(--color_accent);
+    border: solid 6px transparent;
+    border-radius: 16px;
+  }
+{% endstyle %}
+
+{{ 'styles.header.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'styles.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'styles.product.css' | asset_url | stylesheet_tag }}
+{{ 'styles.footer.css' | asset_url | stylesheet_tag }}
+{{ 'styles.all.ph.css' | asset_url | stylesheet_tag }}
+
+{%- if request.page_type == 'collection' or request.page_type == 'search' -%}{{ 'styles.collection.css' | asset_url | stylesheet_tag }}{%- endif -%}
+{%- if request.page_type == 'page' or request.page_type == 'blog' or request.page_type == 'article' or request.page_type == 'search' or request.page_type == 'list-collections' or request.page_type == 'password' or request.page_type == '404' or request.page_type == blank -%}{{ 'styles.templates.css' | asset_url | stylesheet_tag }}{%- endif -%}
+{%- if request.page_type == 'cart' -%}{{ 'styles.cart.css' | asset_url | stylesheet_tag }}{%- endif -%}
+{%- if request.page_type contains 'customers/' -%}{{ 'styles.customers.css' | asset_url | stylesheet_tag }}{%- endif -%}  
+{%- if request.page_type == 'gift_card' -%}{{ 'styles.gift.css' | asset_url | stylesheet_tag }}{%- endif -%}
+
+<noscript>{{ 'styles.noscript.css' | asset_url | stylesheet_tag: preload: true }}</noscript>

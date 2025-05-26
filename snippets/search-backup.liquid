@@ -1,0 +1,76 @@
+<predictive-search>
+  <form action="{{ routes.search_url }}" method="get" role="search" id="search-{{ section.id }}{{ id }}" class="{% if mobile %}mobilenav-search {% endif %}search search-form search-form-{{ section.id }} relative" header-search-form>
+          
+    {% if icon %}<div class="search-form-icon">{%- render 'icons', id: 'search', size: 18 -%}</div>{% endif %}
+    {% if mobile %}<div class="mobilenav-search-icon">{%- render 'icons', id: 'search', size: 20 -%}</div>{% endif %}
+
+    <label for="search-form{{ id }}-{{ section.id }}" class="visually-hidden">{{ 'search.form.title' | t }}</label>
+    <input id="search-form{{ id }}-{{ section.id }}"
+           class="{% if mobile %}mobilenav-search-input no-pad{% else %}search-field search-form-input search-field-{% if icon %}icon{% else %}header{% endif %}{% endif %}"
+           type="text"
+           name="q"
+           value="{% unless mobile %}{{ search.terms | escape }}{% endunless %}" 
+           placeholder="{{ 'search.form.placeholder' | t | escape }}" 
+           {%- if settings.search_predictive_enable -%}
+           role="combobox"
+           aria-expanded="false"
+           aria-owns="predictive-search-results-list"
+           aria-controls="predictive-search-results-list"
+           aria-haspopup="listbox"
+           {%- endif -%}
+           aria-autocomplete="list"
+           autocorrect="off"
+           autocomplete="off"
+           autocapitalize="off"
+           spellcheck="false"
+           header-search-form>
+    
+    <input type="hidden" name="options[prefix]" value="last" />
+
+    <button type="button" class="predictive-search-dimiss keyed-skip" aria-label="{{ 'general.form.close' | t }}" data-predictive-search-dismiss>{%- render 'icons', id: 'close', size: 18 -%}</button>
+
+    {% if settings.search_predictive_enable %}
+
+      {%- liquid
+        capture search_fields
+          if settings.search_predictive_author
+            echo 'author,'
+          endif
+          if settings.search_predictive_body
+            echo 'body,'
+          endif
+          if settings.search_predictive_product_type
+            echo 'product_type,'
+          endif
+          if settings.search_predictive_tag
+            echo 'tag,'
+          endif
+          if settings.search_predictive_title
+            echo 'title,'
+          endif
+          if settings.search_predictive_variants_barcode
+            echo 'variants.barcode,'
+          endif
+          if settings.search_predictive_variants_sku
+            echo 'variants.sku,'
+          endif
+          if settings.search_predictive_variants_title
+            echo 'variants.title,'
+          endif
+          if settings.search_predictive_vendor
+            echo 'vendor,'
+          endif
+        endcapture
+      -%}
+  
+      <div class="predictive-search{% if icon %} predictive-search-page{% if four %} predictive-search-four{% endif %}{% endif %} search-results inline text-left unformatted rows-{{ rows }} slider-v" 
+           tabindex="-1" 
+           data-predictive-search
+           data-search-enable="{{ settings.search_predictive_enable }}"
+           data-search-limit="{{ settings.search_predictive_limit }}"
+           data-search-fields="{% if search_fields != blank %}{{ search_fields | remove_last: ',' }}{% else %}title{% endif %}"></div>
+    
+    {% endif %}
+
+  </form>
+</predictive-search>

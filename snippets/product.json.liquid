@@ -1,0 +1,29 @@
+{% unless product == empty %}
+<script id="ProductJson-{{ section.id }}"
+        type="application/json"
+        data-section-id="{{ section.id }}"
+        data-section-data>
+  {
+    "enable_cart_redirection": {{ enable_cart_redirection | json }},
+    "form_is_inline": {{ enable_inline_form | json }},
+    "gallery_video_autoplay": {{ gallery_video_autoplay | json }},
+    "gallery_video_looping": {{ gallery_video_looping | json }},
+    "has_only_default_variant": {{ product.has_only_default_variant }},
+    "initial_variant_id": {{ product.selected_or_first_available_variant.id }},
+    "onboarding": {{ section_onboarding | json }},
+    "option_type": {{ variant_enable | json }},
+    "product": {{ product | json }},   
+    "product_variants": {{ product.options_with_values | json }},
+    "template": {{ template | json }},    
+    "text": {
+      "added_to_cart_link": {{ added_to_cart_link | json }},
+      "product_available": {{ form_text | json }},
+      "product_unavailable": {{ 'product.add_to_cart.unavailable' | t | json }}
+    }, 
+    "use_history": {{ use_history }}
+  }
+</script>
+<script type="application/json" id="ModelJson-{{ section.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+</script>
+{% endunless %}

@@ -1,0 +1,757 @@
+{% if section.blocks.size > 0 %}
+
+  {%- liquid
+    assign background_color = false
+    if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background
+    endif  
+    if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background_gradient
+    endif
+  -%}
+  
+  {% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+      --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+      --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+      --grid-mobile: {{ section.settings.padding_grid_mobile }}px;
+      --grid-desktop: {{ section.settings.padding_grid_desktop }}px;
+      {%- if background_color -%}
+      --color_background:{{ background_color_section }};
+      {%- endif -%}
+    }
+  {% endstyle %}
+  
+  <div class="dynamic-section dynamic-section-{{ section.id }}">
+    <section data-section-id="{{ section.id }}" 
+             data-section-type="gallery-{{ section.id }}">
+      
+      <div class="{% if section.blocks.size > 0 %}image-gallery {% endif %}section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}">
+
+        {%- liquid
+          assign NN = 0
+          assign RR = 1
+          capture rows
+            for block in section.blocks
+              assign NN = NN | plus: block.settings.block_columns
+              if NN > 4
+                assign NN = 0 | plus: block.settings.block_columns
+                assign RR = RR | plus: 1
+              endif
+              case block.settings.block_columns
+                when 1
+                  assign size = 310
+                when 2
+                  assign size = 620
+                when 3
+                  assign size = 930
+                when 4
+                  assign size = 1240
+              endcase
+              echo 'row-'
+              echo RR
+              echo '~'
+              echo size
+              echo ','
+            endfor
+          endcapture
+          assign rows =  rows | split: ','
+          assign n = 0
+          assign r = 1
+        -%}
+
+        {% for block in section.blocks %}
+
+          {%- liquid
+            assign section_onboarding = false
+            if block.settings.block_img_desktop == blank and block.settings.block_img_mobile == blank
+              assign section_onboarding = true
+            endif
+            case block.settings.block_columns
+              when 1
+                assign size = 310
+                assign sizes = '(min-width: 1280px) 310px, 25vw'
+              when 2
+                assign size = 620
+                assign sizes = '(min-width: 1280px) 620px, (min-width: 960px) calc(50vw - 40px), 50vw'
+              when 3
+                assign size = 930
+                assign sizes = '(min-width: 1280px) 930px, (min-width: 960px) calc(75vw - 40px), 75vw'
+              when 4
+                assign size = 1240
+                assign sizes = '(min-width: 1280px) 1240px, (min-width: 960px) calc(100vw - 40px), 100vw'
+            endcase
+            if block.settings.enable_lazy
+              assign lazy = 'lazy'
+            else
+              assign lazy = 'eager'
+            endif
+          -%}
+
+          {% if block.settings.block_img_desktop != blank or section_onboarding %}
+      
+            {%- liquid
+              assign img_src = block.settings.block_img_desktop
+              capture alt
+                if img_src.alt != blank
+                  echo img_src.alt
+                else
+                  echo img_src | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize
+                endif
+              endcapture
+            -%}
+            
+            <div class="{{ block.settings.insta_filter }} image-gallery-block{% if section_onboarding %} image-gallery-block-onboarding{% endif %} columns-{{ block.settings.block_columns }}{% if block.settings.block_img_mobile != blank or section_onboarding %} desktop{% endif %} relative{% unless section_onboarding %} height-padding-{{ section.settings.image_height }}{% endunless %}" {{ block.shopify_attributes }}>
+
+              {%- liquid
+                assign n = n | plus: block.settings.block_columns
+                if n > 4
+                  assign n = 0 | plus: block.settings.block_columns
+                  assign r = r | plus: 1
+                endif
+                capture row
+                  echo 'row-'
+                  echo r
+                endcapture
+                capture newArray
+                  for x in rows
+                    if x contains row
+                      echo x | split: '~' | last
+                      echo ','
+                    endif
+                  endfor
+                endcapture
+                assign newArray =  newArray | split: ',' | sort_natural
+                assign new_size = newArray | last | times: 1.0
+                if block.settings.block_img_desktop
+                  if section.settings.image_height == 'original'
+                    render 'image.load', img_src: img_src, size: size, new_size: size, sizes: sizes, alt: alt, lazy: lazy
+                  else
+                    render 'image.load', img_src: img_src, size: size, new_size: new_size, padding: section.settings.image_height, sizes: sizes, alt: alt, background: true, lazy: lazy
+                  endif
+                endif
+                if section_onboarding
+                  capture current
+                    cycle 1, 2, 3, 4, 5, 6
+                  endcapture
+                  echo 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg'
+                endif
+                if block.settings.link != blank
+                  echo '<a class="section-layout-link keyed-inside" href="'
+                  echo block.settings.link
+                  echo '" title="'
+                  echo alt | escape
+                  echo '"></a>'
+                endif
+              -%}
+            </div>
+      
+          {% endif %}
+
+          {% if block.settings.block_img_mobile != blank or section_onboarding %}
+      
+            {%- liquid
+              assign img_src = block.settings.block_img_mobile
+              capture alt
+                if img_src.alt != blank
+                  echo img_src.alt
+                else
+                  echo img_src | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize
+                endif
+              endcapture
+            -%}
+
+            <div class="{{ block.settings.insta_filter_mobile }} image-gallery-block{% if section_onboarding %} image-gallery-block-onboarding{% endif %} columns-{{ block.settings.block_columns }}{% if block.settings.block_img_desktop != blank or section_onboarding %} mobile{% endif %} relative{% unless section_onboarding %} height-padding-{{ section.settings.image_height }}{% endunless %}" {{ block.shopify_attributes }}>
+              {%- liquid
+                if block.settings.block_img_mobile                   
+                  if section.settings.image_height == 'original'
+                    render 'image.load', img_src: img_src, size: size, new_size: size, sizes: sizes, alt: alt, lazy: lazy
+                  else
+                    render 'image.load', img_src: img_src, size: size, new_size: new_size, padding: section.settings.image_height, sizes: sizes, alt: alt, background: true, lazy: lazy
+                  endif
+                endif              
+                if section_onboarding
+                  capture current
+                    cycle 1, 2, 3, 4, 5, 6
+                  endcapture
+                  echo 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg'
+                endif              
+                if block.settings.link != blank
+                  echo '<a class="section-layout-link keyed-inside" href="'
+                  echo block.settings.link
+                  echo '" title="'
+                  echo alt | escape
+                  echo '"></a>'
+                endif
+              -%}
+            </div>
+      
+          {% endif %}
+
+        {% endfor %}
+        
+      </div>
+    </section>
+  </div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.gallery.content",
+    "settings": [
+      {
+        "type": "range",
+        "id": "padding_grid_mobile",
+        "label": "t:sections.general.padding.mobile.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "padding_grid_desktop",
+        "label": "t:sections.general.padding.desktop.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "select",
+        "id": "image_height",
+        "label": "t:sections.image.height.label",
+        "options": [
+          {
+            "value": "25",
+            "label": "t:sections.general.height.small.label"
+          },
+          {
+            "value": "50",
+            "label": "t:sections.general.height.medium.label"
+          },
+          {
+            "value": "75",
+            "label": "t:sections.general.height.large.label"
+          },
+          {
+            "value": "original",
+            "label": "t:sections.general.height.original.label"
+          }
+        ],
+        "default": "original"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "margin_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "t:sections.image.title.label",
+        "settings": [
+          {
+            "id": "enable_lazy",
+            "type": "checkbox",
+            "label": "t:sections.general.lazy.multiple.label",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "block_img_desktop",
+            "label": "t:sections.image.title.desktop.label",
+			"info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+			  {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "type": "image_picker",
+            "id": "block_img_mobile",
+            "label": "t:sections.image.title.mobile.label",
+			"info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter_mobile",
+            "label": "t:sections.image.insta.label",
+            "options": [
+			  {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.general.link.title.label"
+          },
+          {
+            "type": "range",
+            "id": "block_columns",
+            "label": "t:sections.image.column.label",
+            "min": 1,
+            "max": 4,
+            "step": 1,
+            "default": 2
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.section.titles.gallery.content",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+	  "templates": ["password"]
+    }
+  }
+{% endschema %}

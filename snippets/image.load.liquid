@@ -1,0 +1,203 @@
+{%- liquid   
+  capture img_height
+    if img_src.width < size
+      echo img_src.height
+    else
+      echo size | divided_by: img_src.aspect_ratio
+    endif
+  endcapture
+  assign img_height = img_height | round
+  capture img_width
+    if img_src.width < size
+      echo img_src.width
+    else
+      echo size
+    endif
+  endcapture
+  assign img_width = img_width | round
+  assign alt = alt | escape
+  capture widths_set
+    unless logo
+      if size < 620
+        if img_src.width >= 310 and size > 310
+          echo '310, '
+          unless size == 310  
+            echo size | append: ', '
+          endunless
+        else
+          echo size | append: ', '
+        endif
+      else
+        echo '310, '
+      endif        
+      if img_src.width >= 620 and size >= 620
+        echo '620, '
+      endif
+      if img_src.width >= size and size > 620 and size < 768
+        echo size | append: ', '
+      endif
+      if img_src.width >= 768 and size >= 768
+        echo '768, '
+      endif
+      if img_src.width >= size and size > 768 and size < 930
+        echo size | append: ', '
+      endif
+      if img_src.width >= 930 and size >= 930
+        echo '930, '
+      endif
+      if img_src.width >= size and size > 930 and size < 1240
+        echo size | append: ', '
+      endif
+      if img_src.width >= 1240 and size >= 1240
+        echo '1240, '
+      endif
+      if full_width and img_src.width >= 1430
+        echo '1430, '
+      endif
+      if full_width and img_src.width >= 1640
+        echo '1640, '
+      endif
+      if full_width and img_src.width >= 1900
+        echo '1900, '
+      endif
+      if full_width and img_src.width >= 2240
+        echo '2240, '
+      endif
+      if full_width and img_src.width >= 2560
+        echo '2560, '
+      endif
+      if full_width and img_src.width >= 3440
+        echo '3440, '
+      endif
+    else
+      echo size | times: 2
+    endunless
+  endcapture
+  assign widths = widths_set | remove_last: ', '
+  capture class
+    if img_src.aspect_ratio > 1
+      echo 'landscape default'
+    elsif img_src.aspect_ratio < 1
+      echo 'vertical'
+    else
+      echo 'square default'
+    endif
+    if background
+      echo ' lazybackground'
+    endif   
+    if class != blank
+      echo ' '
+      echo class
+    endif
+  endcapture
+  if lazy != blank
+    assign lazy = lazy
+  else
+    assign lazy = 'lazy'
+  endif
+  capture style
+    if background or loop
+      unless full_width or crop == false
+        assign max_height = padding | divided_by: 100.0 | times: new_size | round
+        assign max_width = size      
+        echo 'max-height:'
+        if img_src.height < max_height
+          echo img_src.height
+        else
+          echo max_height
+        endif
+        echo 'px;'
+        echo 'max-width:'
+        if img_src.width < max_width
+          echo img_src.width
+        else
+          echo max_width
+        endif
+        echo 'px;'
+      endunless
+    else
+      echo 'aspect-ratio:'
+      echo img_src.aspect_ratio
+      echo ';'
+      echo 'max-height:'
+      echo img_height
+      echo 'px;'
+      echo 'max-width:'
+      echo img_width
+      echo 'px;'
+    endif      
+  endcapture
+-%}
+{% unless logo %}
+  {%- liquid
+    if background or loop and crop
+      assign padding = padding | divided_by: 100.0
+      assign container_width = size | times: 1.0
+      if full_width
+        assign container_height = img_src.height | times: padding | round
+      else
+        assign container_height = padding | times: new_size | round
+      endif
+      assign img_src_width = img_src.width | times: 1.0 | round
+      assign img_src_height = img_src.height | times: 1.0 | round
+      assign image_height = size | divided_by: img_src.aspect_ratio | round
+      if image_height > container_height and new_size == size
+        assign crop_height = img_src_width | times: padding
+        if image_position != blank
+          assign y = image_position | split: '-' | last | divided_by: 100.0 | times: img_src_height | round
+        else
+          assign y = img_src.presentation.focal_point.y | divided_by: '100' | times: img_src_height | round
+        endif
+        assign y_full = crop_height
+        assign y_half = y_full | divided_by: 2
+        assign y_high = y | plus: y_half
+        assign y_low = y | minus: y_half
+        if y_high > img_src_height
+          assign y = img_src_height | minus: y_full
+        elsif y_low < 1
+          assign y = 0
+        else
+          assign y = y | minus: y_half
+        endif
+        if y < 0
+          assign y = 0
+        endif
+        echo img_src | image_url: crop: 'region', crop_left: 0, crop_top: y, crop_width: img_src_width, crop_height: crop_height | image_tag: alt: alt, widths: widths, class: class, loading: lazy, fetchpriority: fetch, style: style, sizes: sizes
+      else
+        assign width = container_height | times: img_src.aspect_ratio | times: 1.0 | round
+        assign crop_width = container_width | divided_by: width | times: img_src_width | round
+        if image_position != blank
+          assign x = image_position | split: '-' | first | divided_by: 100.0 | times: img_src_width | round
+        else
+          assign x = img_src.presentation.focal_point.x | divided_by: '100' | times: img_src_width | round
+        endif
+        assign x_full = crop_width
+        assign x_half = x_full | divided_by: 2
+        assign x_high = x | plus: x_half
+        assign x_low = x | minus: x_half
+        if x_high > img_src_width
+          assign x = img_src_width | minus: x_full
+        elsif x_low < 1
+          assign x = 0
+        else
+          assign x = x | minus: x_half
+        endif
+        if x < 0
+          assign x = 0
+        endif
+        echo img_src | image_url: crop: 'region', crop_left: x, crop_top: 0, crop_width: crop_width, crop_height: img_src_height | image_tag: alt: alt, widths: widths, class: class, loading: lazy, fetchpriority: fetch, style: style, sizes: sizes
+      endif
+    else
+      echo img_src | image_url: width: img_src.width | image_tag: alt: alt, widths: widths, class: class, loading: lazy, fetchpriority: fetch, style: style, sizes: sizes
+    endif
+  -%}
+{% else %}
+  <img src="{{ img_src | image_url: width: size }}"
+       alt="{{ alt }}"
+       srcset="{{ img_src | image_url: width: size }} 1x, {{ img_src | image_url: width: widths }} 2x"
+       width="{{ img_width }}"
+       height="{{ img_height }}"
+       class="{{ class }}"
+       loading="{{ lazy }}"
+       style="{{ style }}">
+{% endunless %}

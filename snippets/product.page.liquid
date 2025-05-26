@@ -1,0 +1,28 @@
+<div class="product-rte rte product-block{% if enable_slide %} product-slide{% endif %}" {{ block.shopify_attributes }}>
+  <div class="product-slide-content" data-height>
+    <div class="product-slide-space">
+      {% if page != blank %}
+        {{ pages[page].content }}
+      {% else %}
+        <p>{{ 'general.onboarding.no_body' | t }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {%- liquid      
+    if enable_slide
+      capture title
+        if heading != blank
+          echo heading
+        else
+          echo 'product.show_more' | t
+        endif
+      endcapture
+      echo '<button type="button" title="'
+      echo title | escape
+      echo '" class="product-slide-btn">'
+      echo title
+      echo '<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>'
+      echo '</button>'
+    endif
+  -%}
+</div>

@@ -1,0 +1,63 @@
+{%- liquid 
+  if settings.social_facebook != blank
+    assign title = 'general.social.facebook_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'facebook', title: title, url: settings.social_facebook
+  endif
+  if settings.social_threads != blank
+    assign title = 'general.social.threads_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'threads', title: title, url: settings.social_threads
+  endif
+  if settings.social_x != blank
+    assign title = 'general.social.x_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'x', title: title, url: settings.social_x
+  endif
+  if settings.social_pinterest != blank
+    assign title = 'general.social.pinterest_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'pinterest', title: title, url: settings.social_pinterest
+  endif
+  if settings.social_instagram != blank
+    assign title = 'general.social.instagram_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'instagram', title: title, url: settings.social_instagram
+  endif
+  if settings.social_tiktok != blank
+    assign title = 'general.social.tiktok_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'tiktok', title: title, url: settings.social_tiktok
+  endif
+  if settings.social_snapchat != blank
+    assign title = 'general.social.snapchat_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'snapchat', title: title, url: settings.social_snapchat
+  endif
+  if settings.social_tumblr != blank
+    assign title = 'general.social.tumblr_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'tumblr', title: title, url: settings.social_tumblr
+  endif
+  if settings.social_whatsapp != blank
+    assign title = 'general.social.whatsapp_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'whatsapp', title: title, url: settings.social_whatsapp
+  endif
+  if settings.social_linkedin != blank
+    assign title = 'general.social.linkedin_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'linkedin', title: title, url: settings.social_linkedin
+  endif
+  if settings.social_youtube != blank
+    assign title = 'general.social.youtube_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'youtube', title: title, url: settings.social_youtube
+  endif
+  if settings.social_vimeo != blank
+    assign title = 'general.social.vimeo_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'vimeo', title: title, url: settings.social_vimeo
+  endif
+  if settings.social_medium != blank
+    assign title = 'general.social.medium_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'medium', title: title, url: settings.social_medium
+  endif
+  if settings.social_rss != blank
+    assign title = 'general.social.rss_html' | t: shop: shop.name | escape
+    render 'social.link', id: 'rss', title: title, url: settings.social_rss
+  endif
+  if settings.social_email != blank
+    assign url = 'mailto:' | append: settings.social_email
+    assign title = 'general.social.email' | t
+    render 'social.link', id: 'email', title: title, url: url
+  endif
+-%}

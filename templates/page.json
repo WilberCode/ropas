@@ -1,0 +1,177 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1aef2aa3-2b50-4512-b360-13c3c2f65302": {
+      "type": "section-image-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "{{ page.title }}",
+        "title_h1": true,
+        "title_outline": "title-outline title-outline-1",
+        "title_size": 48,
+        "title_sub": "Highlight a popular product collection",
+        "title_sub_outline": "none",
+        "title_sub_size": 72,
+        "text_border": true,
+        "content": "<p>Say a bit about your brand, a specific product, or promotion<\/p>",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": true,
+        "layout": "overlay-center-center",
+        "content_width": 100,
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "rgba(0,0,0,0)",
+        "text_background_gradient": "",
+        "text_background_opacity": 0,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 50,
+        "enable_lazy": false,
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "title_enable": false,
+        "title_outline": "none",
+        "title_size": 48,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "rgba(0,0,0,0)",
+        "section_color_hover": "rgba(0,0,0,0)",
+        "section_line": "rgba(0,0,0,0)",
+        "background": "#f4f4f4",
+        "background_gradient": "",
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 20,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "aff3cc06-f99d-409a-b0d9-5e598c8ab4f6": {
+      "type": "section-image-with-text",
+      "blocks": {
+        "template--21569855455544__aff3cc06-f99d-409a-b0d9-5e598c8ab4f6-content-1": {
+          "type": "content",
+          "settings": {
+            "block_title": "Nuestra Pasión",
+            "block_title_h1": false,
+            "block_title_outline": "none",
+            "block_title_size": 24,
+            "block_title_sub": "",
+            "block_title_sub_outline": "title-outline title-outline-1",
+            "block_title_sub_size": 48,
+            "text_border": true,
+            "block_text": "<p>Trabajamos en lo que nos apasiona y representamos marcas que tengan valores respecto por nuestra cultura y el medioambiente.<\/p><p><br\/>Priorizamos la sostenibilidad, el uso de materiales reciclados y los métodos de producción ecológicos con el fin de minimizar nuestro impacto ambiental y proteger los océanos y nuestras olas.<\/p>",
+            "link": "",
+            "button_text": "Read More",
+            "link_style": "text",
+            "title_alignment": "left",
+            "block_columns": 2,
+            "enable_lazy": true,
+            "image_desktop": "shopify:\/\/shop_images\/tienda_ph_surf.jpg",
+            "insta_filter": "none",
+            "image_mobile": "shopify:\/\/shop_images\/tienda_ph_surf.jpg",
+            "insta_filter_mobile": "none",
+            "desktop_alignment": "left",
+            "mobile_alignment": "top"
+          }
+        },
+        "content_PPrW9r": {
+          "type": "content",
+          "settings": {
+            "block_title": "Nuestra Naturaleza",
+            "block_title_h1": false,
+            "block_title_outline": "none",
+            "block_title_size": 24,
+            "block_title_sub": "",
+            "block_title_sub_outline": "none",
+            "block_title_sub_size": 30,
+            "text_border": true,
+            "block_text": "<p>PH Surf Supplies se fundó en el año 2017 con el objetivo de comercializar accesorios de surf eco-amigables y de alta calidad que sean funcionales, duraderos y elegantes. Nuestra prioridad es el Medio Ambiente y la comunidad Punta Hermosina en la que convivimos. Por esta razón, priorizamos la sostenibilidad, el uso de materiales reciclados y los métodos de producción ecológicos.<\/p><p>Nos esforzamos constantemente por minimizar nuestro impacto ambiental y proteger los océanos y nuestras olas. Por lo tanto, trabajamos con proveedores que comparten nuestros valores y compromisos ambientales como VISSLA, SISSTRE y AMUSE. Los cuales utilizan materiales eco amigables & Ocean Friendly como los Coconut Boardshorts, Eco seas wetsuits, Organic Tees, Eco-Shorts, Eco-Shirts, Eco-Zy y Eco-Lastics.<\/p><p>Somos conscientes que el surfing te puede llevar por muchos caminos, pero nosotros buscamos que toda la comunidad surfer comparta el mismo estilo de vida y la misma pasión por el mar y sus olas. Buscamos ayudar a los tablistas a conectarse con el medio ambiente y a surfear de manera más consciente y respetuosa. Sin importar si eres un competidor profesional, free surfer o un apasionado; nuestra filosofía “Surf Everything & Ride Anything” y nuestros productos te ayudarán a divertirte al máximo en cada sesión y a disfrutar cada ola como si fuese la última.<\/p>",
+            "link": "",
+            "button_text": "Read More",
+            "link_style": "text",
+            "title_alignment": "right",
+            "block_columns": 2,
+            "enable_lazy": true,
+            "image_desktop": "shopify:\/\/shop_images\/febiyan-hfrKpacEucE-unsplash_ver2.png",
+            "insta_filter": "none",
+            "insta_filter_mobile": "none",
+            "desktop_alignment": "right",
+            "mobile_alignment": "top"
+          }
+        }
+      },
+      "block_order": [
+        "template--21569855455544__aff3cc06-f99d-409a-b0d9-5e598c8ab4f6-content-1",
+        "content_PPrW9r"
+      ],
+      "settings": {
+        "title": "",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "padding_grid_mobile": 0,
+        "padding_grid_desktop": 0,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 10,
+        "padding_border": true
+      }
+    }
+  },
+  "order": [
+    "1aef2aa3-2b50-4512-b360-13c3c2f65302",
+    "main",
+    "aff3cc06-f99d-409a-b0d9-5e598c8ab4f6"
+  ]
+}

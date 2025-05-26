@@ -1,0 +1,26 @@
+{%- assign name = input_name | default: 'quantity' -%}
+
+<div class="quantity" data-quantity {{ block.shopify_attributes }}>
+
+  <button class="quantity-decrement keyed-skip" 
+          type="button" 
+          aria-label="{{ 'general.form.decrement' | t | escape }}" 
+          data-quantity-decrement{% unless value %} disabled{% endunless %}>{%- render 'icons', id: 'minus', size: 16 -%}</button>
+
+  <label class="visually-hidden"
+         for="quantity-{{ section.id }}{{ variant.id }}">{{ 'general.form.input_quantity' | t }}</label>
+  <input id="quantity-{{ section.id }}{{ variant.id }}"
+         class="quantity-input{% if sticky %} sticky{% endif %}" 
+         type="number" 
+         name="{{ name | escape }}" 
+         min="{% if value %}0{% else %}{% unless variant.available %}0{% else %}1{% endunless %}{% endif %}" 
+         {% if variant.inventory_management and variant.inventory_policy != 'continue' %} max="{{ variant.inventory_quantity }}"{% endif %} 
+         value="{% if value %}{{ value }}{% else %}{% unless variant.available %}0{% else %}1{% endunless %}{% endif %}" 
+         data-quantity-input>
+
+  <button class="quantity-increment keyed-skip" 
+          type="button" 
+          aria-label="{{ 'general.form.increment' | t | escape }}" 
+          data-quantity-increment{% if variant.inventory_management and variant.inventory_policy != 'continue' and variant.inventory_quantity == 1 or value >= variant.inventory_quantity %} disabled{% else %}{% unless variant.available %} disabled{% endunless %}{% endif %}>{%- render 'icons', id: 'plus', size: 16 -%}</button>
+
+</div>

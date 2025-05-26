@@ -1,0 +1,225 @@
+<div id="filters" class="visible {% if class == 'static' %}slideout-content-scroll slider-v{% else %}sticky-menu-slideout-content-scroll{% endif %}" data-revealer-visible="true">
+  
+  {% capture active %}
+    {%- for filter in collection.filters -%}
+      {%- if filter.type == "price_range" -%}
+        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+          {%- assign min_value = filter.min_value.value | default: 0 -%}
+          {%- assign min = min_value | money -%}
+          {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+          {%- assign max = max_value | money -%}
+          <span class="collection-sortby-option collection-sortby-option-selected"><a href="{{ filter.url_to_remove }}" title="{{ 'collection.refine.remove_min_max' | t: min: min, max: max | escape }}" class="keyed-inside" data-refine="{{ filter.url_to_remove | split: '?' | last | split: '&sort' | first | escape  }}" data-filter-option><span class="collection-filter-remove">{%- render 'icons', id: 'close', size: 8 -%}</span>{{ min_value | money }} - {{ max_value | money }}</a></span>
+        {%- endif -%}
+      {%- else -%}
+        {%- for filter_value in filter.active_values -%}
+          <span class="collection-sortby-option collection-sortby-option-selected">
+            <a href="{{ filter_value.url_to_remove }}" title="{{ 'collection.refine.remove_filter' | t: label: filter.label, value: filter_value.label | escape }}" class="keyed-inside" data-refine="{{ filter_value.url_to_remove | split: '?' | last | split: '&sort' | first | escape  }}" data-filter-option>
+              <span class="collection-filter-remove">{%- render 'icons', id: 'close', size: 8 -%}</span>{{ filter.label }}: {{ filter_value.label }}
+            </a>
+          </span>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {% endcapture %}
+  
+  {%- liquid
+  	if collection.url
+      assign results_url = collection.url | append: '?sort_by=' | append: collection.sort_by
+    else
+      assign terms = collection.terms | escape
+      assign results_url = '?q=' | append: terms | append: '&type=product&options%5Bunavailable_products%5D=show&options%5Bprefix%5D=last&sort_by=' | append: collection.sort_by
+    endif
+  -%}
+  
+  {% if active != blank %}
+    <div id="filters-active" class="collection-filter-active slider-v visible" data-filters-active><div class="collection-filter-active-container"><span class="collection-sortby-option collection-sortby-option-selected"><a href="{{ results_url }}" title="{{ 'collection.refine.clear' | t | escape }}" class="active-filters-clear keyed-inside" data-filter-option><span class="collection-filter-remove">{%- render 'icons', id: 'close', size: 8 -%}</span>{{ 'collection.refine.clear' | t }}</a></span>{{ active }}</div></div>
+  {% endif %}
+  
+  <form id="filters-form" class="line-items collection-filter-form {{ class }}{% if active != blank %} active{% endif %}{% if class == 'static' %} slider-v{% endif %}" data-height>
+  
+    {% if class == 'static' %}
+      <div class="collection-buttons">
+        {% if active != blank %}
+          <div class="collection-filter-group-display__reset">
+            <a href="{{ results_url }}" title="{{ 'collection.refine.reset' | t | escape }}" class="btn btn-secondary cancel btn-full-width collection-menu-button" data-filter-option>{{ 'collection.refine.reset' | t }}</a>
+          </div>
+        {% endif %}
+        <div class="collection-filter-group-display__submit">
+          <button type="submit" form="filters-form" class="btn btn-primary {% if background_color %}alt {% endif %}btn-full-width collection-menu-button collection-menu-button-refine" data-button-submit>{{ 'collection.refine.button_alt_title' | t }}</button>
+        </div>
+      </div>
+    {% endif %}
+  
+    <div class="collection-filters">
+      <div class="slider-container">
+        <div class="slider large scroll-bar-h">
+          <fieldset class="slider-flip large" aria-labelledby="filtering-label">
+
+            {%- if request.page_type == 'search' -%}
+              <input type="hidden" name="q" value="{{ search.terms | escape }}">
+            {%- endif -%}
+
+            {%- for filter in collection.filters -%}
+
+              {% capture label %}
+                <label class="option-value-name">{{ filter.label }}{% if filter.active_values.size > 0 %} ({{ filter.active_values.size }})<a href="{{ filter.url_to_remove }}" title="{{ 'collection.refine.reset' | t | escape }}" data-filter-option><span class="collection-filter-remove">{%- render 'icons', id: 'close', size: 10 -%}</span></a>{% endif %}</label>
+                {%- if filter.operator == 'AND' -%}
+                  <p>{{ 'collection.refine.match' | t }}</p>
+                {%- endif -%}
+              {% endcapture %}
+                
+              {%- case filter.type -%}
+
+                {%- when 'boolean' or 'list' -%}
+                  {% capture group %}
+
+                    {%- liquid
+                      if settings.swatch_color != blank
+                        assign var_color = settings.swatch_color
+                      else
+                        assign var_color = 'product.color' | t
+                      endif
+                    -%}
+                    
+                    {%- for filter_value in filter.values -%}
+
+                      {%- liquid
+                        assign enable_swatch = false
+                        if filter.label == var_color and enable_filters_color != 'text'
+                          assign enable_swatch = true
+                        endif
+                      -%}
+              
+                      {% capture input %}
+                        <input id="collection-filter-{{ filter.param_name }}-{{ forloop.index }}"
+                               type="checkbox"
+                               name="{{ filter_value.param_name }}"
+                               value="{{ filter_value.value }}"
+                               {% if filter.presentation == 'swatch' or enable_swatch %}class="swatch{% if enable_filters_rounded %} rounded{% endif %}"{% endif %}
+                               {% if filter_value.active %}checked{% endif %}
+                               {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}>
+                      {% endcapture %}
+                      
+                      {% unless enable_filters_hide and filter_value.count == 0 and filter_value.active == false %}
+
+                        {% if filter.presentation == 'swatch' or enable_swatch %}
+                          <div class="option-value-container">
+                            <div class="swatch option-value{% if enable_filters_rounded %} option-value-rounded{% endif %} option-value-has-image">
+                          
+                              {%- liquid
+                                assign img_src = blank
+                                if filter_value.display.type == 'image'
+                                  assign img_src = filter_value.display.value
+                                elsif enable_swatch and enable_filters_color == 'img-block'
+                                  assign newVal = filter_value.label | handle | append: '.png'
+                                  if images[newVal] != blank
+                                    assign img_src = images[newVal]
+                                  endif                                 
+                                endif
+                                assign final_colors = settings.custom_color | newline_to_br | split: '<br />'
+                                for color in final_colors
+                                  assign c = color | split: ':' | first | strip
+                                  if filter_value.label == c
+                                    assign custom = color | split: ':' | last | strip
+                                    break
+                                  else
+                                    assign custom = blank
+                                  endif
+                                endfor
+                              -%}
+                          
+                              <label for="collection-filter-{{ filter.param_name }}-{{ forloop.index }}"
+                                     class="option-value-name{% if img_src != blank %} option-value-image{% endif %}"
+                                     {% if img_src == blank %}style="background-color:{% if custom != blank %}{{ custom }}{% else %}{{ filter_value.label }}{% endif %};"{% endif %}>
+                          
+                                {%- liquid
+                                  if img_src != blank
+                                    assign img_size = 40
+                                    assign sizes = '40px'                             
+                                    capture alt
+                                      if img_src.alt != blank
+                                        echo img_src.alt
+                                      else
+                                        echo filter.label
+                                        echo ' '
+                                        echo filter_value.label
+                                      endif
+                                    endcapture                           
+                                    render 'image.load', img_src: img_src, size: img_size, sizes: sizes, alt: alt, lazy: 'eager'
+                                  endif
+                                -%}
+                                <span class="visually-hidden">{{ filter_value.label }}</span>
+                              </label>
+                              {{ input }}
+                            </div>
+                            {% unless enable_filters_label %}<span aria-hidden="true">{{ filter_value.label }}</span>{% endunless %}
+                          </div>
+                        {% else %}                        
+                          <li class="collection-filter-group-item{% if filter_value.count == 0 and filter_value.active == false %} disabled{% endif %}">
+                            {{ input }}
+                            <label for="collection-filter-{{ filter.param_name }}-{{ forloop.index }}">{{ filter_value.label }} ({{ filter_value.count }})</label>
+                          </li>
+                        {% endif %}
+                        
+                      {% endunless %}
+                    {%- endfor -%}
+                  {% endcapture %}
+
+                  {% if group != blank %}
+                    <div class="input-wrapper collection-filter-group">
+                      {{ label }}
+                      {% if filter.presentation == 'swatch' or enable_swatch %}
+                        <div class="option"><div class="option-values swatch">{{ group }}</div></div>
+                      {% else %}
+                        <ul class="collection-filter-group-list">{{ group }}</ul>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+            
+                {%- when 'price_range' -%}
+                  <div class="input-wrapper collection-filter-group">
+                    {{ label }}
+                    <div class="collection-filter-group-price-range">
+                     <div class="collection-filter-group-price-range-from">
+                       <label for="collection-filter-{{ filter.min_value.param_name }}">{{ 'collection.refine.from' | t }}</label>
+                       <span class="collection-filter-pricing">
+                         <span class="collection-filter-currency">{{ cart.currency.symbol }}</span>
+                         <input id="collection-filter-{{ filter.min_value.param_name }}"
+                                name="{{ filter.min_value.param_name }}"
+                                class="collection-filter-pricing-input"
+                                {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                                type="number"
+                                placeholder="0"
+                                min="0"
+                                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                       </span>
+                     </div>
+                     <div class="collection-filter-group-price-range-to">
+                       <label for="collection-filter-{{ filter.max_value.param_name }}">{{ 'collection.refine.to' | t }}</label>
+                       <span class="collection-filter-pricing">
+                         <span class="collection-filter-currency">{{ cart.currency.symbol }}</span>
+                         <input id="collection-filter-{{ filter.max_value.param_name }}"
+                                name="{{ filter.max_value.param_name }}"
+                                class="collection-filter-pricing-input"
+                                {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                                type="number"
+                                placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                min="0"
+                                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                       </span>
+                     </div>
+                    </div>
+                  </div>
+
+              {%- endcase -%}
+
+            {%- endfor -%}
+  
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    
+  </form>
+  
+</div>

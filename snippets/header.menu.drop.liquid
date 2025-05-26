@@ -1,0 +1,125 @@
+<ul role="menu" class="navmenu navmenu-depth-{{ depth }}{% if is_submenu %} navmenu-submenu{% endif %}" data-mobile-trigger>
+
+  {% for link in menu.links %}
+
+    {%- liquid
+      assign is_type = blank
+      assign is_color = blank
+      assign menu_item_block = blank
+      assign is_meganav = false
+      assign mega_menu_item_handle = blank
+      assign mega_menu_collection_images = false
+      assign is_contact = false
+      assign contact_menu_item_handle = blank
+      assign is_story = false
+      assign story_menu_item_handle = blank
+      if depth == 1
+        for block in section.blocks
+          case block.type
+            when 'mega_menu'
+              assign mega_menu_item_handle = block.settings.heading
+              assign menu_alignment = block.settings.menu_alignment
+              if link.title == mega_menu_item_handle
+                assign is_meganav = true
+                assign is_type = 'mega'
+                assign is_color = block.settings.color_link
+                assign menu_item_block = block
+                if block.settings.menu_collection_images != 'none'
+                  assign product_item_style = block.settings.product_item_style
+                  if block.settings.enable_image_crop and product_item_style != 'natural'
+                    assign product_item_style = product_item_style | prepend: 'cropped-'
+                  endif
+                  assign mega_menu_collection_images = true
+                  assign mega_menu_collection_image = block.settings.menu_collection_images
+                  assign mega_menu_collection_image_insta_filter = block.settings.menu_collection_images_insta_filter
+                  assign mega_menu_insta_filter = block.settings.insta_filter
+                  break
+                endif
+              endif
+            when 'contact_menu'
+              assign contact_menu_item_handle = block.settings.heading
+              if link.title == contact_menu_item_handle
+                assign is_meganav = true
+                assign is_contact = true
+                assign is_type = 'contact'
+                assign is_color = block.settings.color_link
+                assign menu_item_block = block
+                break
+              endif
+            when 'story_menu'
+              assign story_menu_item_handle = block.settings.heading
+              if link.title == story_menu_item_handle
+                unless is_mobile
+                  assign is_meganav = true
+                endunless
+                assign is_story = true
+                assign is_type = 'story'
+                assign is_color = block.settings.color_link
+                assign menu_item_block = block
+                break
+              endif
+          endcase
+        endfor
+      endif
+      assign d = depth | plus: 1
+    -%}
+
+    {% if link.links == blank and is_contact == false and is_story == false %}
+      <li class="navmenu-item navmenu-id-{{ link.handle }}">
+        <a href="{{ link.url }}" role="menuitem" title="{{ link.title | escape }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %} class="navmenu-link{% unless is_submenu %} navmenu-link-top{% endunless %} navmenu-link-{% if is_submenu %}{{ section.settings.nav_text_size | minus: 2 }}{% else %}{{ section.settings.nav_text_size }}{% endif %} keyed-inside">{{ link.title }}</a>
+      </li>
+    {% else %}
+      <li class="navmenu-item navmenu-item-parent navmenu-{% if is_meganav %}mega{% else %}drop{% endif %} navmenu-id-{{ link.handle }}"
+          {% if is_meganav %} data-meganav-trigger="{{ link.handle }}"{% endif %}
+          data-nav-trigger
+          {% if is_color != 'rgba(0,0,0,0)' and is_color != blank %}style="color: {{ is_color }}"{% endif %}>
+        
+        <a href="{{ link.url }}" role="menuitem" title="{{ link.title | escape }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %} class="navmenu-link navmenu-link-{% if is_submenu %}{{ section.settings.nav_text_size | minus: 2 }}{% else %}{{ section.settings.nav_text_size }}{% endif %} navmenu-link-parent navmenu-link-parent-{{ depth }}{% if is_meganav and is_mobile == false %} navmenu-link-meganav{% endif %}{% if is_contact %} navmenu-contact{% endif %} keyed-inside" aria-expanded="false" aria-haspopup="true">{{ link.title }}{% unless is_contact %}{% if is_mobile %}<span class="navmenu-arrow-toggle"><span class="navmenu-arrow"></span></span>{% endif %}{% endunless %}</a>
+
+        {%- liquid
+          if is_meganav
+            unless is_mobile and is_contact
+              render 'header.menu', is_type: is_type, is_mobile: is_mobile, block: block, menu_location: menu_location, link: link, menu_collection_images: mega_menu_collection_images, menu_collection_image: mega_menu_collection_image, mega_menu_collection_image_insta_filter: mega_menu_collection_image_insta_filter, mega_menu_insta_filter: mega_menu_insta_filter, block: menu_item_block, menu_alignment: menu_alignment, product_style: product_item_style
+            endunless
+          else
+            render 'header.menu.drop', is_mobile: is_mobile, is_story: is_story, menu: link, depth: d, is_submenu: true
+          endif
+        -%}
+
+      </li>
+    {% endif %}
+
+  {% endfor %}
+
+  {%- liquid
+    if depth == 2 and is_mobile and is_story
+      for block in section.blocks
+        case block.type
+          when 'story_menu'
+            assign menu_item_block = block
+        endcase
+      endfor
+      echo '<div class="contactbar is_mobile">'
+      render 'header.menu.story', block: menu_item_block, is_mobile: true
+      echo '</div>'
+    endif
+  -%}
+
+  {% if shop.customer_accounts_enabled == true and is_submenu == false and is_mobile %}
+    {% if customer %}
+      <li class="navmenu-item navmenu-mobile-account navmenu-id-account">
+        <a href="{{ routes.account_url }}" role="menuitem" class="navmenu-link navmenu-link-top" title="{{ 'header.account.title' | t | escape }}">{{ 'header.account.title' | t }}</a>
+      </li>
+    {% else %}
+      <li class="navmenu-item navmenu-mobile-account navmenu-id-account">
+        <a href="{{ routes.account_login_url }}" role="menuitem" class="navmenu-link navmenu-link-top" title="{{ 'header.account.login' | t | escape }}">{{ 'header.account.login' | t }}</a>
+      </li>
+      {% if shop.customer_accounts_optional %}
+        <li class="navmenu-item navmenu-mobile-account navmenu-id-register">
+          <a href="{{ routes.account_register_url }}" role="menuitem" class="navmenu-link navmenu-link-top" title="{{ 'header.account.register' | t | escape }}">{{ 'header.account.register' | t }}</a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  
+</ul>

@@ -1,0 +1,110 @@
+.javascript-error-message {
+	background: var(--color_error);
+	color: var(--white);
+	font-size: var(--body_font_size_12);
+	padding: 20px;
+	text-align: center;
+}
+
+li.navmenu-item-parent:hover > ul {
+	max-height: none;
+	visibility: visible;
+}
+
+li.navmenu-item-parent:hover > ul nav {
+	visibility: visible;
+}
+
+.no-js .site-navigation-flex-center .site-navigation-spacer {
+	display: none;
+}
+
+.no-js .mobilenav-toggle {
+	visibility: hidden;
+}
+
+.no-js .site-navigation-flex .site-navigation,
+.no-js .site-navigation {
+	display: block;
+}
+
+@media screen and (max-width: 639px) {
+	.no-js .site-navigation-flex .site-navigation,
+    .no-js .site-navigation {
+		flex-basis: 100%;
+		order: 4;
+		margin-left: 0;
+		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 639px) {
+	.no-js .site-actions {
+		order: 3;
+	}
+}
+
+@media screen and (min-width: 640px) {
+	.no-js .site-navigation-flex-center .site-navigation-spacer {
+		display: block;
+		flex: 1 0 0;
+		order: 2;
+	}
+}
+
+.no-js .product-form-inline .product-options .option {
+	display: none;
+}
+
+.no-js .product-form-inline .product-options .nojs.hidden {
+	display: block;
+}
+
+.no-js .product-form-inline .product-options.product-options-type-radio.product-options-count-1, .no-js .product-form-inline .product-options.product-options-type-radio.product-options-count-2, .no-js .product-form-inline .product-options.product-options-type-radio.product-options-count-3, .no-js .product-form-inline .product-options.product-options-type-select.product-options-count-1, .no-js .product-form-inline .product-options.product-options-type-select.product-options-count-2, .no-js .product-form-inline .product-options.product-options-type-select.product-options-count-3 {
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	margin: 0 0 15px;
+}
+
+.no-js .product-gallery--viewport--figure {
+	display: none;
+}
+
+.no-js .product-gallery--viewport--figure.active {
+	display: block;
+}
+
+.no-js .product-gift .product-slide-content {
+	max-height: none;
+	visibility: visible;
+}
+
+.no-js .quantity button {
+	display: none;
+}
+
+.no-js .cart-item-remove:not(.no-js) {
+	display: none;
+}
+
+.no-js .search-results-group {
+	margin: 0 0 40px;
+	max-height: none;
+}
+
+#filters.slideout-content-scroll.visible,
+.collection-filter-form.static {
+	max-height: 100%;
+	visibility: visible;
+}
+
+.no-js * #ajaxBusy {
+	background: var(--color_background_modify_75) !important;
+	display: none;
+}
+
+.no-js * #content,
+.no-js * .site-main {
+	display: block;
+	opacity: 1;
+}

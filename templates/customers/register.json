@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "b56cf237-9fad-4f89-9bd6-0c3a5373c837": {
+      "type": "section-image-with-text-overlay",
+      "settings": {
+        "section_height_mobile": 50,
+        "section_height_desktop": 50,
+        "title": "Sign Up",
+        "title_h1": true,
+        "title_outline": "title-outline title-outline-1",
+        "title_size": 96,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "text_border": true,
+        "content": "",
+        "link_1": "",
+        "button_text_1": "Read More",
+        "link_2": "",
+        "button_text_2": "Read More",
+        "link_style": "text",
+        "title_alignment": "center",
+        "layout_mobile": "below",
+        "section_color_mobile": "",
+        "section_color_hover_mobile": "",
+        "section_line_mobile": "",
+        "full_width": true,
+        "layout": "overlay-center-center",
+        "content_width": 100,
+        "section_color": "#ffffff",
+        "section_color_hover": "",
+        "section_line": "",
+        "text_background": "rgba(0,0,0,0)",
+        "text_background_gradient": "",
+        "text_background_opacity": 0,
+        "overlay_background": "#000000",
+        "overlay_background_gradient": "",
+        "overlay_opacity": 50,
+        "enable_lazy": false,
+        "insta_filter": "none",
+        "insta_filter_mobile": "none",
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_border": false
+      }
+    },
+    "main": {
+      "type": "main-register",
+      "settings": {
+        "title_enable": false,
+        "title_outline": "title-outline title-outline-1",
+        "title_size": 96,
+        "title_sub": "",
+        "title_sub_outline": "none",
+        "title_sub_size": 42,
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 40,
+        "margin_bottom_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 0,
+        "padding_border": true
+      }
+    }
+  },
+  "order": [
+    "b56cf237-9fad-4f89-9bd6-0c3a5373c837",
+    "main"
+  ]
+}

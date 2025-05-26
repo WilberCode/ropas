@@ -1,0 +1,1456 @@
+{% if section.settings.enable_sticky %}
+  {% style %}
+    .site-header {
+      position: -webkit-sticky;
+      position: sticky;
+      top: -1px;
+    }
+  {% endstyle %}
+{% endif %}
+
+
+<header data-section-id="{{ section.id }}"  
+        data-section-type="header"
+        data-mobile="{{ section.settings.menu_location }}"
+        data-search="{{ settings.search_predictive_enable }}"
+        data-sticky="{% if section.settings.enable_sticky %}true{% else %}false{% endif %}"
+        class="container site-header-wrapper{% if section.settings.menu_location == 'below' %} site-navigation-flex{% elsif section.settings.menu_location == 'center' %} site-navigation-flex-center{% endif %} ph-header">
+  
+  {% if section.settings.menu != blank %}
+    <div class="mobilenav-toggle">      
+      <button class="mobilenav-toggle-link" 
+              aria-label="{{ 'header.mobile_menu_open' | t | escape }}" 
+              aria-expanded="false" 
+              aria-haspopup="true"
+              aria-controls="site-mobilenav"
+              data-mobilenav-toggle>{% if section.settings.enable_search %}{%- render 'icons', id: 'mobilenav-toggle-search' -%}{% else %}{%- render 'icons', id: 'mobilenav-toggle' -%}{% endif %}</button>
+    </div>
+  {% endif %}
+  
+  {% if section.settings.menu_location == 'center' %}
+    <div class="site-navigation-spacer">&nbsp;</div>
+  {% endif %}
+  
+ 
+  {%- capture nav -%}
+    {%- if section.settings.menu_location != 'mobile' -%}
+      <nav class="site-navigation" aria-label="{{ 'header.main_menu' | t}}">    
+        {%- if section.settings.menu != blank -%}
+          {%- render 'header.menu.drop', is_mobile: false, block: block, menu_location: menu_location, menu: linklists[section.settings.menu], depth: 1, is_submenu: false -%}    
+          <div class="site-navigation-overlay"></div>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endcapture -%}
+  
+  {%- liquid
+     if section.settings.menu_location == 'right'
+      echo nav
+    endif
+  -%}
+  <div class="site-logo relative">
+    <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="site-logo-header keyed">
+      {%- liquid
+        if section.settings.logo or section.settings.mobile_logo
+          assign desktop_logo = section.settings.logo | default: section.settings.mobile_logo
+          capture alt
+            if section.settings.logo.alt != blank
+              echo section.settings.logo.alt | escape
+            else
+              echo shop.name | escape
+            endif
+          endcapture
+          render 'image.load', img_src: desktop_logo, size: section.settings.logo_width, alt: alt, class: 'site-logo-image', logo: true, lazy: 'eager'
+          assign mobile_logo = section.settings.mobile_logo | default: section.settings.logo
+          capture alt
+            if section.settings.mobile_logo.alt != blank
+              echo section.settings.mobile_logo.alt | escape
+            else
+              echo shop.name | escape
+            endif
+          endcapture
+          render 'image.load', img_src: mobile_logo, size: section.settings.mobile_logo_width, alt: alt, class: 'site-logo-image-mobile', logo: true, lazy: 'eager'
+        else
+          echo '<div class="section-title-24 site-logo-text'          
+          if section.settings.menu_location == 'center' or section.settings.menu_location == 'mobile'
+            echo ' text-center'
+          else
+            echo ' text-left'
+          endif
+          echo '" style="margin: 0 auto;max-width: '
+          echo section.settings.logo_width
+          echo 'px">'
+          echo shop.name
+          echo '</div>'
+        endif
+      -%}
+    </a>
+  </div>
+  
+  <div class="site-actions"> 
+    {% if section.settings.header_navtop_text1 != blank or section.settings.header_navtop_text2 != blank %}
+      <ul  class="ph-header-navtop" >
+        {% if section.settings.header_navtop_text1 != blank %}
+          <li>
+              <a href="{{ section.settings.header_navtop_url1 }}">
+                {{ section.settings.header_navtop_text1 }}
+              </a>
+          </li>
+        {% endif %}
+        {% if section.settings.header_navtop_text2 != blank %}
+          <li>
+              <a href="{{ section.settings.header_navtop_url2 }}">
+                {{ section.settings.header_navtop_text2 }}
+              </a>
+          </li>
+        {% endif %} 
+      </ul>
+    {% endif %} 
+    <div class="site-actions-wrapper">
+    {% unless request.page_type == 'gift_card' %}
+      {% if section.settings.enable_search %}
+        <div class="site-actions-search relative">            
+          {%- render 'search', id: '-desktop' -%}
+          <a href="{{ routes.search_url }}" class="search-form-icon" aria-label="{{ 'search.form.title' | t | escape }}" title="{{ 'search.form.title' | t | escape }}" header-search-form-link>{%- render 'icons', id: 'search', size: 20 -%}</a>
+        </div>
+      {% endif %}
+      {% if shop.customer_accounts_enabled %}
+        <div class="site-actions-account">
+          <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}{{ 'header.account.title' | t | escape }}{% else %}{{ 'header.account.login' | t }}{% endif %}" title="{% if customer %}{{ 'header.account.title' | t | escape }}{% else %}{{ 'header.account.login' | t }}{% endif %}">{% if section.settings.account == 'icon' %}{%- render 'icons', id: 'user' -%}{% else %}{% if customer %}{{ 'header.account.title' | t }}{% else %}{{ 'header.account.login' | t }}{% endif %}{% endif %}</a>
+        </div>
+      {% endif %}
+      <div class="site-actions-cart">
+        <a href="{{ routes.cart_url }}" 
+           aria-label="{{ 'cart.view_cart' | t | escape }}" 
+           aria-expanded="false" 
+           aria-haspopup="true"
+           aria-controls="header-minicart-drawer"
+           title="{{ 'cart.view_cart' | t | escape }}" 
+           data-site-actions-cart>
+          {%- render 'icons', id: section.settings.cart_icon -%}
+          <span class="site-actions-cart-label {{ section.settings.cart_icon }}" data-cart-item-count>{{ cart.item_count }}</span>
+        </a>
+      </div> 
+    {% else %}
+      &nbsp;
+    {% endunless %}
+    </div>
+  </div>
+  
+  {%- liquid
+    unless section.settings.menu_location == 'right'
+      echo nav
+    endunless
+  -%}
+  
+</header>
+
+{% if section.settings.menu != blank %}
+  <div id="site-mobilenav" class="mobilenav">
+    <div class="mobilenav-panel" data-mobilenav-animator>
+      <button type="button" class="mobilenav-overlay-close" aria-label="{{ 'general.form.close' | t | escape }}" data-modal-close>{%- render 'icons', id: 'close', size: 18 -%}</button>
+      {%- liquid
+        capture contactbar
+          for block in section.blocks
+            case block.type
+              when 'contact_menu'
+              assign link_title = block.settings.heading
+              if section.settings.menu_location == 'mobile'
+                assign is_mobileMenu = true
+              else
+                assign is_mobileMenu = false
+              endif
+              render 'header.menu.contact', is_mobile: true, is_mobileMenu: is_mobileMenu, link_title: link_title, block: block
+            endcase
+          endfor
+        endcapture
+        if section.settings.enable_search
+          render 'search', mobile: true, id: '-mobile'
+        endif
+      -%}
+      <div class="mobilenav-panel-content{% if contactbar != blank %} has_contactbar{% endif %}{% if section.settings.enable_search %} has_search{% endif %} scroll-bar-v">      
+        <nav class="mobilenav-navigation" aria-label="{{ 'header.mobile_menu' | t}}">          
+          {%- liquid
+            assign is_mobile = true
+            render 'header.menu.drop', is_mobile: true, block: block, menu: linklists[section.settings.menu], depth: 1, is_submenu: false
+          -%}
+        </nav>
+      </div>
+      {% if contactbar != blank %}<div class="mobilenav-contactbar" data-contactbar-mobile-target>{{ contactbar }}</div>{% endif %}
+    </div>
+    <div class="mobilenav-overlay" data-mobilenav-animator></div>
+  </div>
+{% endif %}
+
+{% if request.page_type == 'index' or request.page_type == 'page' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      {% if shop.description != blank %}"description": {{ shop.description | json }},{% endif %}
+      {% if section.settings.logo != blank %}"logo": {{ section.settings.logo | image_url: width:  section.settings.logo_width | prepend:'https:' | json }},{% endif %}
+      "url": {% if request.page_type == 'index' %}{{ shop.url | append: routes.root_url | json }}{% else %}{{ shop.url | append: page.url | json }}{% endif %},
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": {{ shop.phone | json }},
+        "contactType": "Customer service"
+    	}],
+      "sameAs": [
+        {{ settings.social_facebook_link | json }},
+        {{ settings.social_threads_link | json }},
+        {{ settings.social_x_link | json }},
+        {{ settings.social_pinterest_link | json }},
+        {{ settings.social_instagram_link | json }},
+        {{ settings.social_tiktok_link | json }},
+        {{ settings.social_snapchat_link | json }},
+        {{ settings.social_tumblr_link | json }},
+        {{ settings.social_whatsapp_link | json }},
+        {{ settings.social_linkedin_link | json }},
+        {{ settings.social_youtube_link | json }},
+        {{ settings.social_vimeo_link | json }},
+        {{ settings.social_medium_link | json }}
+      ]
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "t:sections.section.titles.header.content",
+    "class": "site-main site-header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.general.logo.label"
+      },
+      {
+        "id": "logo",
+        "type": "image_picker",
+        "label": "t:sections.image.title.label"
+      },
+      {
+        "id": "logo_width",
+        "type": "range",
+        "label": "t:sections.general.logo.max.label",
+        "min": 40,
+        "max": 400,
+        "step": 5,
+        "unit": "px",
+        "default": 250
+      },
+      {
+        "id": "mobile_logo",
+        "type": "image_picker",
+        "label": "t:sections.image.title.mobile.label"
+      },
+      {
+        "id": "mobile_logo_width",
+        "type": "range",
+        "label": "t:sections.general.logo.max_mobile.label",
+        "min": 40,
+        "max": 250,
+        "step": 5,
+        "unit": "px",
+        "default": 200
+      },
+      {
+        "type": "header",
+        "content": "t:sections.header.navigation.content"
+      },
+      {
+        "id": "menu",
+        "type": "link_list",
+        "label": "t:sections.header.main.label",
+        "default": "main-menu"
+      },
+      {
+        "id": "nav_text_size",
+        "type": "range",
+        "label": "t:sections.header.announcement.text_size.label",
+        "min": 10,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.options.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sticky",
+        "label": "t:sections.header.sticky.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "menu_location",
+        "label": "t:sections.header.layout.label",
+        "default": "right",
+        "options": [
+          {
+            "value": "center",
+            "label": "t:sections.header.layout.center.label"
+          },
+          {
+            "value": "right",
+            "label": "t:sections.header.layout.right.label"
+          },
+          {
+            "value": "below",
+            "label": "t:sections.header.layout.below.label"
+          },
+          {
+            "value": "mobile",
+            "label": "t:sections.header.layout.mobile.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "t:sections.header.search.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "cart_icon",
+        "label": "t:sections.general.icons.cart_icon.label",
+        "options": [
+          {
+            "value": "cart-cart",
+            "label": "t:sections.general.icons.cart.label"
+          },
+          {
+            "value": "cart-bag",
+            "label": "t:sections.general.icons.bag.label"
+          }
+        ],
+        "default": "cart-bag"
+      },
+      {
+        "type": "select",
+        "id": "account",
+        "label": "t:sections.header.account.label",
+        "options": [
+          {
+            "value": "icon",
+            "label": "t:sections.general.icons.icon.label"
+          },
+          {
+            "value": "text",
+            "label": "t:sections.general.text.label"
+          }
+        ],
+        "default": "icon"
+      }, 
+      {
+        "type": "header",
+        "content": "Enlaces" 
+      },
+      {
+          "type": "text",
+          "id": "header_navtop_text1",
+          "label": "Texto del enlace 1"
+       },
+      {
+          "type": "url",
+          "id": "header_navtop_url1",
+          "label": "Enlace"
+       },
+      {
+          "type": "text",
+          "id": "header_navtop_text2",
+          "label": "Texto del enlace 2"
+       },
+      {
+          "type": "url",
+          "id": "header_navtop_url2",
+          "label": "Enlace"
+       }
+
+    ],
+    "blocks": [
+      {
+        "type": "mega_menu",
+        "name": "t:sections.header.blocks.titles.mega.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.header.blocks.link.label",
+            "info": "t:sections.header.blocks.link.mega.info"
+          },
+          {
+            "type": "range",
+            "id": "column_link",
+            "label": "t:sections.header.blocks.link.column.label",
+            "info": "t:sections.header.blocks.link.column.info",
+            "min": 2,
+            "max": 5,
+            "step": 1,
+            "default": 4
+          },
+          {
+            "type": "color",
+            "id": "color_link",
+            "label": "t:sections.header.blocks.link.custom.label"
+          },
+          {
+            "type": "select",
+            "id": "menu_collection_images",
+            "label": "t:sections.image.title.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.general.none.label"
+              },
+              {
+                "value": "collection",
+                "label": "t:sections.general.collection.label"
+              },
+              {
+                "value": "product",
+                "label": "t:sections.header.blocks.image.first.label"
+              }
+            ],
+            "default": "collection"
+          },
+          {
+            "type": "select",
+            "id": "menu_collection_images_insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+			  {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "id": "product_item_style",
+            "type": "select",
+            "label": "t:sections.header.blocks.image.ratio.label",
+            "options": [
+              {
+                "value": "natural",
+                "label": "t:sections.header.blocks.image.ratio.option_1.label"
+              },
+              {
+                "value": "small",
+                "label": "t:sections.header.blocks.image.ratio.option_2.label"
+              },
+              {
+                "value": "medium",
+                "label": "t:sections.header.blocks.image.ratio.option_3.label"
+              },
+              {
+                "value": "large",
+                "label": "t:sections.header.blocks.image.ratio.option_4.label"
+              }
+            ],
+            "default": "natural"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_image_crop",
+            "label": "t:sections.header.blocks.image.label",
+            "info": "t:sections.header.blocks.image.info",
+            "default": true
+          },
+          {
+            "type": "select",
+            "id": "image_position",
+            "label": "t:sections.image.position.label",
+            "options": [
+              {
+                "label": "t:sections.image.position.option_1.label",
+                "value": "0-0"
+              },
+              {
+                "label": "t:sections.image.position.option_2.label",
+                "value": "50-0"
+              },
+              {
+                "label": "t:sections.image.position.option_3.label",
+                "value": "100-0"
+              },
+              {
+                "label": "t:sections.image.position.option_4.label",
+                "value": "0-50"
+              },
+              {
+                "label": "t:sections.image.position.option_5.label",
+                "value": "50-50"
+              },
+              {
+                "label": "t:sections.image.position.option_6.label",
+                "value": "100-50"
+              },
+              {
+                "label": "t:sections.image.position.option_7.label",
+                "value": "0-100"
+              },
+              {
+                "label": "t:sections.image.position.option_8.label",
+                "value": "50-100"
+              },
+              {
+                "label": "t:sections.image.position.option_9.label",
+                "value": "100-100"
+              }
+            ],
+            "default": "50-50"
+          },
+          {
+            "id": "menu_alignment",
+            "type": "checkbox",
+            "label": "t:sections.header.blocks.center.label",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.promotion.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_promo",
+            "label": "t:sections.header.blocks.promotion.enable.label",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "promo_position",
+            "label": "t:sections.header.blocks.promotion.position.label",
+            "options": [
+              {
+                "label": "t:sections.header.blocks.promotion.position.first.label",
+                "value": "first"
+              },
+              {
+                "label": "t:sections.header.blocks.promotion.position.last.label",
+                "value": "last"
+              }
+            ],
+            "default": "first"
+          },
+          {
+            "id": "text",
+            "type": "textarea",
+            "label": "t:sections.general.text.label",
+            "default": "Promotion text"
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "t:sections.general.link.title.label"
+          },
+          {
+            "id": "link_text",
+            "type": "text",
+            "label": "t:sections.general.link.title_text.label",
+            "default": "More info here"
+          },
+          {
+            "type": "select",
+            "id": "text_position",
+            "label": "t:sections.general.text_position.label",
+            "options": [
+              {
+                "label": "t:sections.general.position.split.label",
+                "value": "split"
+              },
+              {
+                "label": "t:sections.general.position.top.label",
+                "value": "top"
+              },
+              {
+                "label": "t:sections.general.position.center.label",
+                "value": "center"
+              },
+              {
+                "label": "t:sections.general.position.bottom.label",
+                "value": "bottom"
+              }
+            ],
+            "default": "split"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "t:sections.general.text_color.label",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "overlay_background",
+            "label": "t:sections.section.settings.background_color.label",
+            "default": "#000000"
+          },
+          {
+            "type": "range",
+            "id": "overlay_opacity",
+            "label": "t:sections.general.overlay.background_opacity.label",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "default": 25
+          },
+          {
+            "type": "image_picker",
+            "id": "image_desktop",
+            "label": "t:sections.image.title.desktop.label",
+            "info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "t:sections.image.title.mobile.label",
+            "info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter_mobile",
+            "label": "t:sections.image.insta.label",
+            "options": [
+              {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          }
+        ]
+      },
+      {
+        "type": "story_menu",
+        "name": "t:sections.header.blocks.titles.story.name",
+        "settings": [
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "t:sections.header.blocks.link.label",
+            "info": "t:sections.header.blocks.link.story.info"
+          },
+          {
+            "type": "color",
+            "id": "color_link",
+            "label": "t:sections.header.blocks.link.custom.label"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.general.heading.label",
+            "default": "Tell a story"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.general.text.label",
+            "default": "<p>Share details about your business or products</p>"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.general.link.title.label"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "t:sections.general.link.title_text.label",
+            "default": "Button"
+          },
+          {
+            "id": "text_alignment",
+            "type": "text_alignment",
+            "label": "t:sections.text.alignment.title.label",
+            "default": "center"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.image.title.label",
+            "info": "t:sections.image.position.info"
+          },
+          {
+            "type": "select",
+            "id": "insta_filter",
+            "label": "t:sections.image.insta.label",
+            "options": [
+			  {
+                "value": "none",
+                "label": "t:sections.image.insta.option_0.label"
+              },
+              {
+                "value": "insta insta-seventy-seven",
+                "label": "t:sections.image.insta.option_1.label"
+              },
+              {
+                "value": "insta insta-aden",
+                "label": "t:sections.image.insta.option_2.label"
+              },
+              {
+                "value": "insta insta-amaro",
+                "label": "t:sections.image.insta.option_3.label"
+              },
+              {
+                "value": "insta insta-ashby",
+                "label": "t:sections.image.insta.option_4.label"
+              },
+              {
+                "value": "insta insta-brannan",
+                "label": "t:sections.image.insta.option_5.label"
+              },
+              {
+                "value": "insta insta-brooklyn",
+                "label": "t:sections.image.insta.option_6.label"
+              },
+              {
+                "value": "insta insta-charmes",
+                "label": "t:sections.image.insta.option_7.label"
+              },
+              {
+                "value": "insta insta-clarendon",
+                "label": "t:sections.image.insta.option_8.label"
+              },
+              {
+                "value": "insta insta-crema",
+                "label": "t:sections.image.insta.option_9.label"
+              },
+              {
+                "value": "insta insta-dogpatch",
+                "label": "t:sections.image.insta.option_10.label"
+              },
+              {
+                "value": "insta insta-earlybird",
+                "label": "t:sections.image.insta.option_11.label"
+              },
+              {
+                "value": "insta insta-gingham",
+                "label": "t:sections.image.insta.option_12.label"
+              },
+              {
+                "value": "insta insta-ginza",
+                "label": "t:sections.image.insta.option_13.label"
+              },
+              {
+                "value": "insta insta-hefe",
+                "label": "t:sections.image.insta.option_14.label"
+              },
+              {
+                "value": "insta insta-helena",
+                "label": "t:sections.image.insta.option_15.label"
+              },
+              {
+                "value": "insta insta-hudson",
+                "label": "t:sections.image.insta.option_16.label"
+              },
+              {
+                "value": "insta insta-inkwell",
+                "label": "t:sections.image.insta.option_17.label"
+              },
+              {
+                "value": "insta insta-juno",
+                "label": "t:sections.image.insta.option_18.label"
+              },
+              {
+                "value": "insta insta-kelvin",
+                "label": "t:sections.image.insta.option_19.label"
+              },
+              {
+                "value": "insta insta-lark",
+                "label": "t:sections.image.insta.option_20.label"
+              },
+              {
+                "value": "insta insta-lofi",
+                "label": "t:sections.image.insta.option_21.label"
+              },
+              {
+                "value": "insta insta-ludwig",
+                "label": "t:sections.image.insta.option_22.label"
+              },
+              {
+                "value": "insta insta-maven",
+                "label": "t:sections.image.insta.option_23.label"
+              },
+              {
+                "value": "insta insta-mayfair",
+                "label": "t:sections.image.insta.option_24.label"
+              },
+              {
+                "value": "insta insta-moon",
+                "label": "t:sections.image.insta.option_25.label"
+              },
+              {
+                "value": "insta insta-nashville",
+                "label": "t:sections.image.insta.option_26.label"
+              },
+              {
+                "value": "insta insta-perpetua",
+                "label": "t:sections.image.insta.option_27.label"
+              },
+              {
+                "value": "insta insta-poprocket",
+                "label": "t:sections.image.insta.option_28.label"
+              },
+              {
+                "value": "insta insta-reyes",
+                "label": "t:sections.image.insta.option_29.label"
+              },
+              {
+                "value": "insta insta-rise",
+                "label": "t:sections.image.insta.option_30.label"
+              },
+              {
+                "value": "insta insta-sierra",
+                "label": "t:sections.image.insta.option_31.label"
+              },
+              {
+                "value": "insta insta-skyline",
+                "label": "t:sections.image.insta.option_32.label"
+              },
+              {
+                "value": "insta insta-slumber",
+                "label": "t:sections.image.insta.option_33.label"
+              },
+              {
+                "value": "insta insta-stinson",
+                "label": "t:sections.image.insta.option_34.label"
+              },
+              {
+                "value": "insta insta-sutro",
+                "label": "t:sections.image.insta.option_35.label"
+              },
+              {
+                "value": "insta insta-toaster",
+                "label": "t:sections.image.insta.option_36.label"
+              },
+              {
+                "value": "insta insta-valencia",
+                "label": "t:sections.image.insta.option_37.label"
+              },
+              {
+                "value": "insta insta-vesper",
+                "label": "t:sections.image.insta.option_38.label"
+              },
+              {
+                "value": "insta insta-walden",
+                "label": "t:sections.image.insta.option_39.label"
+              },
+              {
+                "value": "insta insta-willow",
+                "label": "t:sections.image.insta.option_40.label"
+              },
+              {
+                "value": "insta insta-xpro2",
+                "label": "t:sections.image.insta.option_41.label"
+              }
+            ],
+            "default": "none"
+          }
+        ]
+      },
+      {
+        "type": "contact_menu",
+        "name": "t:sections.header.blocks.titles.contact.name",
+        "limit": 1,
+        "settings": [
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "t:sections.header.blocks.link.label",
+            "info": "t:sections.header.blocks.link.contact.info"
+          },
+          {
+            "type": "color",
+            "id": "color_link",
+            "label": "t:sections.header.blocks.link.custom.label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.blocks.contact.label"
+          },
+          {
+            "id": "phone_value",
+            "type": "text",
+            "label": "t:sections.header.blocks.contact.phone.label",
+            "default": "757 555 1212"
+          },
+          {
+            "id": "email_value",
+            "type": "text",
+            "label": "t:sections.header.blocks.contact.email.label",
+            "default": "shop@example.com"
+          },
+          {
+            "id": "hours_value",
+            "type": "richtext",
+            "label": "t:sections.header.blocks.contact.info.label",
+            "default": "<p>Mon-Fri, 9am-5pm</p>"
+          },
+          {
+            "id": "directions_value",
+            "type": "richtext",
+            "label": "t:sections.header.blocks.contact.address.label",
+            "default": "<p>Boardwalk</p><p>Virginia Beach, VA 23451</p>"
+          },
+          {
+            "id": "directions_map",
+            "type": "checkbox",
+            "label": "t:sections.header.blocks.contact.map.label",
+            "default": false
+          },
+          {
+            "id": "api_key",
+            "type": "text",
+            "label": "t:sections.general.map.google.label",
+            "info": "t:sections.general.map.google.info"
+          },
+          {
+            "id": "directions-map-zoom",
+            "type": "range",
+            "label": "t:sections.general.map.zoom.label",
+            "min": 1,
+            "max": 6,
+            "step": 1,
+            "unit": "x",
+            "default": 2
+          },
+          {
+            "id": "directions_map_color_fg",
+            "type": "color",
+            "label": "t:sections.general.map.colors.foreground.label",
+            "default": "#292929"
+          },
+          {
+            "id": "directions_map_color_bg",
+            "type": "color",
+            "label": "t:sections.general.map.colors.background.label",
+            "default": "#ffffff"
+          }
+        ]
+      } 
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "mega_menu"
+        },
+        {
+          "type": "story_menu"
+        },
+        {
+          "type": "contact_menu"
+        }
+      ]
+    }
+  }
+{% endschema %}

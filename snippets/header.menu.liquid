@@ -1,0 +1,117 @@
+<ul role="menu"
+    id="menu-item-{{ link.handle }}" 
+    class="meganav slider-v text-{% if menu_alignment %}center{% else %}left{% endif %}{% if is_type == 'contact' %} contact{% elsif is_type == 'story' %} story{% endif %}{% if is_mobile %} navmenu-depth-2{% endif %}" 
+    data-meganav="{{ link.handle }}" 
+    data-mobile-trigger {{ block.shopify_attributes }}
+    aria-hidden="true">
+  <nav data-nav-trigger class="meganav-menu{% if menu_collection_images %} meganav-show-images{% else %} meganav-no-images{% endif %}">
+    <div class="{% if is_type == 'mega' and is_mobile == false %}slider large {% endif %} meganav-menu-panel scroll-bar-v scroll-bar-h" data-slider="{% if is_type == 'mega' and is_mobile == false %}true{% else %}false{% endif %}">
+      <div class="meganav-menu-panel-contents meganav-menu-panel-contents-{{ block.settings.column_link }}{% if block.settings.enable_promo %} promo{% endif %}">      
+        {% if block.settings.enable_promo %}
+          {% capture promo %}
+            <div class="slider meganav-menu-group promo">
+              <div class="{{ mega_menu_insta_filter }} dynamic-block-{{ block.id }} collection-grid-item collection-grid-item-advertisement collection-grid-item-advertisement-{{ block.settings.text_position }} section-layout">
+                
+                {% liquid
+                  if is_mobile or menu_location == 'mobile'
+                    assign size = 439
+                    assign sizes = '(min-width: 526px) 439px, calc(100vw - 86px)'
+                  else
+                    assign size = 1240                
+                    assign sizes = '(min-width: 768px) 310px, (min-width: 526px) 439px, calc(100vw - 86px)'            
+                  endif
+                  if block.settings.image_desktop != blank
+                    capture alt
+                      if block.settings.image_desktop.alt != blank
+                        echo block.settings.image_desktop.alt | escape
+                      elsif block.settings.title != blank
+                        echo block.settings.title | escape
+                      elsif block.settings.text != blank
+                        echo block.settings.text | escape
+                      else
+                  	  echo section.settings.image_desktop | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize
+                      endif
+                    endcapture
+                    render 'image.load', img_src: block.settings.image_desktop, size: size, new_size: size, padding: 100, sizes: sizes, alt: alt, class: 'desktop', background: true, lazy: 'eager'
+                  endif
+                  if block.settings.image_mobile != blank
+                    capture alt
+                      if block.settings.image_mobile.alt != blank
+                        echo block.settings.image_mobile.alt | escape
+                      elsif block.settings.title != blank
+                        echo block.settings.title | escape
+                      elsif block.settings.text != blank
+                        echo block.settings.text | escape
+                      else
+                  	  echo section.settings.image_mobile | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize
+                      endif
+                    endcapture
+                    render 'image.load', img_src: block.settings.image_mobile, size: size, new_size: size, sizes: sizes, alt: alt, class: 'mobile', lazy: 'eager'
+                  endif
+                  if block.settings.overlay_opacity != 0 and block.settings.overlay_background != 'rgba(0,0,0,0)'
+                    assign opacity = block.settings.overlay_opacity | times: 0.01
+                    assign overlay = block.settings.overlay_background | color_modify: 'alpha', opacity
+                    echo '<div class="section-layout-overlay" style="background: '
+                    echo overlay
+                    echo ';"></div>'
+                  endif
+                -%}
+                
+                {% if block.settings.text != blank %}
+                  <p class="collection-grid-item-advertisement-text block-color">{{ block.settings.text }}</p>
+                {% endif %}
+                
+                {% if block.settings.link != blank and block.settings.link_text != blank %}
+                  <a href="{{ block.settings.link }}" role="menuitem" title="{{ block.settings.link_text | escape }}" class="link-group block-color collection-grid-item-advertisement-link block-color">
+                    <span><span class="link-text collection-grid-item-advertisement-link-text">{{ block.settings.link_text }}</span></span>
+                    <span class="link-arrow collection-grid-item-advertisement-link-arrow">{%- render 'icons', id: 'arrow-long-r', size: 18 -%}</span>
+                  </a>
+                {% endif %}
+  
+                {% if block.settings.color != 'rgba(0,0,0,0)' and block.settings.color != blank %}
+                <style>
+                  .isDesktop:not(.isMobileMenu) .dynamic-block-{{ block.id }} .block-color{color:{{ block.settings.color }};}
+                </style>
+                {% endif %}
+  
+              </div>
+            </div>
+          {% endcapture %}       
+        {% endif %}       
+        
+        {%- liquid
+          if block.settings.enable_promo and block.settings.promo_position == 'first'
+            echo promo
+          endif
+          if is_type == 'mega'           
+            assign crop = block.settings.enable_image_crop
+            case block.settings.product_item_style
+              when 'natural'
+                assign padding = image.aspect_ratio | times: 100
+                assign crop = false
+              when 'small'
+                assign padding = 75
+              when 'medium'
+                assign padding = 100
+              when 'large'
+                assign padding = 150
+            endcase
+            render 'header.menu.mega', is_type: is_type, is_mobile: is_mobile, menu_location: menu_location, link: link, menu_collection_images: block.settings.menu_collection_images, column_link: block.settings.column_link, crop: crop, product_style: block.settings.product_item_style, padding: padding, image_position: block.settings.image_position, menu_collection_images: menu_collection_images, menu_collection_image: menu_collection_image, mega_menu_collection_image_insta_filter: mega_menu_collection_image_insta_filter
+          elsif is_type == 'story'
+            echo '<div class="contactbar is_desktop">'
+              render 'header.menu.story', block: block
+            echo '</div>'
+          else
+            echo '<div class="contactbar is_desktop">'
+              render 'header.menu.contact', link: link, block: block
+            echo '</div>'
+          endif
+          if block.settings.enable_promo and block.settings.promo_position == 'last'
+            echo promo
+          endif
+        -%}
+        
+      </div>
+    </div>
+  </nav>
+</ul>

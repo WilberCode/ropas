@@ -1,0 +1,71 @@
+{% if product_count > 0 %}
+  <div class="product-highlights-containers product-highlights-emphasized-wrapper product-highlights-emphasized-{{ products_per_row }}{% if products_per_row == 2 and products_row_count ==1 %} product-highlights-emphasized-rows-of-2{% endif %}" data-product-highlights-emphasized>
+    
+    {%- liquid
+      if products != blank
+        assign product_limit = products_per_row | minus: 1
+        case products_per_row
+          when 2
+            assign size = 817
+            if products_row_count > 1
+              assign sizes = '(min-width: 1280px) 817px, (min-width: 768px) calc(66.66vw - 40px), (min-width: 640px) 277px, 190px'
+            else
+              assign sizes = '(min-width: 1280px) 817px, (min-width: 768px) calc(66.66vw - 40px), (min-width: 460px) calc(50vw - 40px), 190px'
+            endif        
+            for item in products limit: 1
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index0, size: size, sizes: sizes, lazy: lazy
+            endfor
+            assign size = 394
+            if products_row_count > 1
+              assign sizes = '(min-width: 1280px) 394px, (min-width: 768px) calc(33.33vw - 40px), (min-width: 640px) 277px, 190px'
+            else
+              assign sizes = '(min-width: 1280px) 394px, (min-width: 768px) calc(33.33vw - 40px), (min-width: 460px) calc(50vw - 40px), 190px'
+            endif    
+            for item in products offset: 1 limit: product_limit
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index, size: size, sizes: sizes, lazy: lazy
+            endfor
+          when 3
+            assign size = 817
+            assign sizes = '(min-width: 1280px) 817px, (min-width: 768px) calc(66.66vw - 40px), (min-width: 640px) 277px, 190px'
+            for item in products limit: 1
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index0, size: size, sizes: sizes, lazy: lazy
+            endfor
+            assign size = 394
+            assign sizes = '(min-width: 1280px) 394px, (min-width: 768px) calc(33.33vw - 40px), (min-width: 640px) 277px, 190px'
+            for item in products offset: 1 limit: product_limit
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index, size: size, sizes: sizes, lazy: lazy
+            endfor
+          when 4
+            assign size = 605
+            assign sizes = '(min-width: 1280px) 605px, (min-width: 768px) calc(50vw - 40px), (min-width: 640px) 277px, 190px'
+            for item in products limit: products_per_row
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index0, size: size, sizes: sizes, lazy: lazy
+            endfor
+          when 5
+            assign size = 605
+            assign sizes = '(min-width: 1280px) 605px, (min-width: 768px) calc(50vw - 40px), (min-width: 640px) 277px, 190px'
+            for item in products limit: 1
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index0, size: size, sizes: sizes, lazy: lazy
+            endfor
+            assign size = 288
+            assign sizes = '(min-width: 1280px) 288px, (min-width: 768px) calc(25vw - 40px), (min-width: 640px) 277px, 190px'
+            for item in products offset: 1 limit: product_limit
+              render 'product.loop', product: item, product_style: product_item_style, emphasize: true, forloop_index: forloop.index, size: size, sizes: sizes, lazy: lazy
+            endfor
+        endcase
+      else
+        for i in (1..products_per_row)
+          render 'product.loop.onboard', product_style: product_item_style, emphasize: true, forloop_index: forloop.index0
+        endfor
+      endif
+    -%}
+    
+  </div>
+{% endif %}
+
+{%- liquid
+  if products_row_count > 1
+    assign product_count = product_count | minus: products_per_row
+    render 'product.loop.highlights.default', products: products, product_item_style: product_item_style, product_count: product_count, products_per_row: products_per_row, products_row_count: products_row_count, product_emphasize: product_emphasize, class: ' skip', skip: true, lazy: lazy
+  endif
+-%}

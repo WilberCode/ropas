@@ -1,0 +1,12 @@
+<div class="product-form-inline-atc {% if background_color %}show_payment_button_alt {% endif %}product-block" {{ block.shopify_attributes }}>
+  <button class="btn btn-{% if show_payment_button %}secondary{% else %}primary{% endif %} {% if background_color %}alt {% endif %}btn-full-width btn-spinner product-form-inline-atc-button" type="submit" data-product-atc{% unless variant.available %} disabled{% endunless %}>
+    <span data-product-inline-atc-text>{% if variant.available %}{{ form_text }}{% else %}{{ 'product.add_to_cart.unavailable' | t }}{% endif %}</span>
+    <span class="spinner"></span>
+  </button>
+  {% if request.page_type == 'product' and template.suffix contains 'quick' %}<div class="product-form-inline-link slider-v text-center" data-product-atcl><a href="{{ routes.cart_url }}" title="{{ 'cart.view_cart' | t | escape }}" class="underline toppad">{{ 'cart.view_cart' | t }}</a></div>{% endif %}
+  {%- liquid
+    if show_payment_button
+      echo form | payment_button
+    endif
+  -%}
+</div>

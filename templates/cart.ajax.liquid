@@ -1,0 +1,42 @@
+{% layout none %}
+
+<template data-options
+          data-cart-shipping="{{ cart.requires_shipping | json }}"
+          data-item-count="{{ cart.item_count | json }}"
+          data-total-price="{{ cart.total_price | json }}"></template>
+
+<template data-html="cart_items">
+  {% if cart.item_count > 0 %}
+    {% for item in cart.items %}
+      {%- render 'cart.item', item: item, ajax: true -%}
+    {% endfor %}
+  {% else %}
+  <div class="cart-mini-empty">
+    <h3>{{ 'cart.empty' | t }}</h3>
+    <a class="cart-mini-button-continueshopping btn btn-primary" href="{{ routes.all_products_collection_url }}" title="{{ 'product.continue_shopping' | t | escape }}">{{ 'product.continue_shopping' | t }}</a>
+  </div>
+  {% endif %}
+</template>
+
+<template data-html="cart_discounts">
+  {% for discount_application in cart.cart_level_discount_applications %}
+  <div class="cart-discount">
+    <span class="cart-discount-title">
+      {%- render 'icons', id: 'sale-tag', class: ' cart-item-discount-sale-tag', size: 12 -%}
+      {{ discount_application.title }}
+    </span>
+    <span class="cart-discount-amount">
+      -<span class="money">{% if settings.currency_enable %}{{ discount_application.total_allocated_amount | money_with_currency }}{% else %}{{ discount_application.total_allocated_amount | money }}{% endif %}</span>
+    </span>
+  </div>
+  {% endfor %}
+</template>
+
+<template data-html="cart_discounts_simplified">
+  {% for discount_application in cart.cart_level_discount_applications %}
+    {%- render 'icons', id: 'sale-tag', class: ' cart-discount-sale-tag' -%}
+    {{ discount_application.title }} (-<span class="money">{% if settings.currency_enable %}{{ discount_application.total_allocated_amount | money_with_currency }}{% else %}{{ discount_application.total_allocated_amount | money }}{% endif %}</span>)
+  {% endfor %}
+</template>
+
+<template data-html="cart_subtotal">{% if settings.currency_enable %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</template>

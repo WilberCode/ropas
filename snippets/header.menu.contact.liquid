@@ -1,0 +1,135 @@
+<div class="contactbar-layout"{% if block.settings.directions_value != blank and block.settings.directions_map and block.settings.api_key != blank %} data-contactbar-clone-source{% endif %} data-nav-trigger>
+  
+  {%- liquid
+    if block.settings.directions_value
+      capture directions_address
+        echo block.settings.directions_value | strip_html | json | strip | replace: '"', '' | replace: '\n', ' ' | replace: '\r', ' ' | replace: '&nbsp;', ' ' | replace: '  ', ' ' | replace: '  ', ' ' | replace: ' ', '+' | escape
+      endcapture
+      capture directions_url
+        echo 'https://maps.google.com/?saddr=Current+Location&daddr='
+        echo directions_address
+      endcapture
+    endif
+  -%}
+
+  {% if block.settings.directions_value != blank and block.settings.directions_map and block.settings.api_key != blank %}
+    
+    {%- liquid
+      assign has_map = true
+      assign map_color_bg = block.settings.directions_map_color_bg
+      assign map_color_fg = block.settings.directions_map_color_fg
+      assign map_color_a = map_color_fg
+      assign map_color_b = map_color_bg | color_mix: map_color_fg, 30
+      assign map_color_c = map_color_bg | color_mix: map_color_fg, 50
+      assign map_color_d = map_color_bg | color_mix: map_color_fg, 70
+      assign map_color_e = map_color_bg | color_mix: '#ffffff', 98
+      assign map_color_f = map_color_bg | color_mix: '#000000', 50      
+    -%}
+  
+    {%- capture map -%}
+      <div class="contactbar-map">
+        <div class="map" 
+             data-map 
+             data-map-trigger="{{ link.handle }}" 
+             data-map-api-key="{{ block.settings.api_key }}"          
+             data-map-address="{{ directions_address }}"
+             data-map-zoom="{{ block.settings.directions-map-zoom }}" 
+             data-map-color-a="{{ map_color_a }}" 
+             data-map-color-b="{{ map_color_b }}" 
+             data-map-color-c="{{ map_color_c }}" 
+             data-map-color-d="{{ map_color_d }}" 
+             data-map-color-e="{{ map_color_e }}" 
+             data-map-color-f="{{ map_color_f }}">
+          <div class="map-container" data-map-container></div>
+        </div>
+      </div>
+    {%- endcapture -%}
+  
+    {%- liquid
+      unless is_mobile
+        echo map
+      endunless 
+    -%}
+  
+  {% endif %}
+  
+  <div class="contactbar-items{% if has_map %} contactbar-hasmap{% endif %}">
+    <div class="contactbar-items-layout">
+
+      {% if block.settings.phone_value != blank %}
+      {%- liquid
+        capture phone_url
+          echo 'tel:'
+          echo block.settings.phone_value | strip_newlines | remove: ' ' | escape
+        endcapture
+      -%}
+      <div class="contactbar-item">
+        <a href="{{ phone_url }}" role="menuitem" class="contactbar-item-link" aria-label="{{ 'contactbar.phone_title' | t | escape }}: {{ block.settings.phone_value | escape }}" title="{{ 'contactbar.phone_title' | t | escape }}: {{ block.settings.phone_value | escape }}"></a>
+        <div class="contactbar-item-contents">
+          <div class="contactbar-item-icon">{%- render 'icons', id: 'contact-phone' -%}</div>
+          <div class="contactbar-item-label">{{ 'contactbar.phone_title' | t }}</div>
+          <div class="contactbar-item-value">{{ block.settings.phone_value }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if block.settings.email_value != blank %}
+      <div class="contactbar-item">
+        <a href="mailto:{{ block.settings.email_value | escape }}" role="menuitem" class="contactbar-item-link" aria-label="{{ 'contactbar.email_title' | t | escape }}: {{ block.settings.email_value | escape }}" title="{{ 'contactbar.email_title' | t | escape }}: {{ block.settings.email_value | escape }}" target="_blank"></a>
+        <div class="contactbar-item-contents">
+          <div class="contactbar-item-icon">{%- render 'icons', id: 'contact-email' -%}</div>
+          <div class="contactbar-item-label">{{ 'contactbar.email_title' | t }}</div>
+          <div class="contactbar-item-value">{{ block.settings.email_value }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% unless block.settings.heading == blank %}
+        {% if block.settings.hours_value != blank or block.settings.directions_value != blank %}
+        <div class="contactbar-item{% if block.settings.hours_value == blank %} desktop-hide{% endif %}">
+          <button type="button" class="contactbar-item-link" aria-label="{{ 'contactbar.hours_title' | t | escape }}: {{ block.settings.hours_value | strip_html | escape }}" data-contactbar-info-trigger></button>
+          <div class="contactbar-item-contents">
+            <div class="contactbar-item-icon">{%- render 'icons', id: 'contact-hours' -%}</div>
+            <div class="contactbar-item-label">{{ 'contactbar.hours_title' | t }}</div>
+            <div class="contactbar-item-value">{{ block.settings.hours_value }}</div>
+          </div>
+        </div>
+        {% endif %}
+      {% endunless %}
+
+      {% if block.settings.directions_value != blank %}
+      <div class="contactbar-item">
+        <a href="{{ directions_url }}" role="menuitem" class="contactbar-item-link" aria-label="{{ 'contactbar.directions_title' | t | escape }}: {{ block.settings.directions_value | strip_html | escape }}" title="{{ 'contactbar.directions_title' | t | escape }}: {{ block.settings.directions_value | strip_html | escape }}" target="_blank"></a>
+        <div class="contactbar-item-contents">
+          <div class="contactbar-item-icon">{%- render 'icons', id: 'contact-directions' -%}</div>
+          <div class="contactbar-item-label">{{ 'contactbar.directions_title' | t }}</div>
+          <div class="contactbar-item-value">{{ block.settings.directions_value }}</div>
+        </div>
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+
+  {% if is_mobile %}
+    {% if block.settings.hours_value != blank or block.settings.directions_value != blank %}
+      <div class="contactbar-info">
+        <button type="button" class="contactbar-info-close" aria-label="{{ block.settings.hours_value | strip_html | escape }}" data-contactbar-info-close>{%- render 'icons', id: 'close', size: 18 -%}</button>
+        {%- liquid
+          if block.settings.directions_value != blank and block.settings.directions_map and block.settings.api_key != blank
+            if is_mobileMenu
+              echo map
+            else
+              echo '<div class="contactbar-map"></div>'
+            endif
+          endif
+        -%}
+        <div class="contactbar-info-details">
+          {% if block.settings.directions_value != blank %}<div class="contactbar-info-address">{{ block.settings.directions_value }}</div>{% endif %}
+          {% if block.settings.hours_value != blank %}<div class="contactbar-info-hours">{{ block.settings.hours_value }}</div>{% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+
+</div>

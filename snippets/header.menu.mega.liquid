@@ -1,0 +1,89 @@
+{% for link in link.links %}
+
+  {%- liquid
+    assign link_type = blank
+    if link.type == 'collection_link' or link.type == 'product_link'
+      assign link_type = link.object
+    endif
+    assign product_style = product_style | default: 'natural'
+  -%}
+
+  <div class="slider meganav-menu-group">
+    <div class="slide">
+      <a href="{{ link.url }}" role="menuitem" class="meganav-menu-header{% unless menu_collection_images %} meganav-menu-header-no-images{% endunless %}{% if link.links == blank and is_mobile %} meganav-menu-empty{% endif %}" title="{{ link.title | escape }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+        {%- liquid
+          if menu_collection_images
+            if link.type == 'collection_link' 
+              assign image = link_type.image
+              if image == blank or menu_collection_image == 'product'
+                assign image = link_type.products.first.featured_media.preview_image
+              endif         
+            elsif link.type == 'product_link'
+              assign image = link_type.media[0].preview_image
+            endif         
+            if image != blank
+              capture alt
+                if image.alt != blank
+                  echo image.alt | escape
+                else
+                  echo link_type.title | escape
+                endif
+              endcapture
+           
+              echo '<span class="meganav-menu-image'
+           
+              unless is_mobile or menu_location == 'mobile'
+                echo ' product-item-style-'
+                echo product_style
+              endunless
+           
+              echo '"><figure class="'
+              echo mega_menu_collection_image_insta_filter
+              echo ' product-item-image">'
+              if is_mobile or menu_location == 'mobile'
+                assign size = 40
+                assign sizes = '40px'
+                render 'image.load', img_src: image, size: size, new_size: size, sizes: sizes, alt: alt, lazy: 'eager'
+              else
+                case column_link
+                  when 2
+                    assign size = 610
+                    assign sizes = '(min-width: 768px) 610px, 40px'
+                  when 3
+                    assign size = 400
+                    assign sizes = '(min-width: 768px) 400px, 40px'
+                  when 4
+                    assign size = 295
+                    assign sizes = '(min-width: 768px) 295px, 40px'
+                  when 5
+                    assign size = 232
+                    assign sizes = '(min-width: 768px) 232px, 40px'
+                endcase
+                render 'image.load', img_src: image, size: size, new_size: size, padding: padding, sizes: sizes, alt: alt, image_position: image_position, loop: true, crop: crop, lazy: 'eager'
+              endif
+              echo '</figure></span>'
+            endif
+          endif
+        -%}
+        <span class="meganav-menu-title{% unless is_mobile %} underline{% endunless %}">{{ link.title }}</span>
+        {% if link.links.size > 0 and is_mobile %}
+          <span class="navmenu-arrow-toggle">
+            <span class="navmenu-arrow"></span>
+          </span>
+        {% endif %}            
+      </a>
+
+      {% if link.links != blank %}
+        <div class="meganav-menu-items{% if image == blank %} no-image{% endif %}">
+          {% for link in link.links %}
+            <div class="meganav-menu-item{% if forloop.last %} last{% endif %}">
+              <a href="{{ link.url }}" role="menuitem" class="meganav-menu-link{% unless is_mobile %} underline{% endunless %}" title="{{ link.title | escape }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>{{ link.title }}</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {%- assign image = blank -%}
+
+{% endfor %}

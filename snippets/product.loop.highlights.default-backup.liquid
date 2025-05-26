@@ -1,0 +1,62 @@
+{%- liquid
+  if product_emphasize
+    assign loop_offset = products_per_row
+  else
+    assign loop_offset = 0
+  endif
+  capture classes
+    if mobile_container == true
+      echo 'product-highlights-mobile-wrapper'
+    else
+      echo 'product-highlights-normal-wrapper rows-of-'
+      echo products_per_row
+      if class
+        echo class
+      endif
+    endif
+  endcapture
+  if complementary
+        assign size = 277
+        assign sizes = '(min-width: 768px) 60px, (min-width: 640px) 277px, 190px'
+  else
+    case products_per_row
+      when 2
+        assign size = 605
+        if skip
+          assign sizes = '(min-width: 1280px) 605px, (min-width: 768px) calc(50vw - 40px), (min-width: 640px) 277px, 190px'
+        else
+          assign sizes = '(min-width: 1280px) 605px, (min-width: 460px) calc(50vw - 40px), 190px'
+        endif
+      when 3
+        assign size = 394
+        assign sizes = '(min-width: 1280px) 394px, (min-width: 768px) calc(33.33vw - 40px), (min-width: 640px) 277px, 190px'      
+      when 4
+        assign size = 288
+        assign sizes = '(min-width: 1280px) 288px, (min-width: 768px) calc(25vw - 40px), (min-width: 640px) 277px, 190px'
+      when 5
+        assign size = 277
+        assign sizes = '(min-width: 1280px) 224px, (min-width: 768px) calc(20vw - 40px), (min-width: 640px) 277px, 190px'
+    endcase
+  endif
+-%}
+
+{% if product_count > 0 %}
+  <div class="product-highlights-containers product-highlights-count-{{ products_per_row }} {{ classes }}" data-product-highlights-normal>
+
+    {%- liquid
+      if products != blank
+        for item in products offset: loop_offset
+          render 'product.loop-backup', product: item, product_style: product_item_style, forloop: forloop, size: size, sizes: sizes, lazy: lazy
+          assign loop_product_count = loop_product_count | plus: 1
+          if loop_product_count == product_count
+            break
+          endif
+        endfor
+      else
+        for i in (1..product_count)
+          render 'product.loop.onboard', product_style: product_item_style, forloop: forloop
+        endfor
+      endif
+    -%}
+  </div>
+{% endif %}

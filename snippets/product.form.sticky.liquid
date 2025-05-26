@@ -1,0 +1,112 @@
+{%- liquid
+  capture product_menu_classes
+    echo 'product-menu'
+    if show_payment_button
+      echo ' product-menu-payment-buttons'
+    endif
+  endcapture
+  assign product_menu_mobile_default_state = 'selectoptions'
+  assign product_menu_desktop_default_state = 'selectoptions'
+-%}
+
+<div class="{{ product_menu_classes }}" data-product-menu data-product-menu-desktop-default-state="{{ product_menu_desktop_default_state }}" data-product-menu-mobile-default-state="{{ product_menu_mobile_default_state }}" data-product-menu-state="{{ product_menu_mobile_default_state }}">
+
+  <div class="product-menu-slideout slider-v" data-product-menu-slideout>
+    <div class="product-menu-slideout-container container container-inner">
+      
+      <div class="product-menu-slideout-header{% if product_variants or product.has_only_default_variant %} product-menu-slideout-header-empty{% endif %}">
+        <h5>
+          <span data-product-menu-slideout-heading="product-title">{{ product.title }}: <span class="product-menu-price money" data-product-menu-button-addtocart-price>{% if settings.currency_enable %}{{ product.selected_or_first_available_variant.price | money_with_currency }}{% else %}{{ product.selected_or_first_available_variant.price | money }}{% endif %}</span></span>
+        </h5>
+        <button class="{% if background_color %}alt {% endif %}sticky-menu-slideout-button-dimiss" type="button" aria-label="{{ 'general.form.close' | t | escape }}" data-product-menu-slideout-dismiss>{%- render 'icons', id: 'close' -%}</button>
+      </div>
+
+      <div class="product-menu-slideout-addtocart scroll-bar-v" data-product-menu-slideout-state="addtocart">
+        <div class="product-menu-addtocart-failure-message" data-product-menu-addtocart-failure-message></div>
+        {%- liquid
+          if product_variants == false
+          echo '<div class="hidden">'
+            render 'product.options', product: product, type: 'select', hidden: true
+          echo '</div>'
+          else
+            render 'product.options', product: product, enable_single: enable_single, type: variant_enable, variant_color_enable: variant_color_enable, rounded: rounded, sticky: true, hidden: false
+          endif
+        -%}
+      </div>
+
+      <div class="product-menu-buttons" data-product-menu-buttons>
+        <div class="product-menu-buttons-content container">
+
+          <div class="product-menu-buttons-addtocart{% if background_color %} show_payment_button_alt{% endif %}{% if product_quantity and show_payment_button %} product-menu-buttons-addtocart-3{% elsif product_quantity or show_payment_button %} product-menu-buttons-addtocart-2{% endif %}" data-product-menu-buttons-state="addtocart">
+            
+            {% if product_quantity %}
+              <div class="product-menu-quantity">{%- render 'product.quantity', product: product, variant: variant, sticky: true -%}</div>
+            {% else %}
+              <input class="quantity" type="hidden" min="1" max="1" name="quantity" value="1" data-quantity-input data-quantity-hidden />
+            {% endif %}
+            
+            <button class="btn btn-{% if show_payment_button %}secondary{% else %}primary{% endif %} {% if background_color %}alt {% endif %}btn-spinner" type="submit" data-product-menu-button="addtocart" data-product-menu-button-addtocart data-product-atc{% unless variant.available %} disabled{% endunless %}>
+              <span data-button-text data-product-menu-button-addtocart-text>{% if variant.available %}{{ form_text }}{% else %}{{ 'product.add_to_cart.unavailable' | t }}{% endif %}</span>
+              <span class="spinner"></span>
+            </button>
+            {%- liquid
+              if show_payment_button
+                echo form | payment_button
+              endif
+            -%}
+            
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="product-menu-buttons" data-product-menu-buttons>
+    <div class="product-menu-buttons-content container">
+
+      <div class="product-menu-buttons-info">
+        <h5>{{ product.title }}</h5>
+        {% if enable_breadcrumbs == 'sticky' %}
+        <div class="product-menu-buttons-breadcrumbs">{%- render 'breadcrumbs' -%}</div>
+        {% endif %}
+      </div>
+
+      <div class="product-menu-buttons-selectoptions" data-product-menu-buttons-state="selectoptions">      
+        <button class="btn btn-primary {% if background_color %}alt {% endif %}sticky-menu-button" type="button" data-product-menu-button="selectoptions">
+          <span class="sticky-menu-button-checkout-text relative with-lock">
+            {%- render 'icons', id: cart_icon, size: 18 -%}
+            {{ 'product.select_options' | t }}
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<style>
+  body {
+    padding-bottom: 100px;
+  }
+</style>
+
+<noscript>
+  {% render 'product.options', product: product, variant: variant %}
+  <label class="visually-hidden"
+         for="nojs-quantity-{{ section.id }}{{ variant.id }}">{{ 'general.form.input_quantity' | t }}</label>
+  <input id="nojs-quantity-{{ section.id }}{{ variant.id }}"
+         class="no-pad quantity-input text-center" 
+         type="number" 
+         min="{% if value %}0{% else %}{% unless variant.available %}0{% else %}1{% endunless %}{% endif %}" 
+         name="{{ name | escape }}" 
+         value="{% if value %}{{ value }}{% else %}{% unless variant.available %}0{% else %}1{% endunless %}{% endif %}"/>
+  {% render 'product.form', product: product, variant: variant, form_text: form_text %}
+  <style>
+    body {
+      padding-bottom: 0px;
+    }
+  </style>
+</noscript>

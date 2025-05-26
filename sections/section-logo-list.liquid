@@ -1,0 +1,380 @@
+{% if section.blocks.size > 0 %}
+
+  {%- liquid
+    assign section_onboarding = true
+    if section.settings.title != blank or section.settings.title_sub != blank or section.blocks.size > 0
+      assign section_onboarding = false
+    endif
+    assign text_color = false
+    if section.settings.section_color != 'rgba(0,0,0,0)' and section.settings.section_color != blank
+      assign text_color = true
+      assign text_color_section = section.settings.section_color
+    endif
+    assign background_color = false
+    if section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background
+    endif  
+    if section.settings.background_gradient != 'rgba(0,0,0,0)' and section.settings.background_gradient != blank
+      assign background_color = true
+      assign background_color_section = section.settings.background_gradient
+    endif
+    if section.settings.enable_lazy
+      assign lazy = 'lazy'
+    else
+      assign lazy = 'eager'
+    endif
+  -%}
+  
+  {% style %}
+    .dynamic-section-{{ section.id }} {
+      --section-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+      --section-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+      --section-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+      --section-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+      --section-margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+      --section-margin-bottom-desktop: {{ section.settings.margin_bottom_desktop }}px;
+      {%- if text_color -%}
+      --color_title_text:{{ text_color_section }};
+      --color_text:{{ text_color_section }};
+      --color_text_modify_25:{{ text_color_section | color_modify: 'alpha', 0.25 }};
+      --color_accent:{{ text_color_section }};
+      --color_accent_modify_25:{{ text_color_section | color_modify: 'alpha', 0.25 }};
+      {%- endif -%}
+      {%- if background_color -%}
+      --color_background:{{ background_color_section }};
+      {%- endif -%}
+    }
+  {% endstyle %}
+
+  <div class="logo-heading text-{{ section.settings.title_alignment }}">
+    {% if section.settings.title != blank %}
+      {%- liquid
+        if section.settings.title_h1
+          assign title = 1
+        else
+          assign title = 2
+        endif
+      -%}
+      <h{{ title }} class="section-title{% if section.settings.title_sub != blank %} section-title-half{% endif %} section-title-{{ section.settings.title_size }} {{ section.settings.title_outline }}">{{ section.settings.title }}</h{{ title }}>
+    {% endif %}
+
+    {% if section.settings.title_sub != blank %}
+      <h3 class="section-title section-title-{{ section.settings.title_sub_size }} {{ section.settings.title_sub_outline }}">{{ section.settings.title_sub }}</h3>  
+    {% endif %}
+  </div>
+  
+  <div class="dynamic-section dynamic-section-{{ section.id }}"> 
+    <section data-section-id="{{ section.id }}" 
+             data-section-type="slider-{{ section.id }}"
+             data-url="{{ 'script.slider.js' | asset_url }}"
+             data-slider-use="true"
+             data-slider-breakpoint="medium"
+             class="text-{{ section.settings.title_alignment }}">
+      <div class="section-padding-top section-padding-bottom section-margin-bottom{% if section.settings.padding_border %} section-border{% endif %}"> 
+        <div class="slider-container slider-padding{% if section_onboarding %} hidden{% endif %}">
+          <div class="slider medium scroll-bar-h text-center">
+            <div class="logo-containers logo-count-{{ section.blocks.size }}">
+              {% for block in section.blocks %}
+                <article class="slide logo-item relative keyed-inside"{% if block.settings.link == blank %} tabindex="0"{% endif %} {{ block.shopify_attributes }}>
+                  {%- liquid
+                    if block.settings.block_img
+                      assign img_src = block.settings.block_img                    
+                      capture alt
+                        if img_src.alt != blank
+                          echo img_src.alt | escape
+                        else
+                          echo img_src | split: '/' | last | replace: '-', ' ' | replace: '_', ' ' | split: '.' | first | capitalize | escape
+                        endif
+                      endcapture
+                      render 'image.load', img_src: img_src, size: block.settings.block_img_width, alt: alt, logo: true, lazy: lazy
+                    else
+                      echo 'logo' | placeholder_svg_tag: 'placeholder-svg'
+                    endif
+                    if block.settings.link != blank
+                      echo '<a class="section-layout-link keyed-inside" href="'
+                      echo block.settings.link
+                      echo '" title="'
+                      echo alt | escape
+                      echo '"></a>'
+                    endif
+                  -%}
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+        </div>      
+        
+        {%- liquid
+          if section_onboarding
+            render 'onboarding'
+          endif
+        -%}
+        
+      </div>
+    </section>
+  </div>
+
+{% endif %}
+  
+{% schema %}
+  {
+    "name": "t:sections.section.titles.logo_list.content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.text.title.label"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "t:sections.text.heading.label",
+        "default": "Logo list"
+      },
+      {
+        "id": "title_h1",
+        "type": "checkbox",
+        "label": "t:sections.text.heading_one.label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "title_outline",
+        "label": "t:sections.text.outline.heading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_size",
+        "type": "range",
+        "label": "t:sections.text.heading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 48
+      },
+      {
+        "id": "title_sub",
+        "type": "text",
+        "label": "t:sections.text.subheading.label",
+        "default": "Highlight 'As Seen In' or 'In the Press' logo's"
+      },
+      {
+        "type": "select",
+        "id": "title_sub_outline",
+        "label": "t:sections.text.outline.subheading_outline.label",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.text.outline.option_1.label"
+          },
+          {
+            "value": "title-outline title-outline-1",
+            "label": "t:sections.text.outline.option_2.label"
+          },
+          {
+            "value": "title-outline title-outline-2",
+            "label": "t:sections.text.outline.option_3.label"
+          },
+          {
+            "value": "title-outline title-outline-3",
+            "label": "t:sections.text.outline.option_4.label"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "id": "title_sub_size",
+        "type": "range",
+        "label": "t:sections.text.subheading_size.label",
+        "min": 18,
+        "max": 96,
+        "step": 6,
+        "unit": "px",
+        "default": 30
+      },
+      {
+        "id": "title_alignment",
+        "type": "text_alignment",
+        "label": "t:sections.text.alignment.title.label",
+        "default": "center"
+      },
+      {
+        "id": "section_color",
+        "type": "color",
+        "label": "t:sections.text.color.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.general.options.label"
+      },
+      {
+        "id": "enable_lazy",
+        "type": "checkbox",
+        "label": "t:sections.general.lazy.multiple.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.section.name.content"
+      },
+      {
+        "id": "background",
+        "type": "color",
+        "label": "t:sections.section.settings.background_color.label",
+         "default": "#000000"
+      },
+      {
+        "id": "background_gradient",
+        "type": "color_background",
+        "label": "t:sections.section.settings.background_gradient.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.mobile.content"
+      },
+      {
+        "id": "padding_top_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_mobile",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.section.settings.desktop.content"
+      },
+      {
+        "id": "padding_top_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.top_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_pad.label",
+        "min": 0,
+        "max": 60,
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "margin_bottom_desktop",
+        "type": "range",
+        "label": "t:sections.section.settings.bottom_margin.label",
+        "min": 0,
+        "max": 60, 
+        "step": 10,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "id": "padding_border",
+        "type": "checkbox",
+        "label": "t:sections.section.settings.border.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "t:sections.general.logo.label",
+        "limit": 10,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "block_img",
+            "label": "t:sections.image.title.label"
+          },
+          {
+            "type": "range",
+            "id": "block_img_width",
+            "label": "t:sections.general.logo.max.label",
+            "min": 50,
+            "max": 310,
+            "step": 10,
+            "unit": "px",
+            "default": 310
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.general.link.title.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.section.titles.logo_list.content",
+        "blocks": [
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+	  "templates": ["password"]
+    }
+  }
+{% endschema %}
