@@ -169,6 +169,42 @@
         "padding_border": true
       }
     },
+    "section_product_list_ycKGQb": {
+      "type": "section-product-list",
+      "name": "t:sections.section.titles.product_list.content",
+      "settings": {
+        "title": "Product list",
+        "title_h1": false,
+        "title_outline": "none",
+        "title_size": 42,
+        "title_sub": "Highlight a list of popular",
+        "title_sub_outline": "none",
+        "title_sub_size": 30,
+        "title_alignment": "center",
+        "section_color": "",
+        "section_color_hover": "",
+        "section_line": "",
+        "collection": [
+          "hoodie-trespassers-vissla-white-marble-heather-fw",
+          "hoodie-spectrum-vissla-black-fw",
+          "crew-compassion-fleece-sisstrevolution-white-marble-heather-fw",
+          "crew-compassion-fleece-sisstrevolution-sea-spray-fw"
+        ],
+        "products_row_count": 1,
+        "products_per_row": 4,
+        "product_emphasize": false,
+        "enable_lazy": true,
+        "background": "",
+        "background_gradient": "",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "margin_bottom_mobile": 20,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_bottom_desktop": 40,
+        "padding_border": true
+      }
+    },
     "section_image_EhUYji": {
       "type": "section-image",
       "settings": {
@@ -506,6 +542,7 @@
   "order": [
     "section_slideshow_2_78zzYM",
     "section_collections_list_AazgiU",
+    "section_product_list_ycKGQb",
     "section_image_EhUYji",
     "f4b27ba9-febf-466e-9b9f-e31cd9b4c41a",
     "f9800d96-f998-4a37-ad5a-675f3cac13bc",
