@@ -95,9 +95,9 @@
     "header-minicart": {
       "type": "header-minicart",
       "settings": {
-        "quantity_enable": true,
-        "smart_enable": true,
-        "enable_checkout_lock_icon": true
+        "quantity_enable": false,
+        "smart_enable": false,
+        "enable_checkout_lock_icon": false
       }
     }
   },
